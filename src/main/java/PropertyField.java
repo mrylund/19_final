@@ -67,6 +67,12 @@ public class PropertyField {
         System.out.println(prop.getFieldBuildPrice("17"));
 
         chance.readFile();
-        System.out.println(Arrays.toString(chance.makeCardSet()));
+        chance.makeCardSet();
+        chance.shuffleCard();
+        System.out.println(Arrays.toString(chance.getCardSet()));
+        System.out.println(chance.getCardSet().length);
+        chance.drawCard();
+        System.out.println(chance.getCardDraw());
+        System.out.println(Arrays.toString(chance.getCardSet()));
     }
 }
