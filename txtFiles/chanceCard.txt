@@ -1,0 +1,32 @@
+1: De har været en tur i udlandet og haft for mange cigaretter med hjem. betal told kr. 200
+2: De har vundet i klasselotteriet. modtag kr. 500
+3: I anledning af kongens fødselsdag benådes de herved for fængsel. Dette kort kan opbevares, indtil de får brug for det, eller de kan sælge det for kr. 1000 til banken.
+4: Betal deres bilforsikring kr. 1000
+5: Modtag udbytte af deres aktier kr. 1000
+6: De har kørt frem for ‘Fuld Stop’ betal kr. 1000 i bøde.
+7: Modtag udbytte af deres aktier kr. 1000
+8: Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de købe det af banken.
+9: Ryk frem til ‘Frederiksberg allé’ hvis de passerer Start indkassér kr. 4000
+10: Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de købe det af banken.
+11: Grundet dyrtiden har de fået gageforhøjelse modtag kr. 1000
+12: I anledning af kongens fødselsdag benådes de herved for fængsel. Dette kort kan opbevares, indtil de får brug for det, eller de kan sælge det for kr. 1000 til banken.
+13: Ejendomsskatterne er steget, ekstraudgifterne er: kr. 800 pr.hus  -  kr. 2300 pr.hus
+14: De har modtaget deres tandlægeregning betal kr. 2000.
+15: De har måttet vedtage en parkeringsbøde. Betal kr. 200 i bøde.
+16: Ryk frem til Grønningen. Hvis de passerer “Start”, indkassér da kr. 4.000.
+17: Det er deres fødselsdag. Modtag af hver medspiller kr. 200.
+18: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer “Start”, indkasserer de ikke kr. 4.000.
+19: De modtager “Matador-legatet for værdig trængende”, stort kr. 40.000. Ved værdig trængende forstås, at deres formue, d.v.s. deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.
+20: Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” inkassér da kr. 4.000.
+21: Tag ind på Rådhuspladsen.
+22: De modtager deres aktieudbytte. Modtag kr. 1.000 af banken.
+23: Betal kr. 3.000 for reparation af deres vogn.
+24: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer “Start”, indkasserer de ikke kr. 4.000.
+25: Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.
+26: Ryk frem til “Start”.
+27: Ryk tre felter tilbage.
+28: Oliepriserne er steget, og de skal betale: kr. 500 pr. hus, kr. 2.000 pr. hotel.
+29: Betal kr. 3.000 for reparation af deres vogn.
+30: Kommunen har eftergivet et kvartals skat. Hæv i banken kr. 3.000.
+31: Værdien af egen avl fra nyttehaven udgør kr. 200, som de modtager af banken.
+32: Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.

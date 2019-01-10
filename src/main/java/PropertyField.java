@@ -2,13 +2,14 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class PropertyField {
     private HashMap<String, String> fieldInfo = new HashMap<String, String>();
 
     public void readFile() {
-        String fileName = "src/main/txtFiles/fieldInfo.txt";
+        String fileName = "txtFiles/fieldInfo.txt";
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String lines;
@@ -61,7 +62,11 @@ public class PropertyField {
         int name = 0, price = 1, rent = 2, house1 = 3, house2 = 4, house3 = 5, house4 = 6, hotel = 7, build = 8;
 
         PropertyField prop = new PropertyField();
+        ChanceCard chance = new ChanceCard();
         prop.readFile();
         System.out.println(prop.getFieldBuildPrice("17"));
+
+        chance.readFile();
+        System.out.println(Arrays.toString(chance.makeCardSet()));
     }
 }
