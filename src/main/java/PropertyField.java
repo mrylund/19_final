@@ -6,8 +6,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class PropertyField {
+    public PropertyField() {
+        readFile();
+    }
+
     private HashMap<String, String> fieldInfo = new HashMap<String, String>();
 
+    @SuppressWarnings("Duplicates")
     public void readFile() {
         String fileName = "txtFiles/fieldInfo.txt";
         try {

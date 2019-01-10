@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class ChanceCard {
+    public ChanceCard() {
+        readFile();
+    }
+
     private HashMap<String, String> chanceCard = new HashMap<String, String>();
     private String[] cardSet;
     private String[] shuffleArray;
