@@ -1,29 +1,57 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class ReadFile {
-    private HashMap<String, String> fieldInfo = new HashMap<String, String>();
+    private String fileName = "";
 
-    public void fields() {
-        String fileName = "txtFiles/fieldInfo.txt";
+    public String[] readFile(String fileToBeRead) {
+
+        this.fileName = fileToBeRead;
+        String[] lines;
+        String[] empty = new String[0];
         try {
             BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName));
-            String lines;
-            while((lines = reader.readLine()) != null) {
-                String[] lineInfo = lines.split(": ");
-                fieldInfo.put(lineInfo[0], lineInfo[1]);
+
+            String line;
+            int i = 0;
+            int counter = 0;
+
+            while(reader.readLine() != null){
+                counter++;
+            }
+            reader = new BufferedReader(new java.io.FileReader(fileName));
+
+
+            lines = new String[counter];
+
+            while((line = reader.readLine()) != null) {
+            lines[i] = line;
+            i++;
             }
             reader.close();
+            return lines;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return empty;
     }
 
-    public HashMap getFieldInfo() {
-        return fieldInfo;
+    public static void main(String[] args){
+        ReadFile reader = new ReadFile();
+        String[] readFilePrint = reader.readFile("txtFiles/fieldInfo.txt");
+
+        for(int i = 0; i < readFilePrint.length; i++){
+            System.out.println(readFilePrint[i]);
+        }
+
+        System.out.println(readFilePrint[2]);
+
+        System.out.println(readFilePrint[39].split("; ")[5]);
+
+
     }
 }

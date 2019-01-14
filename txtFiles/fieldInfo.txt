@@ -1,40 +1,40 @@
-1: Start; 4000
-2: Rødovrevej; 1200; 50; 250; 750; 2250; 4000; 6000; 1000
-3: Prøv løkken
-4: Hvidovrevej; 1200; 50; 250; 750; 2250; 4000; 6000; 1000
-5: Betal indkomsskat 10% eller kr. 4000; 10; 4000
-6: SFL-færgerne; 4000; 500; 1000; 2000; 4000
-7: Roskildevej; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
-8: Prøv løkken
-9: Valby Langgade; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
-10: Allégade; 2400; 150; 800; 2000; 6000; 9000; 12000; 1000
-11: I fængsel; På Besøg
-12: Frederiksberg Allé; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
-13: Tuborg Bryggeri; 3000; 100; 200
-14: Bülowsvej; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
-15: Gl. Kongevej; 3200; 250; 1250; 3750; 10000; 14000; 18000; 2000
-16: DSB Kalundborg/Århus; 4000; 500; 1000; 2000; 4000
-17: Bernstorffsvej; 3600; 300; 1400; 4000; 11000; 15000; 19000; 2000
-18: Prøv løkken
-19: Hellerupvej; 3600; 300; 1400; 4000; 11000; 15000; 19000; 2000
-20: Strandvej; 4000; 350; 1600; 4400; 12000; 16000; 20000; 2000
-21: Parkering
-22: Trianglen; 4400; 350; 1800; 5000; 14000; 17500; 21000; 3000
-23: Prøv løkken
-24: Ønsterbrogade; 4400; 350; 1800; 5000; 14000; 17500; 21000; 3000
-25: Grønningen; 4800; 400; 2000; 6000; 15000; 18500; 22000; 3000
-26: DFDS Seaways; 4000; 500; 1000; 2000; 3000; 4000
-27: Bredgade; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
-28: Kgs. Nytorv; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
-29: Coca-Cola tapperi; 3000; 100; 200
-30: Østergade; 5600; 500; 2400; 7200; 17000; 20500; 24000; 3000
-31: De fængsles
-32: Amagertorv; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
-33: Vimmelskaftet; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
-34: Prøv løkken
-35: Nygade; 6400; 600; 3000; 9000; 20000; 24000; 28000; 4000
-36: DSB Halsskov/Knudshoved; 4000; 500; 1000; 2000; 3000; 4000
-37: Prøv løkken
-38: Frederiksberggade; 7000; 700; 3500; 10000; 22000; 26000; 30000; 4000
-39: Ekstraordinær statsskat. Betal kr. 2000; 2000
-40: Rådhuspladsen; 8000; 1000; 4000; 12000; 28000; 34000; 40000; 4000
+Start; 1: Start; 4000
+Street; 2: Rødovrevej; 1200; 50; 250; 750; 2250; 4000; 6000; 1000
+Luck; 3: Prøv løkken
+Street; 4: Hvidovrevej; 1200; 50; 250; 750; 2250; 4000; 6000; 1000
+Temp 1; 5: Betal indkomstskat 10% eller kr. 4000; 10; 4000
+Færge; 6: SFL-færgerne; 4000; 500; 1000; 2000; 4000
+Street; 7: Roskildevej; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
+Luck; 8: Prøv løkken
+Street; 9: Valby Langgade; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
+Street; 10: Allégade; 2400; 150; 800; 2000; 6000; 9000; 12000; 1000
+VisitJail; 11: I fængsel; På Besøg
+Street; 12: Frederiksberg Allé; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
+Temp 2; 13: Tuborg Bryggeri; 3000; 100; 200
+Street; 14: Bülowsvej; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
+Street; 15: Gl. Kongevej; 3200; 250; 1250; 3750; 10000; 14000; 18000; 2000
+Temp 3; 16: DSB Kalundborg/Århus; 4000; 500; 1000; 2000; 4000
+Street; 17: Bernstorffsvej; 3600; 300; 1400; 4000; 11000; 15000; 19000; 2000
+Luck; 18: Prøv løkken
+Street; 19: Hellerupvej; 3600; 300; 1400; 4000; 11000; 15000; 19000; 2000
+Street; 20: Strandvej; 4000; 350; 1600; 4400; 12000; 16000; 20000; 2000
+Parking; 21: Parkering
+Street; 22: Trianglen; 4400; 350; 1800; 5000; 14000; 17500; 21000; 3000
+Luck; 23: Prøv løkken
+Street; 24: Ønsterbrogade; 4400; 350; 1800; 5000; 14000; 17500; 21000; 3000
+Street; 25: Grønningen; 4800; 400; 2000; 6000; 15000; 18500; 22000; 3000
+Temp 4; 26: DFDS Seaways; 4000; 500; 1000; 2000; 3000; 4000
+Street; 27: Bredgade; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
+Street; 28: Kgs. Nytorv; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
+Temp 5; 29: Coca-Cola tapperi; 3000; 100; 200
+Street; 30: Østergade; 5600; 500; 2400; 7200; 17000; 20500; 24000; 3000
+Jail; 31: De fængsles
+Street; 32: Amagertorv; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
+Street; 33: Vimmelskaftet; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
+Luck; 34: Prøv løkken
+Street; 35: Nygade; 6400; 600; 3000; 9000; 20000; 24000; 28000; 4000
+Temp 6; 36: DSB Halsskov/Knudshoved; 4000; 500; 1000; 2000; 3000; 4000
+Luck; 37: Prøv løkken
+Street; 38: Frederiksberggade; 7000; 700; 3500; 10000; 22000; 26000; 30000; 4000
+Temp 7; 39: Ekstraordinær statsskat. Betal kr. 2000; 2000
+Street; 40: Rådhuspladsen; 8000; 1000; 4000; 12000; 28000; 34000; 40000; 4000

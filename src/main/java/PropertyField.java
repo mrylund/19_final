@@ -68,8 +68,13 @@ public class PropertyField {
 
         PropertyField prop = new PropertyField();
         ChanceCard chance = new ChanceCard();
+        ReadFile reader = new ReadFile();
         prop.readFile();
         System.out.println(prop.getFieldBuildPrice("17"));
+
+        String[] readFile = reader.readFile("txtFiles/fieldInfo.txt");
+
+
 
         chance.readFile();
         chance.makeCardSet();
