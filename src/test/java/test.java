@@ -23,5 +23,4 @@ public class test {
     }
     assertEquals("1: this is a test",line );
     }
-
 }

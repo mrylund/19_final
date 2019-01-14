@@ -14,7 +14,6 @@ public class DiceCup {
             dice[i] = faceValue();
         }
         return dice;
-
     }
 
     public int getSum() {
