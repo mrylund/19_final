@@ -24,7 +24,7 @@ public class DiceCup {
         return diceSum;
     }
 
-    public boolean isIdentical() {
+    public boolean isSameValue() {
         int firstDie = dice[0];
         int counter = 1;
         for (int i = 0; i < dice.length; i++) {
@@ -55,5 +55,11 @@ public class DiceCup {
     }
     public void setNUMBEROFDICE(int NUMBEROFDICE) {
         this.NUMBEROFDICE = NUMBEROFDICE;
+    }
+    public int getDie1() {
+        return dice[0];
+    }
+    public int getDie2() {
+        return dice[1];
     }
 }
