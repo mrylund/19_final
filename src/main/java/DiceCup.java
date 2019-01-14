@@ -2,7 +2,6 @@ public class DiceCup {
     private int EYES = 6;
     private int NUMBEROFDICE = 2;
     private int[] dice;
-    private String arrayString;
 
     public int faceValue() {
         return (int)(Math.random() * EYES + 1);
@@ -36,7 +35,7 @@ public class DiceCup {
     }
 
     public String toString(int[] arr) {
-        arrayString = "";
+        String arrayString = "";
         for (int i = 0; i < arr.length; i++) {
             arrayString += "[" + arr[i] + "]";
         }
