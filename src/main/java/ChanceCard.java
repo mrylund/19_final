@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class ChanceCard {
+
     public ChanceCard() {
         readFile();
     }
@@ -52,7 +53,7 @@ public class ChanceCard {
 
         for (int i = 0; i < cardSet.length; i++) {
             success = false;
-            //lægger det sidste kort ind på den sidste tomme plads
+            //lï¿½gger det sidste kort ind pï¿½ den sidste tomme plads
             if(i == cardSet.length-1) {
                 for (int j = 0; j < cardSet.length; j++) {
                     if(shuffleArray[j] == null) {
@@ -63,7 +64,7 @@ public class ChanceCard {
                 //hopper helt ud af i-forloop
                 break;
             }
-            //finder en random tom plads i shuffleArray og sætter et kort ind
+            //finder en random tom plads i shuffleArray og sï¿½tter et kort ind
             do {
                 randomCard = random.nextInt(cardSet.length);
                 if(shuffleArray[randomCard] == null) {
@@ -78,7 +79,7 @@ public class ChanceCard {
 
     public void drawCard() {
         cardDraw = cardSet[0];
-        //lægger det bagerst i bunken
+        //lï¿½gger det bagerst i bunken
         for (int i = 0; i < cardSet.length-1; i++) {
             cardSet[i] = cardSet[i+1];
         }
