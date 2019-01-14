@@ -24,23 +24,4 @@ public class test {
     assertEquals("1: this is a test",line );
     }
 
-    @Test
-    public void makeCardSet() {
-    }
-
-    @Test
-    public void shuffleCard() {
-    }
-
-    @Test
-    public void drawCard() {
-    }
-
-    @Test
-    public void getCardSet() {
-    }
-
-    @Test
-    public void getCardDraw() {
-    }
 }
