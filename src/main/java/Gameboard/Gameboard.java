@@ -9,7 +9,10 @@ public class Gameboard {
     private String[] fieldInfo;
     private GUI_Field[] gui_fields = new GUI_Field[40];
     private Field[] fields = new Field[40];
-    public Gameboard() {
+    private GUI gameboard;
+    public Gameboard(){}
+
+    public void createBoard() {
         fieldInfo = reader.readFile("txtFiles/fieldInfo.txt");
         for (int i = 0; i < fieldInfo.length; i++) {
             String[] sArray = fieldInfo[i].split("; ");
@@ -17,6 +20,10 @@ public class Gameboard {
             gui_fields[i] = fields[i].getField();
         }
 
-        GUI gameboard = new GUI(gui_fields);
+        gameboard = new GUI(gui_fields);
+    }
+
+    public GUI getBoard() {
+        return gameboard;
     }
 }
