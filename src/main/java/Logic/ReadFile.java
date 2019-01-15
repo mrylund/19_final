@@ -84,58 +84,11 @@ public class ReadFile {
         return line[lineNum];
     }
 
-    /*
-    public String getFieldType(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum].split("; ")[0];
-    }
-
-    public String getFieldName(int lineNum) {
+    //brugt til test
+    public String name(int lineNum) {
         String[] allLines = readFile(fieldInfoPath);
         return allLines[lineNum-1].split("; ")[2];
     }
-
-    public String getFieldPrice(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[3];
-    }
-
-    public String getFieldRent(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[4];
-    }
-
-    public String getFieldHouse1(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[5];
-    }
-
-    public String getFieldHouse2(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[6];
-    }
-
-    public String getFieldHouse3(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[7];
-    }
-
-    public String getFieldHouse4(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[8];
-    }
-
-    public String getFieldHotel(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[9];
-    }
-
-    public String getFieldBuildPrice(int lineNum) {
-        String[] allLines = readFile(fieldInfoPath);
-        return allLines[lineNum-1].split("; ")[10];
-    }
-
-    */
 
     public static void main(String[] args){
         ReadFile reader = new ReadFile();
