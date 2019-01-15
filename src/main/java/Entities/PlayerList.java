@@ -33,6 +33,10 @@ public class PlayerList {
         return players;
     }
 
+    public Player getPlayer(int playerNumber) {
+        return players[playerNumber];
+    }
+
     public GUI_Car[] getCars() {
         GUI_Car[] cars = new GUI_Car[players.length];
         for(int i = 0; i < players.length; i++) {
