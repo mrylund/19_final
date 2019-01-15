@@ -27,4 +27,12 @@ public class Player {
     public GUI_Car getCar() {
         return car;
     }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public int getPos() {
+        return pos;
+    }
 }
