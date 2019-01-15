@@ -7,10 +7,10 @@ import java.awt.*;
 
 public class PlayerList {
     private Player[] players;
-    public Player[] addPlayers(int antalSpillere) {
+    public Player[] addPlayers(String[] spillere) {
         Color color;
-        players = new Player[antalSpillere];
-        for(int i = 0; i < antalSpillere; i++) {
+        players = new Player[spillere.length];
+        for(int i = 0; i < spillere.length; i++) {
             switch (i) {
                 case 0: color = new Color(255, 255, 255); break;
                 case 1: color = new Color(0, 0,0); break;
@@ -20,7 +20,7 @@ public class PlayerList {
                 case 5: color = new Color(255, 255, 0); break;
                 default: color = new Color(255, 255, 255); break;
             }
-            players[i] = new Player(color);
+            players[i] = new Player(spillere[i], color);
         }
         return players;
     }

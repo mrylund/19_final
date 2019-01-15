@@ -12,7 +12,13 @@ public class InputController {
         return board.getBoard().getUserInteger(message, min, max);
     }
 
-    public int getInt(String message) {
-        return board.getBoard().getUserInteger(message);
+    public String[] getStringArray(String[] messages, int amount) {
+        String[] output = new String[amount];
+
+        for (int i = 0; i < amount; i++) {
+            output[i] = board.getBoard().getUserString(messages[i]);
+        }
+
+        return output;
     }
 }
