@@ -26,7 +26,7 @@ public class DiceCup {
     public boolean isSameValue() {
         int firstDie = dice[0];
         int counter = 1;
-        for (int i = 0; i < dice.length; i++) {
+        for (int i = 1; i < dice.length; i++) {
             if(dice[i] == firstDie) {
                 counter++;
             }
@@ -60,5 +60,8 @@ public class DiceCup {
     }
     public int getDie2() {
         return dice[1];
+    }
+    public int[] setDiceArray(int[] arr) {
+        return this.dice = arr;
     }
 }
