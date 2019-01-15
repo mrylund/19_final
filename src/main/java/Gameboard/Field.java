@@ -24,14 +24,22 @@ public class Field {
             this.field.setDescription("Her kan de prøve lykken.");
         } else if (values[0].equals("GUI_Jail")) {
             this.field = new GUI_Jail();
+            this.field.setDescription(values[2]);
+            this.field.setSubText(values[2]);
         } else if (values[0].equals("GUI_Shipping")) {
             this.field = new GUI_Shipping();
             this.field.setTitle(values[2]);
             this.field.setSubText(values[1]);
         } else if (values[0].equals("GUI_Brewery")) {
             this.field = new GUI_Brewery();
-        } else if (values[0].equals("GUI_Tax")) {
+        } else if (values[0].equals("GUI_Tax1")) {
             this.field = new GUI_Tax();
+            this.field.setTitle("Betal indkomsskat kr. "+values[4]);
+            this.field.setSubText(values[1]);
+        } else if (values[0].equals("GUI_Tax2")){
+            this.field = new GUI_Tax();
+            this.field.setTitle("Ekstraordinær statsskat. Betal kr. "+values[3]);
+            this.field.setSubText(values[1]);
         } else if (values[0].equals("GUI_Car")) {
             this.field = new GUI_Refuge();
         }

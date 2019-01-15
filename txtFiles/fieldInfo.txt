@@ -2,18 +2,18 @@ GUI_Start; 1; Start; 4000
 GUI_Street; 2; Rødovrevej; 1200; 50; 250; 750; 2250; 4000; 6000; 1000
 GUI_Chance; 3; Prøv lykken
 GUI_Street; 4; Hvidovrevej; 1200; 50; 250; 750; 2250; 4000; 6000; 1000
-GUI_Tax; 5; Betal indkomsskat 10% eller kr. 4000; 10; 4000
-GUI_Shipping; 6; SFL-færgerne; 4000; 500; 1000; 2000; 4000
+GUI_Tax1; 5; Betal indkomsskat 10% eller kr. 4000; 10; 4000
+GUI_Shipping; 6; SFL; 4000; 500; 1000; 2000; 4000
 GUI_Street; 7; Roskildevej; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
 GUI_Chance; 8; Prøv lykken
 GUI_Street; 9; Valby Langgade; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
 GUI_Street; 10; Allégade; 2400; 150; 800; 2000; 6000; 9000; 12000; 1000
-GUI_Jail; 11; I fængsel; På Besøg
+GUI_Jail; 11; På Besøg
 GUI_Street; 12; Frederiksberg Allé; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
 GUI_Brewery; 13; Tuborg Bryggeri; 3000; 100; 200
 GUI_Street; 14; Bülowsvej; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
 GUI_Street; 15; Gl. Kongevej; 3200; 250; 1250; 3750; 10000; 14000; 18000; 2000
-GUI_Shipping; 16; DSB Kalundborg/Århus; 4000; 500; 1000; 2000; 4000
+GUI_Shipping; 16; Kalundborg; 4000; 500; 1000; 2000; 4000
 GUI_Street; 17; Bernstorffsvej; 3600; 300; 1400; 4000; 11000; 15000; 19000; 2000
 GUI_Chance; 18; Prøv lykken
 GUI_Street; 19; Hellerupvej; 3600; 300; 1400; 4000; 11000; 15000; 19000; 2000
@@ -23,7 +23,7 @@ GUI_Street; 22; Trianglen; 4400; 350; 1800; 5000; 14000; 17500; 21000; 3000
 GUI_Chance; 23; Prøv løkken
 GUI_Street; 24; Østerbrogade; 4400; 350; 1800; 5000; 14000; 17500; 21000; 3000
 GUI_Street; 25; Grønningen; 4800; 400; 2000; 6000; 15000; 18500; 22000; 3000
-GUI_Shipping; 26; DFDS Seaways; 4000; 500; 1000; 2000; 3000; 4000
+GUI_Shipping; 26; DFDS; 4000; 500; 1000; 2000; 3000; 4000
 GUI_Street; 27; Bredgade; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
 GUI_Street; 28; Kgs. Nytorv; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
 GUI_Brewery; 29; Coca-Cola tapperi; 3000; 100; 200
@@ -33,8 +33,8 @@ GUI_Street; 32; Amagertorv; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
 GUI_Street; 33; Vimmelskaftet; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
 GUI_Chance; 34; Prøv lykken
 GUI_Street; 35; Nygade; 6400; 600; 3000; 9000; 20000; 24000; 28000; 4000
-GUI_Shipping; 36; DSB Halsskov/Knudshoved; 4000; 500; 1000; 2000; 3000; 4000
+GUI_Shipping; 36;  Halsskov; 4000; 500; 1000; 2000; 3000; 4000
 GUI_Chance; 37; Prøv lykken
 GUI_Street; 38; Frederiksberggade; 7000; 700; 3500; 10000; 22000; 26000; 30000; 4000
-GUI_Tax; 39; Ekstraordinær statsskat. Betal kr. 2000; 2000
+GUI_Tax2; 39; Ekstraordinær statsskat. Betal kr. 2000; 2000
 GUI_Street; 40; Rådhuspladsen; 8000; 1000; 4000; 12000; 28000; 34000; 40000; 4000
