@@ -1,3 +1,5 @@
+package Logic;
+
 public class DiceCup {
     private int EYES = 6;
     private int NUMBEROFDICE = 2;

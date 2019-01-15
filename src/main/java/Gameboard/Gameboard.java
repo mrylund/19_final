@@ -1,5 +1,6 @@
 package Gameboard;
 import Logic.ReadFile;
+import gui_codebehind.GUI_BoardController;
 import gui_fields.GUI_Field;
 import gui_main.GUI;
 
@@ -9,7 +10,7 @@ public class Gameboard {
     private String[] fieldInfo;
     private GUI_Field[] gui_fields = new GUI_Field[40];
     private Field[] fields = new Field[40];
-    private GUI gameboard;
+    private GUI_BoardController gameboard;
     public Gameboard(){}
 
     public void createBoard() {
@@ -20,10 +21,10 @@ public class Gameboard {
             gui_fields[i] = fields[i].getField();
         }
 
-        gameboard = new GUI(gui_fields);
+        gameboard = new GUI_BoardController(gui_fields);
     }
 
-    public GUI getBoard() {
+    public GUI_BoardController getBoard() {
         return gameboard;
     }
 }

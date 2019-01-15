@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ReadFileTest {
 
     ReadFile readFile = new ReadFile();
-
+    @SuppressWarnings("Duplicates")
     @Test
     //hurtig metode
     public void getFieldName() {

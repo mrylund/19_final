@@ -1,7 +1,7 @@
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
+/*
 public class PropertyFieldTest {
 
     private PropertyField property = new PropertyField();
@@ -13,3 +13,4 @@ public class PropertyFieldTest {
         assertTrue(property.getFieldName("1").equals(success));
     }
 }
+*/
