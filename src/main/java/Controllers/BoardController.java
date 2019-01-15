@@ -28,14 +28,27 @@ public class BoardController {
         board.getBoard().getFields()[pos].setCar(player, true);
     }
 
-    public void moveCar(GUI_Player player, int prevpos, int newpos) {
-        int movepos;
-        while(prevpos < newpos) {
-            movepos = prevpos + 1;
+    public void moveCar(GUI_Player player, int prevpos, int amount) {
+        boolean moving = true;
+        int movepos = prevpos + 1;
+        int newpos = prevpos + amount;
+        movepos %= 40;
+        newpos %= 40;
+
+        while(moving) {
             board.getBoard().getFields()[prevpos].setCar(player, false);
             board.getBoard().getFields()[movepos].setCar(player, true);
             prevpos++;
-            sleep(300);
+            prevpos %= 40;
+            movepos = prevpos + 1;
+            movepos %= 40;
+            sleep(100);
+
+            if (prevpos == newpos) {
+                moving = false;
+            }
         }
     }
+
+
 }
