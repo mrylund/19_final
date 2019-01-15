@@ -9,6 +9,8 @@ public class ReadFile {
     private String fieldInfoPath = "txtFiles/fieldInfo.txt";
     private String[] theFile = readFile(fieldInfoPath);
 
+    public ReadFile(){}
+
     public String[] readFile(String fileToBeRead) {
 
         String fileName = fileToBeRead;
