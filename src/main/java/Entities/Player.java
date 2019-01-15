@@ -12,8 +12,8 @@ public class Player {
     private GUI_Car car;
     private GUI_Player player;
 
-    public Player(Color color) {
-        name = "";
+    public Player(String name, Color color) {
+        this.name = name;
         balance = 30000;
         pos = 0;
         car = new GUI_Car(color, Color.BLACK, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);

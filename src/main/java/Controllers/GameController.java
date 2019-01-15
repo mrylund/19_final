@@ -12,15 +12,28 @@ public class GameController {
     private InputController input;
 
 
-    public GameController() {
-        InitializeGame();
+    public GameController(boolean devmode) {
+        InitializeGame(devmode);
     }
 
-    public void InitializeGame() {
-        int antalSpillere = 0;
+    public void InitializeGame(boolean devmode) {
+        int antalSpillere;
+        String[] spillernavne;
         input = new InputController(boardController.createBoard());
-        antalSpillere = input.getInt("Hvor mange spillere?", 3, 6);
-        playerController.createPlayers(antalSpillere);
+        if (devmode) {
+            antalSpillere = 5;
+            spillernavne = new String[] {
+                    "Martin",
+                    "Patrick",
+                    "Athusan",
+                    "Lars",
+                    "Andreas"
+            };
+        } else {
+            antalSpillere = input.getInt("Hvor mange spillere?", 3, 6);
+            spillernavne = input.getStringArray(new String[]{"Hvad hedder spiller 1?", "Hvad hedder spiller 2?", "Hvad hedder spiller 3?", "Hvad hedder spiller 4?", "Hvad hedder spiller 5?", "Hvad hedder spiller 6?"}, antalSpillere);
+        }
+        playerController.createPlayers(spillernavne);
         GUI_Player[] guiPlayers = playerController.getPlayersGUI();
         boardController.addCars(guiPlayers);
 

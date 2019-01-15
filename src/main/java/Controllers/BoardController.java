@@ -14,6 +14,7 @@ public class BoardController {
     public void addCars(GUI_Player[] players) {
         for (GUI_Player player : players) {
             board.getBoard().getFields()[0].setCar(player, true);
+            board.getBoard().addPlayer(player);
         }
     }
 }

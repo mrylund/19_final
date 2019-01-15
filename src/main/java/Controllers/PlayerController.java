@@ -7,8 +7,8 @@ import gui_fields.GUI_Player;
 public class PlayerController {
     private PlayerList players = new PlayerList();
 
-    public Player[] createPlayers(int antalSpillere) {
-        return players.addPlayers(antalSpillere);
+    public Player[] createPlayers(String[] spillere) {
+        return players.addPlayers(spillere);
     }
 
     public GUI_Car[] getPlayerCars() {
