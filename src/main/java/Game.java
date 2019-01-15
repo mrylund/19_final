@@ -1,8 +1,8 @@
-import Gameboard.Gameboard;
+import Controllers.GameController;
 
 public class Game {
     public static void main(String[] args) {
-        Gameboard game = new Gameboard();
+        new GameController();
         
     }
 }
