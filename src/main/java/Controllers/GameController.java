@@ -47,7 +47,7 @@ public class GameController {
         int curSpiller = 0;
         int prevpos = 0;
         while (true) {
-            if (curSpiller >= antalSpillere - 1) curSpiller = 0;
+            if (curSpiller >= antalSpillere) curSpiller = 0;
             prevpos = playerController.getPlayerPos(curSpiller);
             diceCup.roll();
             boardController.setDice(diceCup.getDie1(), diceCup.getDie2());

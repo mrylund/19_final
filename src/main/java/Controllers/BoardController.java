@@ -42,7 +42,7 @@ public class BoardController {
             prevpos %= 40;
             movepos = prevpos + 1;
             movepos %= 40;
-            sleep(100);
+            sleep(150);
 
             if (prevpos == newpos) {
                 moving = false;
