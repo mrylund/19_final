@@ -33,7 +33,12 @@ public class PlayerController {
         return players.getPlayerGUI(playerNumber);
     }
 
-    public void movePlayer(int player, int prevpos, int newpos) {
+    public void movePlayer(int player, int prevpos, int amount) {
+        int newpos = prevpos + amount;
+        if (newpos > 39) {
+            newpos %= 40;
+            players.getPlayer(player).addBalance(4000);
+        }
         players.getPlayer(player).setPos(newpos);
     }
 }
