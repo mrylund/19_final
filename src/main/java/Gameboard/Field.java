@@ -11,25 +11,35 @@ public class Field {
             this.field = new GUI_Street();
             this.field.setTitle(values[2]);
             this.field.setSubText(values[1]);
-            this.field.setDescription("Leje af grund        kr. 1.000<br>" +
-                    "m/ 1 hus           4.000<br>" +
-                    "m/ 2 huse          12.000<br>" +
-                    "m/ 3 huse          28.000<br>" +
-                    "m/ 4 huse          34.000<br>" +
-                    "m/ hotel           40.000<br><br>" +
-                    "Hvert hus koster       kr. 4.000<br>" +
-                    "Et hotel koster        kr. 4.000 + 4 huse<br>" +
-                    "Pantsætningsværdi      kr. 4.000");
+            this.field.setDescription("Leje af grund        kr."+ values[4]+"<br>" +
+                    "m/ 1 hus           "+values[5]+"<br>" +
+                    "m/ 2 huse          "+values[6]+"<br>" +
+                    "m/ 3 huse          "+values[7]+"<br>" +
+                    "m/ 4 huse          "+values[8]+"<br>" +
+                    "m/ hotel           "+values[9]+"<br><br>" +
+                    "Hvert hus og hotel koster       kr. "+values[10]+"<br>" +
+                    "Pantsætningsværdi      kr.");
         } else if (values[0].equals("GUI_Chance")) {
             this.field = new GUI_Chance();
+            this.field.setDescription("Her kan de prøve lykken.");
         } else if (values[0].equals("GUI_Jail")) {
             this.field = new GUI_Jail();
+            this.field.setDescription(values[2]);
+            this.field.setSubText(values[2]);
         } else if (values[0].equals("GUI_Shipping")) {
             this.field = new GUI_Shipping();
+            this.field.setTitle(values[2]);
+            this.field.setSubText(values[1]);
         } else if (values[0].equals("GUI_Brewery")) {
             this.field = new GUI_Brewery();
-        } else if (values[0].equals("GUI_Tax")) {
+        } else if (values[0].equals("GUI_Tax1")) {
             this.field = new GUI_Tax();
+            this.field.setTitle("Betal indkomsskat kr. "+values[4]);
+            this.field.setSubText(values[1]);
+        } else if (values[0].equals("GUI_Tax2")){
+            this.field = new GUI_Tax();
+            this.field.setTitle("Ekstraordinær statsskat. Betal kr. "+values[3]);
+            this.field.setSubText(values[1]);
         } else if (values[0].equals("GUI_Car")) {
             this.field = new GUI_Refuge();
         }
