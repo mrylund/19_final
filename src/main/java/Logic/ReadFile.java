@@ -39,6 +39,11 @@ public class ReadFile {
         return empty;
     }
 
+    public String getFieldColor(int lineNum) {
+        String[] color = theFile[lineNum-1].split("; ");
+        return color[color.length-1];
+    }
+
     public String getFieldType(int lineNum){
         return theFile[lineNum-1].split("; ")[0];
     }
@@ -123,5 +128,7 @@ public class ReadFile {
                     reader.getFieldRent(40));*/
         }
         System.out.println((counter/50) + " millisek");
+
+        System.out.println(reader.getFieldColor(1));
     }
 }

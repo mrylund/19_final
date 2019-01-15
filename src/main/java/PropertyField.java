@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
-
+/*
 public class PropertyField {
     public PropertyField() {
         readFile();
@@ -81,3 +81,5 @@ public class PropertyField {
         System.out.println(Arrays.toString(chance.getCardSet()));
     }
 }
+
+*/
