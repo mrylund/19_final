@@ -7,6 +7,9 @@ public class Field {
     public Field(String[] values) {
         if(values[0].equals("GUI_Start")){
             this.field = new GUI_Start();
+            this.field.setSubText(values[1]);
+            this.field.setDescription("Når de passerer start indkasserer de 4000 kr.");
+            this.field.setTitle("Start");
         }else if(values[0].equals("GUI_Street")) {
             this.field = new GUI_Street();
             this.field.setTitle(values[2]);
@@ -30,18 +33,33 @@ public class Field {
             this.field = new GUI_Shipping();
             this.field.setTitle(values[2]);
             this.field.setSubText(values[1]);
+            this.field.setDescription("Leje af rederi        kr."+ values[4]+"<br>" +
+                    "m/ 2 rederier      "+values[5]+"<br>" +
+                    "m/ 3 rederier      "+values[6]+"<br>" +
+                    "m/ 4 rederier      "+values[7]+"<br>" +
+
+                    "Pantsætningsværdi      kr.");
         } else if (values[0].equals("GUI_Brewery")) {
             this.field = new GUI_Brewery();
+            this.field.setSubText(values[1]);
+            this.field.setTitle(values[2]);
+            this.field.setDescription("leje af grund kr <br> 100 * antal-øjne<br><br>" +
+                    "leje af grund med begge bryggerier kr <br>200 * antal-øjne");
         } else if (values[0].equals("GUI_Tax1")) {
             this.field = new GUI_Tax();
             this.field.setTitle("Betal indkomsskat kr. "+values[4]);
             this.field.setSubText(values[1]);
+            this.field.setDescription("Betal indkomsskat kr. "+values[4]);
         } else if (values[0].equals("GUI_Tax2")){
             this.field = new GUI_Tax();
             this.field.setTitle("Ekstraordinær statsskat. Betal kr. "+values[3]);
             this.field.setSubText(values[1]);
+            this.field.setDescription("Ekstraordinær statsskat. Betal kr. "+values[3]);
         } else if (values[0].equals("GUI_Car")) {
             this.field = new GUI_Refuge();
+            this.field.setSubText(values[1]);
+            this.field.setDescription("Gratis parkering");
+            this.field.setTitle("Parkering");
         }
 
     }

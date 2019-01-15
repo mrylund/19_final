@@ -10,7 +10,7 @@ GUI_Street; 9; Valby Langgade; 2000; 100; 600; 1800; 5400; 8000; 11000; 1000
 GUI_Street; 10; Allégade; 2400; 150; 800; 2000; 6000; 9000; 12000; 1000
 GUI_Jail; 11; På Besøg
 GUI_Street; 12; Frederiksberg Allé; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
-GUI_Brewery; 13; Tuborg Bryggeri; 3000; 100; 200
+GUI_Brewery; 13; Tuborg; 3000; 100; 200
 GUI_Street; 14; Bülowsvej; 2800; 200; 1000; 3000; 9000; 12500; 15000; 2000
 GUI_Street; 15; Gl. Kongevej; 3200; 250; 1250; 3750; 10000; 14000; 18000; 2000
 GUI_Shipping; 16; Kalundborg; 4000; 500; 1000; 2000; 4000
@@ -26,7 +26,7 @@ GUI_Street; 25; Grønningen; 4800; 400; 2000; 6000; 15000; 18500; 22000; 3000
 GUI_Shipping; 26; DFDS; 4000; 500; 1000; 2000; 3000; 4000
 GUI_Street; 27; Bredgade; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
 GUI_Street; 28; Kgs. Nytorv; 5200; 450; 2200; 6600; 16000; 19500; 23000; 3000
-GUI_Brewery; 29; Coca-Cola tapperi; 3000; 100; 200
+GUI_Brewery; 29; Carlsberg; 3000; 100; 200
 GUI_Street; 30; Østergade; 5600; 500; 2400; 7200; 17000; 20500; 24000; 3000
 GUI_Jail; 31; De fængsles
 GUI_Street; 32; Amagertorv; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
