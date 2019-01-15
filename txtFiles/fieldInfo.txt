@@ -36,5 +36,5 @@ GUI_Street; 35; Nygade; 6400; 600; 3000; 9000; 20000; 24000; 28000; 4000
 GUI_Shipping; 36; DSB Halsskov/Knudshoved; 4000; 500; 1000; 2000; 3000; 4000
 GUI_Chance; 37; Prøv lykken
 GUI_Street; 38; Frederiksberggade; 7000; 700; 3500; 10000; 22000; 26000; 30000; 4000
-GUI_Street; 39; Ekstraordinær statsskat. Betal kr. 2000; 2000
+GUI_Tax; 39; Ekstraordinær statsskat. Betal kr. 2000; 2000
 GUI_Street; 40; Rådhuspladsen; 8000; 1000; 4000; 12000; 28000; 34000; 40000; 4000

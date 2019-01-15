@@ -8,7 +8,6 @@ import java.io.IOException;
 import static junit.framework.TestCase.assertEquals;
 
 public class test {
-
     @Test
     public void readFile() {
         String fileName = "txtFiles/tests.txt";
