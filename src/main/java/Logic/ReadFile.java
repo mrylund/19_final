@@ -7,6 +7,7 @@ import java.io.IOException;
 public class ReadFile {
 
     private String fieldInfoPath = "txtFiles/fieldInfo.txt";
+    private String[] theFile = readFile(fieldInfoPath);
 
     public String[] readFile(String fileToBeRead) {
 
@@ -43,7 +44,9 @@ public class ReadFile {
         return empty;
     }
 
-    String[] theFile = readFile(fieldInfoPath);
+    public String navn(int lineNum) {
+        return theFile[lineNum-1].split("; ")[2];
+    }
 
     public String getLine(int lineNum) {
         String[] line = readFile(fieldInfoPath);
@@ -109,10 +112,30 @@ public class ReadFile {
             System.out.println(readFilePrint[i]);
         }
 
-        System.out.println(readFilePrint[2]);
+        //System.out.println(readFilePrint[2]);
+        //System.out.println(readFilePrint[39].split("; ")[5]);
+        //System.out.println(reader.getFieldName(40));
 
-        System.out.println(readFilePrint[39].split("; ")[5]);
+        long counter = 0;
+        for (int i = 0; i < 50; i++) {
+            long t0 = System.currentTimeMillis();
+            for (int j = 1; j < 40; j++) {
+                //System.out.println(reader.getFieldName(j));
+                System.out.println(reader.navn(j));
+            }
+            long t1 = System.currentTimeMillis();
+            counter += (t1-t0);
 
-        System.out.println(reader.getFieldName(40));
+            /*System.out.println(reader.getFieldName(40) + "\n" +
+                    reader.getFieldPrice(40) + "\n" +
+                    reader.getFieldHouse1(40) + "\n" +
+                    reader.getFieldHouse2(40) + "\n" +
+                    reader.getFieldHouse3(40) + "\n" +
+                    reader.getFieldHouse4(40) + "\n" +
+                    reader.getFieldHotel(40) + "\n" +
+                    reader.getFieldBuildPrice(40) + "\n" +
+                    reader.getFieldRent(40));*/
+        }
+        System.out.println((counter/50) + " millisek");
     }
 }

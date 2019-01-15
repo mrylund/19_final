@@ -33,7 +33,7 @@ GUI_Street; 32; Amagertorv; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
 GUI_Street; 33; Vimmelskaftet; 6000; 550; 2600; 7800; 18000; 22000; 25000; 4000
 GUI_Chance; 34; Prøv lykken
 GUI_Street; 35; Nygade; 6400; 600; 3000; 9000; 20000; 24000; 28000; 4000
-GUI_Shipping; 36;  Halsskov; 4000; 500; 1000; 2000; 3000; 4000
+GUI_Shipping; 36; Halsskov; 4000; 500; 1000; 2000; 3000; 4000
 GUI_Chance; 37; Prøv lykken
 GUI_Street; 38; Frederiksberggade; 7000; 700; 3500; 10000; 22000; 26000; 30000; 4000
 GUI_Tax2; 39; Ekstraordinær statsskat. Betal kr. 2000; 2000
