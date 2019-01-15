@@ -36,7 +36,7 @@ public class PropertyField {
     }
 
     public String getFieldName(String tile) {
-        return getFieldValue(tile)[0];
+        return getFieldValue(tile)[2];
     }
     public int getFieldPrice(String tile) {
         return Integer.parseInt(getFieldValue(tile)[1]);

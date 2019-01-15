@@ -16,19 +16,15 @@ public class ReadFile {
         String[] empty = new String[0];
         try {
             BufferedReader reader = new BufferedReader(new java.io.FileReader(fileName));
-
             String line;
             int i = 0;
             int counter = 0;
-
             while (reader.readLine() != null) {
                 counter++;
             }
+            reader.close();
             reader = new BufferedReader(new java.io.FileReader(fileName));
-
-
             lines = new String[counter];
-
             while ((line = reader.readLine()) != null) {
                 lines[i] = line;
                 i++;
@@ -40,12 +36,47 @@ public class ReadFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return empty;
     }
 
-    public String navn(int lineNum) {
+    public String getFieldType(int lineNum){
+        return theFile[lineNum-1].split("; ")[0];
+    }
+
+    public String getFieldName(int lineNum) {
         return theFile[lineNum-1].split("; ")[2];
+    }
+
+    public String getFieldPrice(int lineNum){
+        return theFile[lineNum-1].split("; ")[3];
+    }
+
+    public String getFieldRent(int lineNum){
+        return theFile[lineNum-1].split("; ")[4];
+    }
+
+    public String getFieldHouse1Price(int lineNum){
+        return theFile[lineNum-1].split("; ")[5];
+    }
+
+    public String getFieldHouse2Price(int lineNum){
+        return theFile[lineNum-1].split("; ")[6];
+    }
+
+    public String getFieldHouse3Price(int lineNum){
+        return theFile[lineNum-1].split("; ")[7];
+    }
+
+    public String getFieldHouse4Price(int lineNum){
+        return theFile[lineNum-1].split("; ")[8];
+    }
+
+    public String getFieldHotelPrice(int lineNum){
+        return theFile[lineNum-1].split("; ")[9];
+    }
+
+    public String getBuildPrice(int lineNum) {
+        return theFile[lineNum-1].split("; ")[10];
     }
 
     public String getLine(int lineNum) {
@@ -53,6 +84,7 @@ public class ReadFile {
         return line[lineNum];
     }
 
+    /*
     public String getFieldType(int lineNum) {
         String[] allLines = readFile(fieldInfoPath);
         return allLines[lineNum].split("; ")[0];
@@ -103,6 +135,7 @@ public class ReadFile {
         return allLines[lineNum-1].split("; ")[10];
     }
 
+    */
 
     public static void main(String[] args){
         ReadFile reader = new ReadFile();
@@ -121,7 +154,7 @@ public class ReadFile {
             long t0 = System.currentTimeMillis();
             for (int j = 1; j < 40; j++) {
                 //System.out.println(reader.getFieldName(j));
-                System.out.println(reader.navn(j));
+                System.out.println(reader.getFieldName(j));
             }
             long t1 = System.currentTimeMillis();
             counter += (t1-t0);
