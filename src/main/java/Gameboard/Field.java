@@ -1,18 +1,26 @@
 package Gameboard;
 
 import gui_fields.*;
+import java.awt.*;
 
 public class Field {
     private GUI_Field field;
     public Field(String[] values) {
         if(values[0].equals("GUI_Start")){
             this.field = new GUI_Start();
+            String[] lineColor = values[4].split(",");
+            int[] colorOfField = new int[lineColor.length];
+            for(int i = 0; i < colorOfField.length; i++){
+                colorOfField[i] = Integer.parseInt(lineColor[i]);
+            }
+            this.field.setBackGroundColor(new Color(colorOfField[0],colorOfField[1],colorOfField[2]));
             this.field.setSubText(values[1]);
             this.field.setDescription("Når de passerer start indkasserer de 4000 kr.");
             this.field.setTitle("Start");
         }else if(values[0].equals("GUI_Street")) {
             this.field = new GUI_Street();
             this.field.setTitle(values[2]);
+           // this.field.setBackGroundColor();
             this.field.setSubText(values[1]);
             this.field.setDescription("Leje af grund        kr."+ values[4]+"<br>" +
                     "m/ 1 hus           "+values[5]+"<br>" +
