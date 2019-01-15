@@ -35,4 +35,14 @@ public class Player {
     public int getPos() {
         return pos;
     }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+        player.setBalance(this.balance);
+    }
+
+    public void addBalance(int amount) {
+        this.balance += amount;
+        player.setBalance(this.balance);
+    }
 }
