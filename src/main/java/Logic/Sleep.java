@@ -2,7 +2,7 @@ package Logic;
 
 public class Sleep {
     public static void sleep() {
-        sleep(1200);
+        sleep(1000);
     }
 
     public static void sleep(int n) {

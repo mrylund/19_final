@@ -45,17 +45,15 @@ public class GameController {
 
     public void GameLoop() {
         int curSpiller = 0;
-        int newpos = 0;
         int prevpos = 0;
         while (true) {
-            if (curSpiller >= antalSpillere - 1) antalSpillere = 0;
+            if (curSpiller >= antalSpillere) curSpiller = 0;
             prevpos = playerController.getPlayerPos(curSpiller);
             diceCup.roll();
             boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
-            newpos = prevpos + diceCup.getSum();
 
-            boardController.moveCar(playerController.getPlayer(curSpiller), prevpos, newpos);
-            playerController.movePlayer(curSpiller, prevpos, newpos);
+            boardController.moveCar(playerController.getPlayer(curSpiller), prevpos, diceCup.getSum());
+            playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
             sleep();
             curSpiller++;
         }
