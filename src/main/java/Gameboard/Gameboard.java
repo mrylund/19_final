@@ -11,6 +11,7 @@ public class Gameboard {
     private GUI_Field[] gui_fields = new GUI_Field[40];
     private Field[] fields = new Field[40];
     private GUI_BoardController gameboard;
+
     public Gameboard(){}
 
     public void createBoard() {

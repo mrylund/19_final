@@ -17,10 +17,16 @@ public class Field {
             this.field.setSubText(values[1]);
             this.field.setDescription("Når de passerer start indkasserer de 4000 kr.");
             this.field.setTitle("Start");
+
         }else if(values[0].equals("GUI_Street")) {
             this.field = new GUI_Street();
+            String[] lineColor = values[11].split(",");
+            int[] colorOfField = new int[lineColor.length];
+            for(int i = 0; i < colorOfField.length; i++){
+                colorOfField[i] = Integer.parseInt(lineColor[i]);
+            }
+            this.field.setBackGroundColor(new Color(colorOfField[0],colorOfField[1],colorOfField[2]));
             this.field.setTitle(values[2]);
-           // this.field.setBackGroundColor();
             this.field.setSubText(values[1]);
             this.field.setDescription("Leje af grund        kr."+ values[4]+"<br>" +
                     "m/ 1 hus           "+values[5]+"<br>" +
@@ -69,7 +75,6 @@ public class Field {
             this.field.setDescription("Gratis parkering");
             this.field.setTitle("Parkering");
         }
-
     }
 
     public GUI_Field getField() {
