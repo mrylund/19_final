@@ -2,14 +2,19 @@ package Controllers;
 
 import Entities.Player;
 import Gameboard.Gameboard;
+import Logic.DiceCup;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 import jdk.internal.util.xml.impl.Input;
 
+import static Logic.Sleep.sleep;
+
 public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
+    int antalSpillere;
 
 
     public GameController(boolean devmode) {
@@ -17,7 +22,6 @@ public class GameController {
     }
 
     public void InitializeGame(boolean devmode) {
-        int antalSpillere;
         String[] spillernavne;
         input = new InputController(boardController.createBoard());
         if (devmode) {
@@ -36,6 +40,17 @@ public class GameController {
         playerController.createPlayers(spillernavne);
         GUI_Player[] guiPlayers = playerController.getPlayersGUI();
         boardController.addCars(guiPlayers);
+        GameLoop();
+    }
 
+    public void GameLoop() {
+        int curSpiller = 0;
+        while (true) {
+            if (curSpiller >= antalSpillere - 1) antalSpillere = 0;
+            diceCup.roll();
+            boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+            curSpiller++;
+            sleep();
+        }
     }
 }

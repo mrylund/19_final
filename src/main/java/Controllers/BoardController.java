@@ -17,4 +17,8 @@ public class BoardController {
             board.getBoard().addPlayer(player);
         }
     }
+
+    public void setDice(int dice1, int dice2) {
+        board.getBoard().setDice(dice1, dice2);
+    }
 }
