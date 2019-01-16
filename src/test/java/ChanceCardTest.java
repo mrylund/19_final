@@ -1,10 +1,11 @@
+import Logic.ChanceCard;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ChanceCardTest {
 
-    ChanceCard chanceCard = new ChanceCard();
+    private ChanceCard chanceCard = new ChanceCard();
 
     //tjekker om to String[] er ens eller ej
     public boolean checkIfSame(String[] s1, String[] s2) {
@@ -33,6 +34,10 @@ public class ChanceCardTest {
             }
         }
         assertTrue(counter == 0);
+        chanceCard.makeCardSet();
+        for(int i = 0; i < chanceCard.getCardSet().length; i++) {
+            System.out.println(chanceCard.getCardSet()[i]);
+        }
     }
 
     @Test

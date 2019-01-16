@@ -21,4 +21,8 @@ public class InputController {
 
         return output;
     }
+
+    public String getButtonpress(String question, String[] buttons) {
+        return board.getBoard().getUserButtonPressed(question, buttons);
+    }
 }

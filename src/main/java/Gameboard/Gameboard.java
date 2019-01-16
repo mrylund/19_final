@@ -28,4 +28,16 @@ public class Gameboard {
     public GUI_BoardController getBoard() {
         return gameboard;
     }
+
+    public int getFieldType(int fieldnumber) {
+        return fields[fieldnumber].getFieldType();
+    }
+
+    public int getFieldOwner(int fieldNumber) {
+        return fields[fieldNumber].getOwner();
+    }
+
+    public void setFieldOwner(int field, int player) {
+        fields[field].setOwner(player);
+    }
 }

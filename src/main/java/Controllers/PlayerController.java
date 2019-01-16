@@ -29,8 +29,12 @@ public class PlayerController {
         return players.getPlayer(playerNumber).getPos();
     }
 
-    public GUI_Player getPlayer(int playerNumber) {
+    public GUI_Player getPlayerGUI(int playerNumber) {
         return players.getPlayerGUI(playerNumber);
+    }
+
+    public Player getPlayer(int playerNumber) {
+        return players.getPlayer(playerNumber);
     }
 
     public void movePlayer(int player, int prevpos, int amount) {
@@ -40,5 +44,14 @@ public class PlayerController {
             players.getPlayer(player).addBalance(4000);
         }
         players.getPlayer(player).setPos(newpos);
+    }
+
+    public boolean purchaseProperty(int player, int amount) {
+        if (players.playerCanAfford(player, amount)) {
+            players.getPlayer(player).addBalance(-amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -1,20 +1,19 @@
 package Controllers;
 
-import Entities.Player;
-import Gameboard.Gameboard;
 import Logic.DiceCup;
-import gui_fields.GUI_Car;
+import Logic.ReadFile;
 import gui_fields.GUI_Player;
-import jdk.internal.util.xml.impl.Input;
 
 import static Logic.Sleep.sleep;
 
 public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
+    private ChanceCardController chancecontroller = new ChanceCardController();
     private DiceCup diceCup = new DiceCup();
     private InputController input;
-    int antalSpillere;
+    private ReadFile reader = new ReadFile();
+    int numberOfPlayers;
 
 
     public GameController(boolean devmode) {
@@ -25,7 +24,7 @@ public class GameController {
         String[] spillernavne;
         input = new InputController(boardController.createBoard());
         if (devmode) {
-            antalSpillere = 5;
+            numberOfPlayers = 5;
             spillernavne = new String[] {
                     "Martin",
                     "Patrick",
@@ -34,8 +33,8 @@ public class GameController {
                     "Andreas"
             };
         } else {
-            antalSpillere = input.getInt("Hvor mange spillere?", 3, 6);
-            spillernavne = input.getStringArray(new String[]{"Hvad hedder spiller 1?", "Hvad hedder spiller 2?", "Hvad hedder spiller 3?", "Hvad hedder spiller 4?", "Hvad hedder spiller 5?", "Hvad hedder spiller 6?"}, antalSpillere);
+            numberOfPlayers = input.getInt("Hvor mange spillere?", 3, 6);
+            spillernavne = input.getStringArray(new String[]{"Hvad hedder spiller 1?", "Hvad hedder spiller 2?", "Hvad hedder spiller 3?", "Hvad hedder spiller 4?", "Hvad hedder spiller 5?", "Hvad hedder spiller 6?"}, numberOfPlayers);
         }
         playerController.createPlayers(spillernavne);
         GUI_Player[] guiPlayers = playerController.getPlayersGUI();
@@ -46,15 +45,59 @@ public class GameController {
     public void GameLoop() {
         int curSpiller = 0;
         int prevpos = 0;
+        int fieldnumber = 0;
         while (true) {
-            if (curSpiller >= antalSpillere) curSpiller = 0;
+            if (curSpiller >= numberOfPlayers) curSpiller = 0;
             prevpos = playerController.getPlayerPos(curSpiller);
-            diceCup.roll();
-            boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+            if (input.getButtonpress("Det er nu: " + playerController.getPlayerGUI(curSpiller).getName() + ", kast med terningerne", new String[]{"kast"}).equals("kast")) {
+                diceCup.roll();
+                boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+                fieldnumber = boardController.moveCar(playerController.getPlayerGUI(curSpiller), prevpos, diceCup.getSum());
+                playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
+            }
 
-            boardController.moveCar(playerController.getPlayer(curSpiller), prevpos, diceCup.getSum());
-            playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
-            sleep();
+            int fieldtype = boardController.getFieldType(fieldnumber);
+            if (fieldtype == 1 || fieldtype == 4 || fieldtype == 5) {
+                if (boardController.fieldHasOwner(fieldnumber)) {
+                    input.getButtonpress("Dette felt er dsv. ejet af en anden spiller!", new String[]{"ok"});
+                } else {
+                    String answer = input.getButtonpress("Vil du gerne købe feltet " + reader.getFieldName(fieldnumber + 1) + " for " + reader.getFieldPrice(fieldnumber + 1) + "?", new String[]{"ja", "nej"});
+                    if (answer.equals("ja")) {
+                        int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldnumber + 1));
+                        boolean success = playerController.purchaseProperty(curSpiller, fieldPrice);
+                        if (success) {
+                            boardController.purchaseProperty(fieldnumber, curSpiller);
+                        }
+                    }
+                }
+            } else if (fieldtype == 2) {
+                chancecontroller.drawCard();
+                int[] values = chancecontroller.getCardValues();
+                String chanceCardText = chancecontroller.getCardText();
+                boardController.displayChanceCard(chanceCardText);
+
+                switch(values[0]){
+                    case 1:
+                        playerController.getPlayer(curSpiller).addBalance(values[1]);
+                        break;
+                    case 2:
+
+                    case 3:
+
+                    case 4:
+
+                    case 5:
+
+                    case 6:
+                }
+
+            } else if (fieldtype == 3) {
+
+            } else if (fieldtype == 6) {
+
+            } else if (fieldtype == 7) {
+
+            }
             if (!diceCup.isSameValue()) {
                 curSpiller++;
             }
