@@ -9,6 +9,7 @@ import static Logic.Sleep.sleep;
 public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
+    private ChanceCardController chancecontroller = new ChanceCardController();
     private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
@@ -55,7 +56,6 @@ public class GameController {
                 playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
             }
 
-
             int fieldtype = boardController.getFieldType(fieldnumber);
             if (fieldtype == 1 || fieldtype == 4 || fieldtype == 5) {
                 if (boardController.fieldHasOwner(fieldnumber)) {
@@ -71,6 +71,19 @@ public class GameController {
                     }
                 }
             } else if (fieldtype == 2) {
+                chancecontroller.drawCard();
+                int[] values = chancecontroller.getCardValues();
+                String chanceCardText = chancecontroller.getCardText();
+                boardController.displayChanceCard(chanceCardText);
+
+                switch(values[0]){
+                    case 1:
+                        playerController.getPlayer(curSpiller).addBalance(values[1]);
+                        break;
+                    case 2:
+
+                    case 3:
+                }
 
             } else if (fieldtype == 3) {
 
