@@ -5,6 +5,9 @@ import java.awt.*;
 
 public class Field {
     private GUI_Field field;
+    private int fieldtype = 0;
+    private int owner = -1;
+
     public Field(String[] values) {
 
         if(values[0].equals("GUI_Start")){
@@ -18,6 +21,7 @@ public class Field {
             this.field.setSubText(values[1]);
             this.field.setDescription("Når de passerer start indkasserer de 4000 kr.");
             this.field.setTitle("Start");
+            fieldtype = 0;
 
         }else if(values[0].equals("GUI_Street")) {
             this.field = new GUI_Street();
@@ -37,18 +41,18 @@ public class Field {
                     "m/ hotel           "+values[9]+"<br><br>" +
                     "Hvert hus og hotel koster       kr. "+values[10]+"<br>" +
                     "Pantsætningsværdi      kr.");
-
+            fieldtype = 1;
         } else if (values[0].equals("GUI_Chance")) {
             this.field = new GUI_Chance();
             this.field.setDescription("Her kan de prøve lykken.");
-
+            fieldtype = 2;
         } else if (values[0].equals("GUI_Jail")) {
             this.field = new GUI_Jail();
             this.field.setDescription(values[2]);
             this.field.setSubText(values[2]);
             this.field.setForeGroundColor(new Color(255,255,255));
             this.field.setBackGroundColor(new Color(0,0,0));
-
+            fieldtype = 3;
         } else if (values[0].equals("GUI_Shipping")) {
             this.field = new GUI_Shipping();
             this.field.setTitle(values[2]);
@@ -59,7 +63,7 @@ public class Field {
                     "m/ 4 rederier      "+values[7]+"<br>" +
                     "Pantsætningsværdi      kr.");
             this.field.setBackGroundColor(new Color(200,10,20));
-
+            fieldtype = 4;
         } else if (values[0].equals("GUI_Brewery")) {
             this.field = new GUI_Brewery();
             this.field.setSubText(values[1]);
@@ -68,29 +72,43 @@ public class Field {
                     "leje af grund med begge bryggerier kr <br>200 * antal-øjne");
             this.field.setForeGroundColor(new Color(0,150,2));
             this.field.setBackGroundColor(new Color(0,0,0));
-
+            fieldtype = 5;
         } else if (values[0].equals("GUI_Tax1")) {
             this.field = new GUI_Tax();
             this.field.setTitle("Betal indkomsskat kr. "+values[4]);
             this.field.setSubText(values[1]);
             this.field.setDescription("Betal indkomsskat kr. "+values[4]);
-
+            fieldtype = 6;
         } else if (values[0].equals("GUI_Tax2")){
             this.field = new GUI_Tax();
             this.field.setTitle("Ekstraordinær statsskat. Betal kr. "+values[3]);
             this.field.setSubText(values[1]);
             this.field.setDescription("Ekstraordinær statsskat. Betal kr. "+values[3]);
-
+            fieldtype = 6;
         } else if (values[0].equals("GUI_Car")) {
             this.field = new GUI_Refuge();
             this.field.setSubText(values[1]);
             this.field.setDescription("Gratis parkering");
             this.field.setTitle("Parkering");
+            fieldtype = 7;
         }
     }
 
     public GUI_Field getField() {
         return this.field;
+    }
+
+    public int getFieldType() {
+        return fieldtype;
+    }
+
+    public int getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(int player) {
+        this.owner = player;
+        ((GUI_Ownable)this.field).setBorder(new Color(255, 0, 175));
     }
 
 }

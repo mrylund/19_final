@@ -45,4 +45,10 @@ public class PlayerList {
 
         return cars;
     }
+
+    public boolean playerCanAfford(int player, int amount) {
+        if (players[player].getBalance() > amount) {
+            return true;
+        } else { return false;}
+    }
 }

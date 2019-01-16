@@ -2,6 +2,6 @@ import Controllers.GameController;
 
 public class Game {
     public static void main(String[] args) {
-        new GameController(false);
+        new GameController(true);
     }
 }

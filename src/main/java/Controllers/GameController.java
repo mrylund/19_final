@@ -1,6 +1,7 @@
 package Controllers;
 
 import Logic.DiceCup;
+import Logic.ReadFile;
 import gui_fields.GUI_Player;
 
 import static Logic.Sleep.sleep;
@@ -10,6 +11,7 @@ public class GameController {
     private PlayerController playerController = new PlayerController();
     private DiceCup diceCup = new DiceCup();
     private InputController input;
+    private ReadFile reader = new ReadFile();
     int numberOfPlayers;
 
 
@@ -42,15 +44,41 @@ public class GameController {
     public void GameLoop() {
         int curSpiller = 0;
         int prevpos = 0;
+        int fieldnumber = 0;
         while (true) {
             if (curSpiller >= numberOfPlayers) curSpiller = 0;
             prevpos = playerController.getPlayerPos(curSpiller);
-            diceCup.roll();
-            boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+            if (input.getButtonpress("Det er nu: " + playerController.getPlayerGUI(curSpiller).getName() + ", kast med terningerne", new String[]{"kast"}).equals("kast")) {
+                diceCup.roll();
+                boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+                fieldnumber = boardController.moveCar(playerController.getPlayerGUI(curSpiller), prevpos, diceCup.getSum());
+                playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
+            }
 
-            boardController.moveCar(playerController.getPlayer(curSpiller), prevpos, diceCup.getSum());
-            playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
-            sleep();
+
+            int fieldtype = boardController.getFieldType(fieldnumber);
+            if (fieldtype == 1 || fieldtype == 4 || fieldtype == 5) {
+                if (boardController.fieldHasOwner(fieldnumber)) {
+                    input.getButtonpress("Dette felt er dsv. ejet af en anden spiller!", new String[]{"ok"});
+                } else {
+                    String answer = input.getButtonpress("Vil du gerne købe feltet " + reader.getFieldName(fieldnumber + 1) + " for " + reader.getFieldPrice(fieldnumber + 1) + "?", new String[]{"ja", "nej"});
+                    if (answer.equals("ja")) {
+                        int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldnumber + 1));
+                        boolean success = playerController.purchaseProperty(curSpiller, fieldPrice);
+                        if (success) {
+                            boardController.purchaseProperty(fieldnumber, curSpiller);
+                        }
+                    }
+                }
+            } else if (fieldtype == 2) {
+
+            } else if (fieldtype == 3) {
+
+            } else if (fieldtype == 6) {
+
+            } else if (fieldtype == 7) {
+
+            }
             curSpiller++;
         }
     }

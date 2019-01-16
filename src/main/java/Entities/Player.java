@@ -43,6 +43,15 @@ public class Player {
 
     public void addBalance(int amount) {
         this.balance += amount;
-        player.setBalance(this.balance);
+        if (this.balance < 0) {
+            player.setBalance(0);
+        } else {
+            player.setBalance(this.balance);
+        }
+
+    }
+
+    public int getBalance() {
+        return this.balance;
     }
 }
