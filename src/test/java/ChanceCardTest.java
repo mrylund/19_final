@@ -1,10 +1,11 @@
+import Logic.ChanceCard;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ChanceCardTest {
 
-    ChanceCard chanceCard = new ChanceCard();
+    private ChanceCard chanceCard = new ChanceCard();
 
     //tjekker om to String[] er ens eller ej
     public boolean checkIfSame(String[] s1, String[] s2) {

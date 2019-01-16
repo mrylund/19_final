@@ -1,3 +1,5 @@
+package Logic;
+
 import Logic.ReadFile;
 
 import java.util.Random;
