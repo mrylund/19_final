@@ -33,6 +33,10 @@ public class ChanceCardTest {
             }
         }
         assertTrue(counter == 0);
+        chanceCard.makeCardSet();
+        for(int i = 0; i < chanceCard.getCardSet().length; i++) {
+            System.out.println(chanceCard.getCardSet()[i]);
+        }
     }
 
     @Test

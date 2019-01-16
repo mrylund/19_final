@@ -1,48 +1,24 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
+import Logic.ReadFile;
+
 import java.util.Random;
 
 public class ChanceCard {
 
-    public ChanceCard() {
-        readFile();
-    }
-
-    private HashMap<String, String> chanceCard = new HashMap<String, String>();
-    private String[] cardSet;
     private String[] shuffleArray;
     private Random random = new Random();
     private String cardDraw;
+    private ReadFile reader = new ReadFile();
+    private String chanceCardPath = "txtFiles/chanceCard.txt";
+    private String[] cardSet;
 
-    @SuppressWarnings("Duplicates")
-    public void readFile() {
-        String fileName = "txtFiles/chanceCard.txt";
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String lines;
-            while((lines = reader.readLine()) != null) {
-                String[] lineInfo = lines.split(": ");
-                chanceCard.put(lineInfo[0], lineInfo[1]);
+    public void makeCardSet(){
+        this.cardSet = reader.readFile(chanceCardPath);
+        for(int i = 0; i < cardSet.length; i++ ){
+            if(i < 9){
+                cardSet[i] = cardSet[i].substring(3);
+            }else{
+                cardSet[i] = cardSet[i].substring(4);
             }
-            reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getChanceCard(String key) {
-        return chanceCard.get(key);
-    }
-    
-    public void makeCardSet() {
-        cardSet = new String[chanceCard.size()];
-        for (int i = 1; i < chanceCard.size(); i++) {
-            cardSet[i-1] = getChanceCard(Integer.toString(i));
         }
     }
 
@@ -53,7 +29,7 @@ public class ChanceCard {
 
         for (int i = 0; i < cardSet.length; i++) {
             success = false;
-            //l�gger det sidste kort ind p� den sidste tomme plads
+            //lægger det sidste kort ind på den sidste tomme plads
             if(i == cardSet.length-1) {
                 for (int j = 0; j < cardSet.length; j++) {
                     if(shuffleArray[j] == null) {
@@ -64,7 +40,7 @@ public class ChanceCard {
                 //hopper helt ud af i-forloop
                 break;
             }
-            //finder en random tom plads i shuffleArray og s�tter et kort ind
+            //finder en random tom plads i shuffleArray og sætter et kort ind
             do {
                 randomCard = random.nextInt(cardSet.length);
                 if(shuffleArray[randomCard] == null) {
@@ -79,7 +55,7 @@ public class ChanceCard {
 
     public void drawCard() {
         cardDraw = cardSet[0];
-        //l�gger det bagerst i bunken
+        //lægger det bagerst i bunken
         for (int i = 0; i < cardSet.length-1; i++) {
             cardSet[i] = cardSet[i+1];
         }

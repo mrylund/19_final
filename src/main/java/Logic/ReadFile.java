@@ -96,7 +96,7 @@ public class ReadFile {
         String[] allLines = readFile(fieldInfoPath);
         return allLines[lineNum-1].split("; ")[2];
     }
-
+    /*
     public static void main(String[] args){
         ReadFile reader = new ReadFile();
         String[] readFilePrint = reader.readFile("txtFiles/fieldInfo.txt");
@@ -119,7 +119,7 @@ public class ReadFile {
             long t1 = System.currentTimeMillis();
             counter += (t1-t0);
 
-            /*System.out.println(reader.getFieldName(40) + "\n" +
+            System.out.println(reader.getFieldName(40) + "\n" +
                     reader.getFieldPrice(40) + "\n" +
                     reader.getFieldHouse1(40) + "\n" +
                     reader.getFieldHouse2(40) + "\n" +
@@ -127,10 +127,17 @@ public class ReadFile {
                     reader.getFieldHouse4(40) + "\n" +
                     reader.getFieldHotel(40) + "\n" +
                     reader.getFieldBuildPrice(40) + "\n" +
-                    reader.getFieldRent(40));*/
+                    reader.getFieldRent(40));
         }
+
         System.out.println((counter/50) + " millisek");
 
         System.out.println(reader.getFieldColor(1));
+
+        System.out.println(System.currentTimeMillis());
+
+        System.out.println(Long.MAX_VALUE);
     }
+
+    */
 }
