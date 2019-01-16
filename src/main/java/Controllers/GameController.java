@@ -55,7 +55,9 @@ public class GameController {
             boardController.moveCar(playerController.getPlayer(curSpiller), prevpos, diceCup.getSum());
             playerController.movePlayer(curSpiller, prevpos, diceCup.getSum());
             sleep();
-            curSpiller++;
+            if (!diceCup.isSameValue()) {
+                curSpiller++;
+            }
         }
     }
 }
