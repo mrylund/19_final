@@ -64,7 +64,7 @@ public class BoardController {
             }
         }
 
-        return newpos;
+        return newpos + 1;
     }
 
     public int getFieldType(int fieldnumber) {
@@ -77,7 +77,6 @@ public class BoardController {
 
     public boolean fieldHasOwner(int field) {
         int owner = board.getFieldOwner(field);
-        System.out.println(owner);
         if (owner >= 0 && owner <= 6) {
             return true;
         }
@@ -87,6 +86,15 @@ public class BoardController {
     public int getFieldOwner(int field) {
         return board.getFieldOwner(field);
     }
+
+    public boolean hasSameType(int player) {
+        if (getFieldOwner(1) == player && getFieldOwner(3) == player) {
+
+        }
+
+        return true;
+    }
+
 
 
 }

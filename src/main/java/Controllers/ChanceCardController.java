@@ -9,8 +9,8 @@ public class ChanceCardController {
         chanceCard.shuffleCard();
     }
 
-    private ChanceCardDevmode chanceCard = new ChanceCardDevmode();
-    //private ChanceCard chanceCard = new ChanceCard();
+    //private ChanceCardDevmode chanceCard = new ChanceCardDevmode();
+    private ChanceCard chanceCard = new ChanceCard();
 
     public void drawCard(){
         chanceCard.drawCard();

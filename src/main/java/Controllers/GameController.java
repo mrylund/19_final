@@ -9,8 +9,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    private DiceCupDevmode diceCup = new DiceCupDevmode();
-    //private DiceCup diceCup = new DiceCup();
+    //private DiceCupDevmode diceCup = new DiceCupDevmode();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -44,135 +44,208 @@ public class GameController {
 
     private void GameLoop() {
         int curPlayer = 0;
-        int prevPos = 0;
-        int fieldnumber = 0;
+        int prevPos;
+
         while (true) {
             if (curPlayer >= numberOfPlayers) curPlayer = 0;
             prevPos = playerController.getPlayerPos(curPlayer);
-            if (input.getButtonpress("Det er nu: " + playerController.getPlayerGUI(curPlayer).getName() + ", kast med terningerne", new String[]{"kast"}).equals("kast")) {
-                diceCup.roll();
-                boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
-                fieldnumber = boardController.moveCar(playerController.getPlayerGUI(curPlayer), prevPos, diceCup.getSum());
-                playerController.movePlayer(curPlayer, prevPos, diceCup.getSum());
+
+            if(playerController.getPlayer(curPlayer).isJailed()) {
+                doJailedPlayerTurn(curPlayer, prevPos);
             }
 
-            int fieldtype = boardController.getFieldType(fieldnumber);
-            if (fieldtype == 1 || fieldtype == 4 || fieldtype == 5) {
-                if (boardController.fieldHasOwner(fieldnumber)) {
-                    int owner = boardController.getFieldOwner(fieldnumber);
-                    int price = Integer.parseInt(reader.getFieldRent(fieldnumber - 1));
-                    input.getButtonpress("Dette felt er ejet af "
-                            + playerController.getPlayer(owner).getName()
-                            + " du skal batale vedkommende "
-                            + price + "kr.",
-                            new String[]{"ok"});
+            doPlayerTurn(curPlayer, prevPos);
 
-                } else {
-                    String answer = input.getButtonpress("Vil du gerne købe feltet " + reader.getFieldName(fieldnumber + 1) + " for " + reader.getFieldPrice(fieldnumber + 1) + "?", new String[]{"ja", "nej"});
-                    if (answer.equals("ja")) {
-                        int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldnumber + 1));
-                        boolean success = playerController.purchaseProperty(curPlayer, fieldPrice);
-                        if (success) {
-                            boardController.purchaseProperty(fieldnumber, curPlayer, playerController.getPlayerGUI(curPlayer).getPrimaryColor());
-                        }
-                    }
-                }
-            } else if (fieldtype == 2) {
-                chancecontroller.drawCard();
-                int[] values = chancecontroller.getCardValues();
-                String chanceCardText = chancecontroller.getCardText();
-                boardController.displayChanceCard(chanceCardText);
-                input.showMessage("Du har trukket et chancekort.");
-                switch(values[0]){
-                    case 1: //Spillers balance ændres afhængig af hvad der står på kortet.
-                        playerController.getPlayer(curPlayer).addBalance(values[1]);
-                        System.out.println(curPlayer + "Har nu" + playerController.getPlayer(curPlayer).getBalance());
-                        break;
-
-                    case 2: //Spiller flyttes til nyt felt
-                        if(prevPos < values[1]){
-                            playerController.setPlayerPos(curPlayer,values[1],true);
-                        }else{
-                            playerController.setPlayerPos(curPlayer,values[1]);
-                        }
-                        boardController.setCarpos(playerController.getPlayerGUI(curPlayer),fieldnumber,values[1]);
-                        break;
-
-                    case 3: //Spiller trækker jailCard, som kan bruges til at komme ud af fængsel
-                        playerController.getPlayer(curPlayer).setJailcard(true);
-                        break;
-
-                    case 4: //Gå i fængsel chancekort
-                        boardController.setCarpos(playerController.getPlayerGUI(curPlayer),prevPos,values[1]);
-                        if(playerController.getPlayer(curPlayer).hasJailcard()){
-                            playerController.getPlayer(curPlayer).setJailed(false);
-                        }else {
-                            playerController.getPlayer(curPlayer).setJailed(true);
-                        }
-                        break;
-                    case 5:
-                        break;
-                    case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
-                           // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
-                        int playerPos = playerController.getPlayerPos(curPlayer);
-                        //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
-                        int[] rederier = {0,6,16,26,36};
-                        int closestRederi = 0;
-                        //finder det tætteste rederi
-                        if(playerPos >= rederier[4]) {
-                            closestRederi = rederier[1];
-                        } else if(playerPos >= rederier[3]) {
-                            closestRederi = rederier[4];
-                        } else {
-                            for (int i = 0; i < rederier.length-1; i++) {
-                                if(playerPos > rederier[i] && playerPos < rederier[i+1]) {
-                                    closestRederi = Math.max(rederier[i], rederier[i+1]);
-                                    break;
-                                }
-                            }
-                        }
-                        if(playerPos >= rederier[4]) {
-                            playerController.setPlayerPos(curPlayer, closestRederi, true);
-                        } else {
-                            playerController.setPlayerPos(curPlayer, closestRederi);
-                        }
-                        boardController.setCarpos(playerController.getPlayerGUI(curPlayer), fieldnumber, closestRederi);
-
-
-                        break;
-                    case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
-                        break;
-                    case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
-                        break;
-                    case 9: // Ryk tre felter frem.
-                        boardController.moveCar(playerController.getPlayerGUI(curPlayer),prevPos,3);
-                        playerController.movePlayer(curPlayer,prevPos,3);
-                        break;
-                    case 10: // 200 kr fra alle spillere til curPlayer
-
-                        playerController.getPlayer(curPlayer).addBalance(numberOfPlayers * 200);
-                        for(int i = 0; i < numberOfPlayers; i++){
-                            if(playerController.getPlayer(curPlayer) != playerController.getPlayer(i)){
-                                playerController.getPlayer(i).addBalance(-200);
-                            }
-                        }
-                        break;
-
-                    default:
-
-
-                }
-
-            } else if (fieldtype == 3) {
-
-            } else if (fieldtype == 6) {
-
-            } else if (fieldtype == 7) {
-
-            }
             if (!diceCup.isSameValue()) {
                 curPlayer++;
             }
         }
+
+    }
+
+    private void doPlayerTurn(int player, int prevPos) {
+        int fieldNumber = 0;
+
+        input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nKast med terningerne", new String[]{"kast"});
+
+        diceCup.roll();
+        boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+        fieldNumber = boardController.moveCar(playerController.getPlayerGUI(player), prevPos, diceCup.getSum());
+        playerController.movePlayer(player, prevPos, diceCup.getSum());
+
+
+        doFieldAction(player, prevPos, fieldNumber);
+    }
+
+    private void doJailedPlayerTurn(int player, int prevPos) {
+        int fieldNumber;
+
+        if (playerController.getPlayer(player).hasJailcard()) {
+            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu er i fængsel, men du har et fripas, vil du bruge dette?", new String[]{"Ja", "Nej"});
+            if (answer.equals("Ja")) {
+                playerController.getPlayer(player).setJailcard(false);
+                playerController.getPlayer(player).setJailed(false);
+                return;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nKast med terningerne", new String[]{"kast"});
+            diceCup.roll();
+            boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
+
+            if (diceCup.isSameValue()) {
+                playerController.getPlayer(player).setJailed(false);
+                fieldNumber = boardController.moveCar(playerController.getPlayerGUI(player), prevPos, diceCup.getSum());
+                playerController.movePlayer(player, prevPos, diceCup.getSum());
+
+                doFieldAction(player, prevPos, fieldNumber);
+                break;
+            }
+        }
+    }
+
+    private void doFieldAction(int curPlayer, int prevPos, int fieldNumber) {
+        int fieldType = boardController.getFieldType(fieldNumber);
+
+        if (fieldType == 1 || fieldType == 4 || fieldType == 5) {
+            doPurchasableField(curPlayer, fieldNumber);
+
+        } else if (fieldType == 2) {
+            doChanceField(curPlayer, prevPos, fieldNumber);
+
+        } else if (fieldType == 3) {
+            doGoJailField();
+
+        } else if (fieldType == 6) {
+            doTaxField();
+
+
+        } else if (fieldType == 7) {
+            doParkingField();
+
+        }
+    }
+
+    private void doPurchasableField(int player, int fieldNumber) {
+        if (boardController.fieldHasOwner(fieldNumber)) {
+            int owner = boardController.getFieldOwner(fieldNumber);
+            int price = Integer.parseInt(reader.getFieldRent(fieldNumber));
+            input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
+                            + playerController.getPlayer(owner).getName()
+                            + " du skal batale vedkommende "
+                            + price + "kr.",
+                    new String[]{"ok"});
+            playerController.payRent(player, owner, price);
+        } else {
+            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) + " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
+            if (answer.equals("ja")) {
+                int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldNumber));
+                boolean success = playerController.purchaseProperty(player, fieldPrice);
+                if (success) {
+                    boardController.purchaseProperty(fieldNumber, player, playerController.getPlayerGUI(player).getPrimaryColor());
+                }
+            }
+        }
+    }
+
+
+    private void doChanceField(int player, int prevPos, int fieldNumber) {
+        chancecontroller.drawCard();
+        int[] values = chancecontroller.getCardValues();
+        String chanceCardText = chancecontroller.getCardText();
+        boardController.displayChanceCard(chanceCardText);
+        input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har trukket et chancekort.");
+        switch(values[0]){
+            case 1: //Spillers balance ændres afhængig af hvad der står på kortet.
+                playerController.getPlayer(player).addBalance(values[1]);
+                break;
+
+            case 2: //Spiller flyttes til nyt felt
+                if(prevPos < values[1]){
+                    playerController.setPlayerPos(player,values[1],true);
+                }else{
+                    playerController.setPlayerPos(player,values[1]);
+                }
+                boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber,values[1]);
+                break;
+
+            case 3: //Spiller trækker jailCard, som kan bruges til at komme ud af fængsel
+                playerController.getPlayer(player).setJailcard(true);
+                break;
+
+            case 4: //Gå i fængsel chancekort
+                boardController.setCarpos(playerController.getPlayerGUI(player),prevPos,values[1]);
+                if(playerController.getPlayer(player).hasJailcard()){
+                    playerController.getPlayer(player).setJailed(false);
+                }else {
+                    playerController.getPlayer(player).setJailed(true);
+                }
+                break;
+            case 5:
+                break;
+            case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
+                // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
+                int playerPos = playerController.getPlayerPos(player);
+                //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
+                int[] rederier = {0,6,16,26,36};
+                int closestRederi = 0;
+                //finder det tætteste rederi
+                if(playerPos >= rederier[4]) {
+                    closestRederi = rederier[1];
+                } else if(playerPos >= rederier[3]) {
+                    closestRederi = rederier[4];
+                } else {
+                    for (int i = 0; i < rederier.length-1; i++) {
+                        if(playerPos > rederier[i] && playerPos < rederier[i+1]) {
+                            closestRederi = Math.max(rederier[i], rederier[i+1]);
+                            break;
+                        }
+                    }
+                }
+                if(playerPos >= rederier[4]) {
+                    playerController.setPlayerPos(player, closestRederi, true);
+                } else {
+                    playerController.setPlayerPos(player, closestRederi);
+                }
+                boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
+
+
+                break;
+            case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
+                break;
+            case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
+                break;
+            case 9: // Ryk tre felter frem.
+                boardController.moveCar(playerController.getPlayerGUI(player),prevPos,3);
+                playerController.movePlayer(player,prevPos,3);
+                break;
+            case 10: // 200 kr fra alle spillere til curPlayer
+
+                playerController.getPlayer(player).addBalance(numberOfPlayers * 200);
+                for(int i = 0; i < numberOfPlayers; i++){
+                    if(playerController.getPlayer(player) != playerController.getPlayer(i)){
+                        playerController.getPlayer(i).addBalance(-200);
+                    }
+                }
+                break;
+
+            default:
+
+
+        }
+
+    }
+
+    private void doGoJailField() {
+
+    }
+
+    private void doTaxField() {
+
+    }
+
+    private void doParkingField() {
+
     }
 }

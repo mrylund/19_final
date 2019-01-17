@@ -64,4 +64,15 @@ public class PlayerController {
        setPlayerPos(player,newPos,false);
     }
 
+    public boolean payRent(int player1, int player2, int amount) {
+        boolean success = false;
+        if (players.playerCanAfford(player1, amount)) {
+            players.getPlayer(player1).addBalance(-amount);
+            players.getPlayer(player2).addBalance(-amount);
+            success = true;
+        }
+
+        return success;
+    }
+
 }

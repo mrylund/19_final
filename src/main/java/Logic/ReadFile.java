@@ -42,12 +42,12 @@ public class ReadFile {
     }
 
     public String getFieldColor(int lineNum) {
-        String[] color = theFile[lineNum-1].split("; ");
+        String[] color = theFile[lineNum].split("; ");
         return color[color.length-1];
     }
 
     public String getFieldType(int lineNum){
-        return theFile[lineNum-1].split("; ")[0];
+        return theFile[lineNum].split("; ")[0];
     }
 
     public String getFieldName(int lineNum) {

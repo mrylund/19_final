@@ -31,14 +31,14 @@ public class Gameboard {
     }
 
     public int getFieldType(int fieldnumber) {
-        return fields[fieldnumber].getFieldType();
+        return fields[fieldnumber - 1].getFieldType();
     }
 
     public int getFieldOwner(int fieldNumber) {
-        return fields[fieldNumber].getOwner();
+        return fields[fieldNumber -  1].getOwner();
     }
 
     public void setFieldOwner(int field, int player, Color color) {
-        fields[field].setOwner(player, color);
+        fields[field - 1].setOwner(player, color);
     }
 }
