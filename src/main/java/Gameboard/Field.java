@@ -106,9 +106,9 @@ public class Field {
         return this.owner;
     }
 
-    public void setOwner(int player) {
+    public void setOwner(int player, Color color) {
         this.owner = player;
-        ((GUI_Ownable)this.field).setBorder(new Color(255, 0, 175));
+        ((GUI_Ownable)this.field).setBorder(color);
     }
 
 }

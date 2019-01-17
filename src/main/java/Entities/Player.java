@@ -54,4 +54,8 @@ public class Player {
     public int getBalance() {
         return this.balance;
     }
+
+    public String getName() {
+        return name;
+    }
 }
