@@ -115,7 +115,7 @@ public class GameController {
             doChanceField(curPlayer, prevPos, fieldNumber);
 
         } else if (fieldType == 3) {
-            doGoJailField();
+            doGoJailField(curPlayer, fieldNumber);
 
         } else if (fieldType == 6) {
             doTaxField();
@@ -217,8 +217,8 @@ public class GameController {
             case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
                 break;
             case 9: // Ryk tre felter frem.
-                boardController.moveCar(playerController.getPlayerGUI(player),prevPos,3);
-                playerController.movePlayer(player,prevPos,3);
+                boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
+                playerController.movePlayer(player,fieldNumber,3);
                 break;
             case 10: // 200 kr fra alle spillere til curPlayer
 
@@ -237,8 +237,12 @@ public class GameController {
 
     }
 
-    private void doGoJailField() {
-
+    private void doGoJailField(int player, int fieldNumber) {
+        if (fieldNumber ==  31) {
+            playerController.setPlayerPos(player, 11);
+            boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber, 11);
+            playerController.getPlayer(player).setJailed(true);
+        }
     }
 
     private void doTaxField() {

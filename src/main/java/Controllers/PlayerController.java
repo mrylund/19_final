@@ -41,6 +41,7 @@ public class PlayerController {
             newpos %= 40;
             players.getPlayer(player).addBalance(4000);
         }
+
         players.getPlayer(player).setPos(newpos);
     }
 
