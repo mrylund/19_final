@@ -52,9 +52,9 @@ public class GameController {
 
             if(playerController.getPlayer(curPlayer).isJailed()) {
                 doJailedPlayerTurn(curPlayer, prevPos);
+            } else {
+                doPlayerTurn(curPlayer, prevPos);
             }
-
-            doPlayerTurn(curPlayer, prevPos);
 
             if (!diceCup.isSameValue()) {
                 curPlayer++;
@@ -90,7 +90,7 @@ public class GameController {
         }
 
         for (int i = 0; i < 3; i++) {
-            input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nKast med terningerne", new String[]{"kast"});
+            input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu er i fængsel, slå 2 ens for at komme ud.\nForsøg " + i + "/3", new String[]{"kast"});
             diceCup.roll();
             boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
 
@@ -239,6 +239,7 @@ public class GameController {
 
     private void doGoJailField(int player, int fieldNumber) {
         if (fieldNumber ==  31) {
+            input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu skal gå i fængsel!");
             playerController.setPlayerPos(player, 11);
             boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber, 11);
             playerController.getPlayer(player).setJailed(true);
