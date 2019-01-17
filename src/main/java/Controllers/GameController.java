@@ -13,14 +13,14 @@ public class GameController {
     private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
-    int numberOfPlayers;
+    private int numberOfPlayers;
 
 
     public GameController(boolean devmode) {
         InitializeGame(devmode);
     }
 
-    public void InitializeGame(boolean devmode) {
+    private void InitializeGame(boolean devmode) {
         String[] spillernavne;
         input = new InputController(boardController.createBoard());
         if (devmode) {
@@ -42,7 +42,7 @@ public class GameController {
         GameLoop();
     }
 
-    public void GameLoop() {
+    private void GameLoop() {
         int curPlayer = 0;
         int prevPos = 0;
         int fieldnumber = 0;
