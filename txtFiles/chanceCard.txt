@@ -1,32 +1,32 @@
-1: De har været en tur i udlandet og haft for mange cigaretter med hjem. betal told kr. 200: 1: -200
+1: De har vÃ¦ret en tur i udlandet og haft for mange cigaretter med hjem. Betal told kr. 200: 1: -200
 2: De har vundet i klasselotteriet. modtag kr. 500: 1: 500
-3: I anledning af kongens fødselsdag benådes de herved for fængsel. Dette kort kan opbevares, indtil de får brug for det.: 3: 1
+3: I anledning af kongens fÃ¸dselsdag benÃ¥des de herved for fÃ¦ngsel. Dette kort kan opbevares, indtil de fÃ¸r brug for det.: 3: 1
 4: Betal deres bilforsikring kr. 1.000: 1: -1000
 5: Modtag udbytte af deres aktier kr. 1.000: 1: 1000
-6: De har kørt frem for ‘Fuld Stop’ betal kr. 1000 i bøde.: 1: -1000
+6: De har kÃ¸rt frem for "Fuld Stop" betal kr. 1000 i bÃ¸de.: 1: -1000
 7: Modtag udbytte af deres aktier kr. 1.000: 1: 1000
-8: Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de købe det af banken.: 6: 1873871
-9: Ryk frem til ‘Frederiksberg allé’ hvis de passerer Start indkassér kr. 4.000: 2: 12
-10: Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de købe det af banken.: 6: 1873871
-11: Grundet dyrtiden har de fået gageforhøjelse modtag kr. 1.000: 1: 1000
-12: I anledning af kongens fødselsdag benådes de herved for fængsel. Dette kort kan opbevares, indtil de får brug for det.: 3: 1
+8: Ryk brikken frem til det nÃ¦rmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de kÃ¸be det af banken.: 6: 1873871
+9: Ryk frem til "Frederiksberg all" hvis de passerer Start indkassÃ©r kr. 4.000: 2: 12
+10: Ryk brikken frem til det nÃ¦rmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de kÃ¸be det af banken.: 6: 1873871
+11: Grundet dyrtiden har de fÃ¥et gageforhÃ¸jelse modtag kr. 1.000: 1: 1000
+12: I anledning af kongens fÃ¸dselsdag benÃ¥des de herved for fÃ¦ngsel. Dette kort kan opbevares, indtil de fÃ¸r brug for det.: 3: 1
 13: Ejendomsskatterne er steget, ekstraudgifterne er; kr. 800 pr.hus  -  kr. 2400 pr.hotel: 5: 800
-14: De har modtaget deres tandlægeregning betal kr. 2.000.: 1: -2000
-15: De har måttet vedtage en parkeringsbøde. Betal kr. 200 i bøde.: 1: -200
-16: Ryk frem til Grønningen. Hvis de passerer “Start”, indkassér da kr. 4.000.: 2: 25
-17: Det er deres fødselsdag. Modtag af hver medspiller kr. 200.: 10: 200
-18: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer “Start”, indkasserer de ikke kr. 4.000.: 4: 11
-19: De modtager “Matador-legatet for værdig trængende”, stort kr. 40.000. Ved værdig trængende forstås, at deres formue, d.v.s. deres kontante penge + skøder + bygninger ikke overstiger kr. 15.000.: 7: 40000
-20: Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” inkassér da kr. 4.000.: 8: 0
-21: Tag ind på Rådhuspladsen.: 2: 40
+14: De har modtaget deres tandlÃ¦geregning betal kr. 2.000.: 1: -2000
+15: De har mÃ¥ttet vedtage en parkeringsbÃ¸de. Betal kr. 200 i bÃ¸de.: 1: -200
+16: Ryk frem til GrÃ¸nningen. Hvis de passerer "Start", indkassÃ©r da kr. 4.000.: 2: 25
+17: Det er deres fÃ¸dselsdag. Modtag af hver medspiller kr. 200.: 10: 200
+18: GÃ¥ i fÃ¦ngsel. Ryk direkte til fÃ¦ngslet. Selv om de passerer "Start", indkasserÃ©r de ikke kr. 4.000.: 4: 11
+19: De modtager "Matador-legatet for vÃ¦rdig trÃ¦ngende", stort kr. 40.000. Ved vÃ¦rdig trÃ¦ngende forstÃ¥s, at deres formue, d.v.s. deres kontante penge + skÃ¸der + bygninger ikke overstiger kr. 15.000.: 7: 40000
+20: Tag med den nÃ¦rmeste fÃ¦rge - flyt brikken frem, og hvis de passerer "Start" indkassÃ©r da kr. 4.000.: 8: 0
+21: Tag ind pÃ¥ RÃ¥dhuspladsen.: 2: 40
 22: De modtager deres aktieudbytte. Modtag kr. 1.000 af banken.: 1: 1000
 23: Betal kr. 3.000 for reparation af deres vogn.: 1: -3000
-24: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer “Start”, indkasserer de ikke kr. 4.000.: 4: 0
-25: Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.: 1: 1000
-26: Ryk frem til “Start”.: 2: 1
+24: GÃ¥ i fÃ¦ngsel. Ryk direkte til fÃ¦ngslet. Selv om de passerer "Start", indkasserer de ikke kr. 4.000.: 4: 11
+25: Deres prÃ¦mieobligation er kommet ud. De modtager kr. 1.000 af banken.: 1: 1000
+26: Ryk frem til "Start".: 2: 1
 27: Ryk tre felter tilbage.: 9: -3
 28: Oliepriserne er steget, og de skal betale; kr. 500 pr. hus, kr. 1500 pr. hotel.: 5: 500
 29: Betal kr. 3.000 for reparation af deres vogn.: 1: -3000
-30: Kommunen har eftergivet et kvartals skat. Hæv i banken kr. 3.000.: 1: 3000
-31: Værdien af egen avl fra nyttehaven udgør kr. 200, som de modtager af banken.: 1: 200
-32: Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.: 1: 1000
+30: Kommunen har eftergivet et kvartals skat. HÃ¦v i banken kr. 3.000.: 1: 3000
+31: VÃ¦rdien af egen avl fra nyttehaven udgÃ¸r kr. 200, som de modtager af banken.: 1: 200
+32: Deres prÃ¦mieobligation er kommet ud. De modtager kr. 1.000 af banken.: 1: 1000

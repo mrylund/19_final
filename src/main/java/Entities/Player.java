@@ -9,6 +9,8 @@ public class Player {
     private String name;
     private int balance;
     private int pos;
+    private boolean jailed;
+    private boolean jailCard;
     private GUI_Car car;
     private GUI_Player player;
 
@@ -58,4 +60,33 @@ public class Player {
     public String getName() {
         return name;
     }
+
+    /**
+     * @return om spilleren er jailed.
+     */
+    public boolean isJailed() {
+        return jailed;
+    }
+
+    /**
+     * @param jailed om spilleren skal være i jail eller ej.
+     */
+    public void setJailed(boolean jailed) {
+        this.jailed = jailed;
+    }
+
+    /**
+     * @return om spilleren har et jail frikort.
+     */
+    public boolean hasJailcard() {
+        return jailCard;
+    }
+
+    /**
+     * @param jailcard om spilleren har et jail frikort.
+     */
+    public void setJailcard(boolean jailcard) {
+        this.jailCard = jailcard;
+    }
+
 }

@@ -1,14 +1,11 @@
 package Controllers;
 
-import Entities.Player;
+
 import Gameboard.Gameboard;
 import gui_fields.GUI_Player;
-import gui_fields.GUI_Street;
-import gui_main.GUI;
-
 import java.awt.*;
-
 import static Logic.Sleep.sleep;
+
 
 public class BoardController {
     private Gameboard board = new Gameboard();
@@ -26,14 +23,21 @@ public class BoardController {
 
     public void displayChanceCard(String text){
         board.getBoard().setChanceCard(text);
+        board.getBoard().displayChanceCard();
     }
 
     public void setDice(int dice1, int dice2) {
         board.getBoard().setDice(dice1, dice2);
     }
 
-    public void setCarpos(GUI_Player player, int prevpos, int pos) {
-        board.getBoard().getFields()[pos].setCar(player, true);
+    public void setCarpos(GUI_Player player, int prevPos, int newPos) {
+        int moveAmount;
+        if(prevPos > newPos){
+            moveAmount = 40-prevPos + newPos;
+        }else{
+            moveAmount = newPos-prevPos;
+        }
+        moveCar(player,prevPos,moveAmount-1);
     }
 
     public int moveCar(GUI_Player player, int prevpos, int amount) {

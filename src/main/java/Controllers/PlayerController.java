@@ -4,8 +4,6 @@ import Entities.PlayerList;
 import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 
-import static Logic.Sleep.sleep;
-
 public class PlayerController {
     private PlayerList players = new PlayerList();
 
@@ -37,8 +35,8 @@ public class PlayerController {
         return players.getPlayer(playerNumber);
     }
 
-    public void movePlayer(int player, int prevpos, int amount) {
-        int newpos = prevpos + amount;
+    public void movePlayer(int player, int prevPos, int amount) {
+        int newpos = prevPos + amount;
         if (newpos > 39) {
             newpos %= 40;
             players.getPlayer(player).addBalance(4000);
@@ -54,4 +52,16 @@ public class PlayerController {
             return false;
         }
     }
+
+    public void setPlayerPos(int player, int newPos, boolean startMoney){
+        if(startMoney){
+            players.getPlayer(player).addBalance(4000);
+        }
+        players.getPlayer(player).setPos(newPos);
+    }
+
+    public void setPlayerPos(int player, int newPos){
+       setPlayerPos(player,newPos,false);
+    }
+
 }

@@ -58,7 +58,6 @@ public class ChanceCard {
         }
         cardSet[cardSet.length-1] = cardDraw;
        return Integer.parseInt(cardDraw.split(": ")[0]);
-
     }
 
     public int getCardType(){
