@@ -60,7 +60,7 @@ public class GameController {
             if (fieldtype == 1 || fieldtype == 4 || fieldtype == 5) {
                 if (boardController.fieldHasOwner(fieldnumber)) {
                     int owner = boardController.getFieldOwner(fieldnumber);
-                    int price = Integer.parseInt(reader.getFieldPrice(fieldnumber));
+                    int price = Integer.parseInt(reader.getFieldRent(fieldnumber - 1));
                     input.getButtonpress("Dette felt er ejet af "
                             + playerController.getPlayer(owner).getName()
                             + " du skal batale vedkommende "
