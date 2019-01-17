@@ -19,7 +19,7 @@ public class ChanceCardDevmode {
     }
 
     public int  drawCard() {
-        cardDraw = cardSet[15];
+        cardDraw = cardSet[7];
         return Integer.parseInt(cardDraw.split(": ")[0]);
     }
 

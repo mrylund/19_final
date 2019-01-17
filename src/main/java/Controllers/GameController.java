@@ -9,8 +9,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -114,6 +114,31 @@ public class GameController {
                         break;
                     case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
                            // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
+                        int playerPos = playerController.getPlayerPos(curPlayer);
+                        //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
+                        int[] rederier = {0,6,16,26,36};
+                        int closestRederi = 0;
+                        //finder det tætteste rederi
+                        if(playerPos >= rederier[4]) {
+                            closestRederi = rederier[1];
+                        } else if(playerPos >= rederier[3]) {
+                            closestRederi = rederier[4];
+                        } else {
+                            for (int i = 0; i < rederier.length-1; i++) {
+                                if(playerPos > rederier[i] && playerPos < rederier[i+1]) {
+                                    closestRederi = Math.max(rederier[i], rederier[i+1]);
+                                    break;
+                                }
+                            }
+                        }
+                        if(playerPos >= rederier[4]) {
+                            playerController.setPlayerPos(curPlayer, closestRederi, true);
+                        } else {
+                            playerController.setPlayerPos(curPlayer, closestRederi);
+                        }
+                        boardController.setCarpos(playerController.getPlayerGUI(curPlayer), fieldnumber, closestRederi);
+
+
                         break;
                     case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
                         break;
