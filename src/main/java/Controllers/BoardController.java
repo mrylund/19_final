@@ -33,11 +33,11 @@ public class BoardController {
     public void setCarpos(GUI_Player player, int prevPos, int newPos) {
         int moveAmount;
         if(prevPos > newPos){
-            moveAmount = 40-prevPos + newPos;
+            moveAmount = 40-prevPos + newPos + 1;
         }else{
-            moveAmount = newPos-prevPos;
+            moveAmount = newPos - prevPos - 1;
         }
-        moveCar(player,prevPos,moveAmount-1);
+        moveCar(player,prevPos - 1,moveAmount-1);
     }
 
     public int moveCar(GUI_Player player, int prevpos, int amount) {
