@@ -6,6 +6,8 @@ import gui_fields.GUI_Player;
 import gui_fields.GUI_Street;
 import gui_main.GUI;
 
+import java.awt.*;
+
 import static Logic.Sleep.sleep;
 
 public class BoardController {
@@ -65,8 +67,8 @@ public class BoardController {
         return board.getFieldType(fieldnumber);
     }
 
-    public void purchaseProperty(int field, int playerNumber) {
-        board.setFieldOwner(field, playerNumber );
+    public void purchaseProperty(int field, int playerNumber, Color color) {
+        board.setFieldOwner(field, playerNumber, color);
     }
 
     public boolean fieldHasOwner(int field) {
@@ -76,6 +78,10 @@ public class BoardController {
             return true;
         }
         return false;
+    }
+
+    public int getFieldOwner(int field) {
+        return board.getFieldOwner(field);
     }
 
 
