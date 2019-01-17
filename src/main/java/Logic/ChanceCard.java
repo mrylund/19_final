@@ -1,5 +1,7 @@
 package Logic;
 
+import Entities.Player;
+import Gameboard.Gameboard;
 import Logic.ReadFile;
 
 import java.util.Random;
@@ -15,13 +17,6 @@ public class ChanceCard {
 
     public void makeCardSet(){
         this.cardSet = reader.readFile(chanceCardPath);
-        for(int i = 0; i < cardSet.length; i++ ){
-            if(i < 9){
-                cardSet[i] = cardSet[i].substring(3);
-            }else{
-                cardSet[i] = cardSet[i].substring(4);
-            }
-        }
     }
 
     public void shuffleCard() {
@@ -55,13 +50,23 @@ public class ChanceCard {
         cardSet = shuffleArray;
     }
 
-    public void drawCard() {
+    public int  drawCard() {
         cardDraw = cardSet[0];
         //lægger det bagerst i bunken
         for (int i = 0; i < cardSet.length-1; i++) {
             cardSet[i] = cardSet[i+1];
         }
         cardSet[cardSet.length-1] = cardDraw;
+       return Integer.parseInt(cardDraw.split(": ")[0]);
+
+    }
+
+    public int getCardType(){
+        return Integer.parseInt(cardDraw.split(": ")[2]);
+    }
+
+    public int getCardValue(){
+        return Integer.parseInt(cardDraw.split(": ")[3]);
     }
 
     public String[] getCardSet() {
@@ -69,6 +74,15 @@ public class ChanceCard {
     }
 
     public String getCardDraw() {
-        return cardDraw;
+        return cardDraw.split(": ")[1];
+    }
+    public int getCardNr(){
+        String[] chanceCardLine = getCardDraw().split(": ");
+        return Integer.parseInt(chanceCardLine[0]);
+    }
+
+    public String getCardText(){
+        return getCardDraw();
+
     }
 }

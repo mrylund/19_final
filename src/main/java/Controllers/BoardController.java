@@ -24,6 +24,10 @@ public class BoardController {
         }
     }
 
+    public void displayChanceCard(String text){
+        board.getBoard().setChanceCard(text);
+    }
+
     public void setDice(int dice1, int dice2) {
         board.getBoard().setDice(dice1, dice2);
     }
