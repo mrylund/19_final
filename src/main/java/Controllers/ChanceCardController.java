@@ -1,5 +1,6 @@
 package Controllers;
 import Logic.ChanceCard;
+import Logic.ChanceCardDevmode;
 
 public class ChanceCardController {
 
@@ -8,7 +9,7 @@ public class ChanceCardController {
         chanceCard.shuffleCard();
     }
 
-    private ChanceCard chanceCard = new ChanceCard();
+    private ChanceCardDevmode chanceCard = new ChanceCardDevmode();
 
     public void drawCard(){
         chanceCard.drawCard();

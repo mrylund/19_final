@@ -1,6 +1,7 @@
 package Controllers;
 
 import Logic.DiceCup;
+import Logic.DiceCupDevmode;
 import Logic.ReadFile;
 import gui_fields.GUI_Player;
 
@@ -10,7 +11,7 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
     private InputController input;
     private ReadFile reader = new ReadFile();
     int numberOfPlayers;

@@ -48,7 +48,10 @@ public class BoardController {
             prevpos %= 40;
             movepos = prevpos + 1;
             movepos %= 40;
-            sleep(200);
+            int speed = 200;
+            //acceleration
+            int newSpeed = (int)(speed - (amount * 1.4));
+            sleep(newSpeed);
 
             if (prevpos == newpos) {
                 moving = false;
