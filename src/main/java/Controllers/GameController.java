@@ -211,10 +211,12 @@ public class GameController {
                 boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
 
                 int fieldOwner = boardController.getFieldOwner(closestRederi);
-                int rent = Integer.parseInt(reader.getFieldRent(fieldNumber+1));
+                int rent = Integer.parseInt(reader.getFieldRent(playerController.getPlayerPos(player)));
                 if(fieldOwner != -1) {
                     playerController.getPlayer(player).addBalance(-rent * 2);
                     playerController.getPlayer(fieldOwner).addBalance(rent * 2);
+                } else {
+                    doPurchasableField(player, playerController.getPlayerPos(player));
                 }
 
 
