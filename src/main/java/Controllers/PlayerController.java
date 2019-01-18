@@ -58,7 +58,7 @@ public class PlayerController {
         if(startMoney){
             players.getPlayer(player).addBalance(4000);
         }
-        players.getPlayer(player).setPos(newPos);
+        players.getPlayer(player).setPos(newPos - 1);
     }
 
     public void setPlayerPos(int player, int newPos){
