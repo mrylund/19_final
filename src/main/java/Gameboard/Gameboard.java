@@ -41,4 +41,11 @@ public class Gameboard {
     public void setFieldOwner(int field, int player, Color color) {
         fields[field - 1].setOwner(player, color);
     }
+
+    public void addHouse(int player, int field) {
+        if (fields[field].getOwner() == player) {
+            int amount = fields[field].getHouseCount();
+            fields[field].setHouses(amount + 1);
+        }
+    }
 }

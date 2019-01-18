@@ -67,6 +67,17 @@ public class GameController {
     private void doPlayerTurn(int player, int prevPos) {
         int fieldNumber = 0;
 
+
+        if (boardController.hasSameType(player)) {
+            String husanswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
+            if (husanswer.equals("Ja")) {
+                int fieldanswer = input.getInt("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nHvilket felt vil du gerne købe et hus til?", 2, 40);
+                if (boardController.hasAllFields(player, fieldanswer)) {
+                    boardController.purchaseHouse(player, fieldNumber);
+                }
+            }
+        }
+
         input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nKast med terningerne", new String[]{"kast"});
 
         diceCup.roll();

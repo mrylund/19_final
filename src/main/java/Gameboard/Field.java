@@ -7,6 +7,7 @@ public class Field {
     private GUI_Field field;
     private int fieldtype = 0;
     private int owner = -1;
+    private int houseCount = 0;
 
     public Field(String[] values) {
 
@@ -109,6 +110,15 @@ public class Field {
     public void setOwner(int player, Color color) {
         this.owner = player;
         ((GUI_Ownable)this.field).setBorder(color);
+    }
+
+    public void setHouses(int amount) {
+        houseCount = amount;
+        ((GUI_Street)this.field).setHouses(amount);
+    }
+
+    public int getHouseCount() {
+        return this.houseCount;
     }
 
 }

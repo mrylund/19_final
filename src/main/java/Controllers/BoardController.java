@@ -89,10 +89,45 @@ public class BoardController {
 
     public boolean hasSameType(int player) {
         if (getFieldOwner(1) == player && getFieldOwner(3) == player) {
+            return true;
+        } else if (getFieldOwner(7)  == player && getFieldOwner(9)  == player && getFieldOwner(10)  == player) {
+            return true;
+        } else if (getFieldOwner(12)  == player && getFieldOwner(14)  == player && getFieldOwner(15)  == player) {
+            return true;
+        } else if (getFieldOwner(17)  == player && getFieldOwner(19)  == player && getFieldOwner(20)  == player) {
+            return true;
+        } else if (getFieldOwner(22)  == player && getFieldOwner(24)  == player && getFieldOwner(25)  == player) {
+            return true;
+        } else if (getFieldOwner(27)  == player && getFieldOwner(28)  == player && getFieldOwner(30)  == player) {
+            return true;
+        } else if (getFieldOwner(32)  == player && getFieldOwner(33)  == player && getFieldOwner(35)  == player) {
+            return true;
+        } else return getFieldOwner(38) == player && getFieldOwner(40) == player;
+    }
 
+    public boolean hasAllFields(int player, int fieldNumber) {
+        if (fieldNumber == 1 || fieldNumber == 3) {
+            return getFieldOwner(1) == player && getFieldOwner(3) == player;
+        } else if (fieldNumber == 7 || fieldNumber == 9 || fieldNumber == 10) {
+            return getFieldOwner(7) == player && getFieldOwner(9) == player && getFieldOwner(10) == player;
+        }else if (fieldNumber == 12 || fieldNumber == 14 || fieldNumber == 15) {
+            return getFieldOwner(12) == player && getFieldOwner(14) == player && getFieldOwner(15) == player;
+        }else if (fieldNumber == 17 || fieldNumber == 19 || fieldNumber == 20) {
+            return getFieldOwner(17) == player && getFieldOwner(19) == player && getFieldOwner(20) == player;
+        }else if (fieldNumber == 22 || fieldNumber == 24 || fieldNumber == 25) {
+            return getFieldOwner(22) == player && getFieldOwner(24) == player && getFieldOwner(25) == player;
+        }else if (fieldNumber == 27 || fieldNumber == 28 || fieldNumber == 30) {
+            return getFieldOwner(27) == player && getFieldOwner(28) == player && getFieldOwner(30) == player;
+        }else if (fieldNumber == 32 || fieldNumber == 33 || fieldNumber == 35) {
+            return getFieldOwner(32) == player && getFieldOwner(33) == player && getFieldOwner(35) == player;
+        }else if (fieldNumber == 38 || fieldNumber == 40) {
+            return getFieldOwner(38) == player  && getFieldOwner(40) == player;
         }
+        return false;
+    }
 
-        return true;
+    public void purchaseHouse(int player, int field) {
+        board.addHouse(player, field);
     }
 
 
