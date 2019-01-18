@@ -61,7 +61,6 @@ public class GameController {
                 curPlayer++;
             }
         }
-
     }
 
     private void doPlayerTurn(int player, int prevPos) {
@@ -160,7 +159,7 @@ public class GameController {
         }
     }
 
-    //@SuppressWarnings("Duplicates")
+    @SuppressWarnings("Duplicates")
     private void doChanceField(int player, int prevPos, int fieldNumber) {
         chancecontroller.drawCard();
         int[] values = chancecontroller.getCardValues();
@@ -235,7 +234,6 @@ public class GameController {
                 break;
 
             case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
-                // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
                 prevPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
                 if(prevPos >= rederier[4]) {
@@ -256,12 +254,29 @@ public class GameController {
                 boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
                 input.showMessage("Du tager nu færgen hen til næste rederi! Hvis feltet du lander på er ejet af en anden spiller, så skal der betales leje!");
 
-                playerController.setPlayerPos(player,closestRederi+10,true);
-                boardController.setCarpos(playerController.getPlayerGUI(player),closestRederi,closestRederi+10);
-                int newPos = closestRederi+10;
+                int newPosAfterTravel = closestRederi+10;
+                playerController.setPlayerPos(player,newPosAfterTravel,false);
+                boardController.setCarpos(playerController.getPlayerGUI(player),closestRederi,newPosAfterTravel);
 
-                doPurchasableField(player,newPos);
-
+                if(boardController.fieldHasOwner(newPosAfterTravel)){
+                    int ownedAmount = boardController.getOwnedAmountOfShippingFields(newPosAfterTravel);
+                    String ownerName = playerController.getPlayerGUI(boardController.getFieldOwner(newPosAfterTravel)).getName();
+                    if(ownedAmount == 1) {
+                        playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),500);
+                        input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr. 500 i leje, da ejeren har 1 af denne type felter. ");
+                    }else if(ownedAmount == 2){
+                        playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),1000);
+                        input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr. 1.000 i leje, da ejeren har 2 af denne type felter. ");
+                    }else if(ownedAmount == 3){
+                        playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),2000);
+                        input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr 2.000 i leje, da ejeren har 3 af denne type felter. ");
+                    }else{
+                        playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),4000);
+                        input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr 4.000 i leje, da ejeren har 4 af denne type felter. ");
+                    }
+                }else {
+                    doPurchasableField(player, newPosAfterTravel);
+                }
                 break;
 
             case 9: // Ryk tre felter frem.

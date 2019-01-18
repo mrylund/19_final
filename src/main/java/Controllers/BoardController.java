@@ -1,6 +1,5 @@
 package Controllers;
 
-
 import Gameboard.Gameboard;
 import gui_fields.GUI_Player;
 import java.awt.*;
@@ -131,5 +130,19 @@ public class BoardController {
     }
 
 
+    public int getOwnedAmountOfShippingFields(int fieldNumber){
+        int counter = 0;
+        if(!fieldHasOwner(fieldNumber)){
+            return counter;
+        }else{
+            int ownerOfField = getFieldOwner(fieldNumber);
+            for(int i = 6; i <= 36; i = i + 10){
+                if(getFieldOwner(i) == ownerOfField){
+                    counter++;
+                }
+            }
+            return counter;
+        }
+    }
 
 }
