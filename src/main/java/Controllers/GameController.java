@@ -236,7 +236,7 @@ public class GameController {
 
             case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
                 // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
-                //prevPos = playerController.getPlayerPos(player);
+                prevPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
                 if(prevPos >= rederier[4]) {
                     closestRederi = rederier[1];
@@ -257,7 +257,7 @@ public class GameController {
                 input.showMessage("Du tager nu færgen hen til næste rederi! Hvis feltet du lander på er ejet af en anden spiller, så skal der betales leje!");
 
                 playerController.setPlayerPos(player,closestRederi+10,true);
-                boardController.setCarpos(playerController.getPlayerGUI(player),prevPos,closestRederi+10);
+                boardController.setCarpos(playerController.getPlayerGUI(player),closestRederi,closestRederi+10);
                 int newPos = closestRederi+10;
 
                 doPurchasableField(player,newPos);
