@@ -69,7 +69,7 @@ public class PlayerController {
         boolean success = false;
         if (players.playerCanAfford(player1, amount)) {
             players.getPlayer(player1).addBalance(-amount);
-            players.getPlayer(player2).addBalance(-amount);
+            players.getPlayer(player2).addBalance(amount);
             success = true;
         }
 

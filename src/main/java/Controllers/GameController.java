@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -197,7 +197,6 @@ public class GameController {
             case 5:
                 break;
             case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
-                // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
                 int playerPos = playerController.getPlayerPos(player);
                 //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
                 int[] rederier = {0,6,16,26,36};
@@ -219,17 +218,18 @@ public class GameController {
                     playerController.setPlayerPos(player, closestRederi);
                 }
                 boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
-
-                int fieldOwner = boardController.getFieldOwner(closestRederi);
-                int rent = Integer.parseInt(reader.getFieldRent(playerController.getPlayerPos(player)));
-                if(fieldOwner != -1) {
-                    playerController.getPlayer(player).addBalance(-rent * 2);
-                    playerController.getPlayer(fieldOwner).addBalance(rent * 2);
+                int owner = boardController.getFieldOwner(closestRederi);
+                int price = (Integer.parseInt(reader.getFieldRent(closestRederi))) * 2;
+                if(boardController.fieldHasOwner(closestRederi)) {
+                    input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
+                                    + playerController.getPlayer(owner).getName()
+                                    + " du skal batale vedkommende dobbelt leje, nemlig "
+                                    + price + "kr.",
+                            new String[]{"ok"});
+                    playerController.payRent(player, owner, price);
                 } else {
-                    doPurchasableField(player, playerController.getPlayerPos(player));
+                    doPurchasableField(player, playerController.getPlayerPos(player)+1);
                 }
-
-
                 break;
             case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
                 break;
