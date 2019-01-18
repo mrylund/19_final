@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.Player;
 import Logic.DiceCup;
 import Logic.DiceCupDevmode;
 import Logic.ReadFile;
@@ -9,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -162,7 +163,8 @@ public class GameController {
                 break;
 
             case 2: //Spiller flyttes til nyt felt
-                if(prevPos < values[1]){
+                int curPos = playerController.getPlayerPos(player);
+                if(curPos > values[1]){
                     playerController.setPlayerPos(player,values[1],true);
                 }else{
                     playerController.setPlayerPos(player,values[1]);
@@ -193,8 +195,6 @@ public class GameController {
                 //finder det tætteste rederi
                 if(playerPos >= rederier[4]) {
                     closestRederi = rederier[1];
-                } else if(playerPos >= rederier[3]) {
-                    closestRederi = rederier[4];
                 } else {
                     for (int i = 0; i < rederier.length-1; i++) {
                         if(playerPos > rederier[i] && playerPos < rederier[i+1]) {
@@ -209,6 +209,13 @@ public class GameController {
                     playerController.setPlayerPos(player, closestRederi);
                 }
                 boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
+
+                int fieldOwner = boardController.getFieldOwner(closestRederi);
+                int rent = Integer.parseInt(reader.getFieldRent(fieldNumber+1));
+                if(fieldOwner != -1) {
+                    playerController.getPlayer(player).addBalance(-rent * 2);
+                    playerController.getPlayer(fieldOwner).addBalance(rent * 2);
+                }
 
 
                 break;
