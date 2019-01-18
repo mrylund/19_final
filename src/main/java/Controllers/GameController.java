@@ -16,7 +16,6 @@ public class GameController {
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
 
-
     public GameController(boolean devmode) {
         InitializeGame(devmode);
     }
@@ -122,7 +121,7 @@ public class GameController {
 
     private void doFieldAction(int curPlayer, int prevPos, int fieldNumber) {
         int fieldType = boardController.getFieldType(fieldNumber);
-
+// FIXME: 18-01-2019 Felttype 5 er brewery og skal laves
         if (fieldType == 1 || fieldType == 4 || fieldType == 5) {
             doPurchasableField(curPlayer, fieldNumber);
 
@@ -201,6 +200,8 @@ public class GameController {
                 break;
             case 5:
                 break;
+
+// TODO: 18-01-2019 Denne case er lavet færdigt
             case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
                 int playerPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
@@ -234,9 +235,11 @@ public class GameController {
                 }
                 break;
 
+// TODO: 18-01-2019 Case 7 mangler at laves
             case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
                 break;
 
+// TODO: 18-01-2019 Case 8 er lavet færdigt
             case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
                 prevPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
@@ -259,6 +262,11 @@ public class GameController {
                 input.showMessage("Du tager nu færgen hen til næste rederi! Hvis feltet du lander på er ejet af en anden spiller, så skal der betales leje!");
 
                 int newPosAfterTravel = closestRederi+10;
+
+                if(newPosAfterTravel > 40){
+                    newPosAfterTravel = newPosAfterTravel % 40;
+                }
+
                 playerController.setPlayerPos(player,newPosAfterTravel,false);
                 boardController.setCarpos(playerController.getPlayerGUI(player),closestRederi,newPosAfterTravel);
 
@@ -282,14 +290,16 @@ public class GameController {
                     doPurchasableField(player, newPosAfterTravel);
                 }
                 break;
-
+// TODO: 18-01-2019 Ændre tekst i chancecard.txt til case 9.
             case 9: // Ryk tre felter frem.
                 boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
                 playerController.movePlayer(player,fieldNumber,3);
+                int newPos = playerController.getPlayerPos(player);
+                doPurchasableField(player,newPos);
                 break;
 
+// TODO: 18-01-2019 Lav metode som finder currentNumberofPlayers til case 10
             case 10: // 200 kr fra alle spillere til curPlayer
-
                 playerController.getPlayer(player).addBalance(numberOfPlayers * 200);
                 for(int i = 0; i < numberOfPlayers; i++){
                     if(playerController.getPlayer(player) != playerController.getPlayer(i)){
@@ -298,6 +308,7 @@ public class GameController {
                 }
                 break;
 
+// TODO: 18-01-2019 Lav en default
             default:
 
         }

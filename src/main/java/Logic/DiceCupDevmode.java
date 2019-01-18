@@ -1,7 +1,7 @@
 package Logic;
 
 public class DiceCupDevmode {
-    private int[] dice = {2,0};
+    private int[] dice = {35,1};
 
     public int[] roll() {
         return dice;
