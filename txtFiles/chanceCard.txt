@@ -24,7 +24,7 @@
 24: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer "Start", indkasserer de ikke kr. 4.000.: 4: 11
 25: Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.: 1: 1000
 26: Ryk frem til "Start".: 2: 1
-27: Ryk tre felter tilbage.: 9: -3
+27: Ryk tre felter frem.: 9: 3
 28: Oliepriserne er steget, og de skal betale; kr. 500 pr. hus, kr. 1500 pr. hotel.: 5: 500
 29: Betal kr. 3.000 for reparation af deres vogn.: 1: -3000
 30: Kommunen har eftergivet et kvartals skat. Hæv i banken kr. 3.000.: 1: 3000
