@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    private DiceCupDevmode diceCup = new DiceCupDevmode();
-    //private DiceCup diceCup = new DiceCup();
+    //private DiceCupDevmode diceCup = new DiceCupDevmode();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -163,8 +163,7 @@ public class GameController {
                 break;
 
             case 2: //Spiller flyttes til nyt felt
-                int curPos = playerController.getPlayerPos(player);
-                if(curPos > values[1]){
+                if(prevPos > values[1]){
                     playerController.setPlayerPos(player,values[1],true);
                 }else{
                     playerController.setPlayerPos(player,values[1]);
