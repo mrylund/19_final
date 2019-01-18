@@ -71,7 +71,7 @@ public class GameController {
             if (husanswer.equals("Ja")) {
                 int fieldanswer = input.getInt("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nHvilket felt vil du gerne købe et hus til?", 2, 40);
                 if (boardController.hasAllFields(player, fieldanswer) ) {
-                    int price = Integer.parseInt(reader.getFieldHouse1Price(fieldanswer));
+                    int price = Integer.parseInt(reader.getBuildPrice(fieldanswer));
                     if (playerController.playerCanAfford(player, price)) {
                         boolean success = boardController.purchaseHouse(player, fieldanswer);
                         if (success) playerController.getPlayer(player).addBalance(-price);

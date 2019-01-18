@@ -20,9 +20,6 @@ public class Gameboard {
             String[] sArray = fieldInfo[i].split("; ");
             fields[i] = new Field(sArray);
             gui_fields[i] = fields[i].getField();
-            if (i == 1 || i == 3) {
-                fields[i].setOwner(0, Color.white);
-            }
         }
 
         gameboard = new GUI_BoardController(gui_fields);
