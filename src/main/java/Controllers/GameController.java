@@ -186,7 +186,6 @@ public class GameController {
             case 5:
                 break;
             case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
-                // boardController.moveCar(playerController.getPlayer(curPlayer),curPos,)
                 int playerPos = playerController.getPlayerPos(player);
                 //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
                 int[] rederier = {0,6,16,26,36};
@@ -208,11 +207,6 @@ public class GameController {
                     playerController.setPlayerPos(player, closestRederi);
                 }
                 boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
-
-                int fieldOwner = boardController.getFieldOwner(closestRederi);
-                        System.out.println(closestRederi);
-                int rent = Integer.parseInt(reader.getFieldRent(playerController.getPlayerPos(player)+1));
-                        System.out.println(rent);
                 int owner = boardController.getFieldOwner(closestRederi);
                 int price = (Integer.parseInt(reader.getFieldRent(closestRederi))) * 2;
                 if(boardController.fieldHasOwner(closestRederi)) {
@@ -222,13 +216,9 @@ public class GameController {
                                     + price + "kr.",
                             new String[]{"ok"});
                     playerController.payRent(player, owner, price);
-                    //playerController.getPlayer(player).addBalance(-rent * 2);
-                    //playerController.getPlayer(fieldOwner).addBalance(rent * 2);
                 } else {
                     doPurchasableField(player, playerController.getPlayerPos(player)+1);
                 }
-
-
                 break;
             case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
                 break;
