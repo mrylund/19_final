@@ -8,6 +8,7 @@ public class Field {
     private int fieldtype = 0;
     private int owner = -1;
     private int houseCount = 0;
+    private boolean hotel = false;
 
     public Field(String[] values) {
 
@@ -115,6 +116,15 @@ public class Field {
     public void setHouses(int amount) {
         houseCount = amount;
         ((GUI_Street)this.field).setHouses(amount);
+    }
+
+    public void setHotel(boolean hotel) {
+        ((GUI_Street)this.field).setHotel(hotel);
+        this.hotel = true;
+    }
+
+    public boolean hasHotel() {
+        return hotel;
     }
 
     public int getHouseCount() {

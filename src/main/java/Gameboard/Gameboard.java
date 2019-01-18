@@ -20,6 +20,9 @@ public class Gameboard {
             String[] sArray = fieldInfo[i].split("; ");
             fields[i] = new Field(sArray);
             gui_fields[i] = fields[i].getField();
+            if (i == 1 || i == 3) {
+                fields[i].setOwner(0, Color.white);
+            }
         }
 
         gameboard = new GUI_BoardController(gui_fields);
@@ -42,10 +45,21 @@ public class Gameboard {
         fields[field - 1].setOwner(player, color);
     }
 
+    public int getHouses(int fieldNumber) {
+        return fields[fieldNumber - 1].getHouseCount();
+    }
+
     public void addHouse(int player, int field) {
-        if (fields[field].getOwner() == player) {
-            int amount = fields[field].getHouseCount();
-            fields[field].setHouses(amount + 1);
+        if (fields[field-1].getOwner() == player && !fields[field-1].hasHotel()) {
+            int amount = fields[field-1].getHouseCount();
+            fields[field-1].setHouses(amount + 1);
+        }
+    }
+
+    public void addHotel(int player, int field) {
+        if (fields[field-1].getOwner() == player) {
+            fields[field-1].setHouses(0);
+            fields[field-1].setHotel(true);
         }
     }
 }

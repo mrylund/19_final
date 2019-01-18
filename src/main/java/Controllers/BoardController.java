@@ -87,7 +87,7 @@ public class BoardController {
     }
 
     public boolean hasSameType(int player) {
-        if (getFieldOwner(1) == player && getFieldOwner(3) == player) {
+        if (getFieldOwner(2) == player && getFieldOwner(4) == player) {
             return true;
         } else if (getFieldOwner(7)  == player && getFieldOwner(9)  == player && getFieldOwner(10)  == player) {
             return true;
@@ -105,8 +105,8 @@ public class BoardController {
     }
 
     public boolean hasAllFields(int player, int fieldNumber) {
-        if (fieldNumber == 1 || fieldNumber == 3) {
-            return getFieldOwner(1) == player && getFieldOwner(3) == player;
+        if (fieldNumber == 2 || fieldNumber == 4) {
+            return getFieldOwner(2) == player && getFieldOwner(4) == player;
         } else if (fieldNumber == 7 || fieldNumber == 9 || fieldNumber == 10) {
             return getFieldOwner(7) == player && getFieldOwner(9) == player && getFieldOwner(10) == player;
         }else if (fieldNumber == 12 || fieldNumber == 14 || fieldNumber == 15) {
@@ -125,8 +125,16 @@ public class BoardController {
         return false;
     }
 
-    public void purchaseHouse(int player, int field) {
-        board.addHouse(player, field);
+
+    public boolean purchaseHouse(int player, int field) {
+        if (board.getHouses(field) < 4) {
+            board.addHouse(player, field);
+            return true;
+        } else if (board.getHouses(field) == 4) {
+            board.addHotel(player, field);
+        }
+
+        return false;
     }
 
 

@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    private DiceCupDevmode diceCup = new DiceCupDevmode();
-    //private DiceCup diceCup = new DiceCup();
+    //private DiceCupDevmode diceCup = new DiceCupDevmode();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -71,8 +71,12 @@ public class GameController {
             String husanswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
             if (husanswer.equals("Ja")) {
                 int fieldanswer = input.getInt("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nHvilket felt vil du gerne købe et hus til?", 2, 40);
-                if (boardController.hasAllFields(player, fieldanswer)) {
-                    boardController.purchaseHouse(player, fieldNumber);
+                if (boardController.hasAllFields(player, fieldanswer) ) {
+                    int price = Integer.parseInt(reader.getFieldHouse1Price(fieldanswer));
+                    if (playerController.playerCanAfford(player, price)) {
+                        boolean success = boardController.purchaseHouse(player, fieldanswer);
+                        if (success) playerController.getPlayer(player).addBalance(-price);
+                    }
                 }
             }
         }

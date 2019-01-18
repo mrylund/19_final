@@ -76,4 +76,8 @@ public class PlayerController {
         return success;
     }
 
+    public boolean playerCanAfford(int player, int amount) {
+        return players.playerCanAfford(player, amount);
+    }
+
 }
