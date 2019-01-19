@@ -66,6 +66,10 @@ public class BoardController {
         return newpos + 1;
     }
 
+    public int getHouses(int fieldNumber) {
+        return board.getHouses(fieldNumber);
+    }
+
     public int getFieldType(int fieldnumber) {
         return board.getFieldType(fieldnumber);
     }
@@ -125,6 +129,13 @@ public class BoardController {
         return false;
     }
 
+    public boolean hasHotel(int fieldNumber) {
+        return board.hasHotel(fieldNumber);
+    }
+
+    public boolean hasHouses(int fieldNumber) {
+        return board.hasHotel(fieldNumber);
+    }
 
     public boolean purchaseHouse(int player, int field) {
         if (board.getHouses(field) < 4) {
@@ -136,7 +147,6 @@ public class BoardController {
 
         return false;
     }
-
 
     public int getOwnedAmountOfShippingFields(int fieldNumber){
         int counter = 0;

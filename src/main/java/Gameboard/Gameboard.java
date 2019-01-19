@@ -34,8 +34,16 @@ public class Gameboard {
         return fields[fieldnumber - 1].getFieldType();
     }
 
+    public boolean hasHotel(int fieldNumber) {
+        return fields[fieldNumber - 1].hasHotel();
+    }
+
+    public boolean hasHouses(int fieldNumber) {
+        return getHouses(fieldNumber) > 0;
+    }
+
     public int getFieldOwner(int fieldNumber) {
-        return fields[fieldNumber -  1].getOwner();
+        return fields[fieldNumber - 1].getOwner();
     }
 
     public void setFieldOwner(int field, int player, Color color) {
