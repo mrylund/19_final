@@ -79,7 +79,6 @@ public class PlayerController {
         } else {
             hasLost = true;
         }
-
         return success;
     }
 
