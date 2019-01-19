@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    private DiceCupDevmode diceCup = new DiceCupDevmode();
-    //private DiceCup diceCup = new DiceCup();
+    //private DiceCupDevmode diceCup = new DiceCupDevmode();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -56,10 +56,32 @@ public class GameController {
                 doPlayerTurn(curPlayer, prevPos);
             }
 
+            if (playerController.playerLost(curPlayer)) {
+                break;
+            }
+
             if (!diceCup.isSameValue()) {
                 curPlayer++;
             }
         }
+
+        int winner = 0;
+        int winnerValue = 0;
+
+        for(int i = 0; i < numberOfPlayers; i++) {
+            int temp = 0;
+            temp += playerController.getPlayer(i).getBalance();
+            temp += boardController.getTotalPropertyValues(i);
+
+            if (temp > winnerValue) {
+                winner = i;
+                winnerValue = temp;
+            }
+        }
+
+        input.showMessage(playerController.getPlayerGUI(winner).getName() + " har vundet spillet!");
+
+
 
     }
 

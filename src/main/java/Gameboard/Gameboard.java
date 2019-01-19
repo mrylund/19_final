@@ -67,4 +67,24 @@ public class Gameboard {
             fields[field-1].setHotel(true);
         }
     }
+
+    public int getTotalFieldValue(int field) {
+        if (fields[field - 1].getFieldType() == 1) {
+            int houses = fields[field - 1].getHouseCount();
+            boolean hotel = fields[field - 1].hasHotel();
+            int value = Integer.parseInt(reader.getFieldPrice(field));
+
+            if (hotel) {
+                value += Integer.parseInt(reader.getBuildPrice(field)) * 5;
+            } else {
+                value += Integer.parseInt(reader.getBuildPrice(field)) * houses;
+            }
+
+            return value;
+        } else if (fields[field - 1].getFieldType() == 4) {
+            return Integer.parseInt((reader.getFieldPrice(field)));
+        }
+
+        return 0;
+    }
 }
