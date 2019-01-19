@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -171,7 +171,7 @@ public class GameController {
                 playerController.payRent(player, owner, price);
             } else if (boardController.hasAllFields(owner,fieldNumber)){
                 int amount = 2 * Integer.parseInt(reader.getFieldRent(fieldNumber));
-                input.showMessage("Da ejeren " + boardController.getFieldOwner(fieldNumber) + "ejer alle af denne type felt, så du skal nu betale dobbelt leje ( dvs. " + amount + " )");
+                input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() + " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + amount + " )");
                 playerController.payRent(player,owner,amount);
             } else {
                 int numOfHouses = boardController.getHouses(fieldNumber);
