@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -155,11 +155,7 @@ public class GameController {
             doGoJailField(curPlayer, fieldNumber);
 
         } else if (fieldType == 6) {
-            doTaxField();
-
-        } else if (fieldType == 7) {
-            doParkingField();
-
+            doTaxField(curPlayer, fieldNumber);
         }
     }
 
@@ -367,7 +363,7 @@ public class GameController {
     }
 
     private void doGoJailField(int player, int fieldNumber) {
-        if (fieldNumber ==  31) {
+        if (fieldNumber == 31) {
             input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu skal gå i fængsel!");
             playerController.setPlayerPos(player, 11);
             boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber, 11);
@@ -375,11 +371,19 @@ public class GameController {
         }
     }
 
-    private void doTaxField() {
-
-    }
-
-    private void doParkingField() {
-
+    private void doTaxField(int player, int fieldNumber) {
+        if(fieldNumber == 5) {
+            int playerBalance = playerController.getBalance(player);
+            int taxToPay = (playerBalance/100)*10;
+            String taxAnswer = input.getButtonpress("Betal 10% af din pengebeholdning (" + taxToPay + "kr) eller 4000kr.", new String[]{"10%", "4000kr"});
+            if(taxAnswer.equals("10%")) {
+                playerController.getPlayer(player).addBalance(-taxToPay);
+            } else {
+                playerController.getPlayer(player).addBalance(-4000);
+            }
+        } else if(fieldNumber == 39) {
+            input.showMessage(reader.getFieldName(39));
+            playerController.getPlayer(player).addBalance(-2000);
+        }
     }
 }
