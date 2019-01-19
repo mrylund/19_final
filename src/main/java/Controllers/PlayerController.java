@@ -84,7 +84,7 @@ public class PlayerController {
         Player[] allPlayers = players.getPlayers();
         int counter = 0;
         for(Player player: allPlayers) {
-            if(player.getBalance() != 0) {
+            if(player.getBalance() > 0) {
                 counter++;
             }
         }
