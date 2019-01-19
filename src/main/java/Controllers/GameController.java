@@ -88,7 +88,6 @@ public class GameController {
     private void doPlayerTurn(int player, int prevPos) {
         int fieldNumber = 0;
 
-
         if (boardController.hasSameType(player)) {
             String husanswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
             if (husanswer.equals("Ja")) {
@@ -170,7 +169,10 @@ public class GameController {
                                 + price + "kr.",
                         new String[]{"ok"});
                 playerController.payRent(player, owner, price);
-
+            } else if (boardController.hasAllFields(owner,fieldNumber)){
+                int amount = 2 * Integer.parseInt(reader.getFieldRent(fieldNumber));
+                input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() + " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + amount + " )");
+                playerController.payRent(player,owner,amount);
             } else {
                 int numOfHouses = boardController.getHouses(fieldNumber);
                 int price = 0;
@@ -284,6 +286,12 @@ public class GameController {
 
 // TODO: 18-01-2019 Case 7 mangler at laves
             case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
+                int totalValue = boardController.getTotalPropertyValues(player) + playerController.getPlayer(player).getBalance();
+                if(totalValue <= 15000){
+                    playerController.getPlayer(player).addBalance(40000);
+                }else{
+                    input.showMessage("Din formue er over kr. 15.000, så derfor modtager du ikke Matador-Legatet på kr. 40.000");
+                }
                 break;
 
 // TODO: 18-01-2019 Case 8 er lavet færdigt
@@ -337,6 +345,7 @@ public class GameController {
                     doPurchasableField(player, newPosAfterTravel);
                 }
                 break;
+
 // TODO: 18-01-2019 Ændre tekst i chancecard.txt til case 9.
             case 9: // Ryk tre felter frem.
                 boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
