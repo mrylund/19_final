@@ -153,4 +153,15 @@ public class BoardController {
         }
     }
 
+    public int getTotalPropertyValues(int player) {
+        int value = 0;
+        for(int i = 1; i < 40; i++) {
+            if (board.getFieldOwner(i) == player) {
+                value += board.getTotalFieldValue(i);
+            }
+        }
+
+        return value;
+    }
+
 }

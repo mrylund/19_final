@@ -13,6 +13,7 @@ public class Player {
     private boolean jailCard;
     private GUI_Car car;
     private GUI_Player player;
+    private boolean hasLost = false;
 
     public Player(String name, Color color) {
         this.name = name;
@@ -47,10 +48,16 @@ public class Player {
         this.balance += amount;
         if (this.balance < 0) {
             player.setBalance(0);
+            hasLost = true;
+
         } else {
             player.setBalance(this.balance);
         }
 
+    }
+
+    public boolean hasLost() {
+        return hasLost;
     }
 
     public int getBalance() {

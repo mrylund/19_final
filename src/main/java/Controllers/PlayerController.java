@@ -6,6 +6,7 @@ import gui_fields.GUI_Player;
 
 public class PlayerController {
     private PlayerList players = new PlayerList();
+    private boolean hasLost = false;
 
     public Player[] createPlayers(String[] spillere) {
         return players.addPlayers(spillere);
@@ -71,6 +72,8 @@ public class PlayerController {
             players.getPlayer(curPlayer).addBalance(-amount);
             players.getPlayer(ownerOfField).addBalance(amount);
             success = true;
+        } else {
+            hasLost = true;
         }
 
         return success;
@@ -89,5 +92,9 @@ public class PlayerController {
             }
         }
         return counter-1;
+    }
+
+    public boolean playerLost(int player) {
+        return players.getPlayer(player).hasLost();
     }
 }
