@@ -23,7 +23,7 @@ public class Gameboard {
         }
 
         gameboard = new GUI_BoardController(gui_fields);
-        gameboard.setChanceCard("FUCK");
+        gameboard.setChanceCard("Prøv chancen");
     }
 
     public GUI_BoardController getBoard() {

@@ -374,12 +374,17 @@ public class GameController {
     private void doTaxField(int player, int fieldNumber) {
         if(fieldNumber == 5) {
             int playerBalance = playerController.getBalance(player);
-            int taxToPay = (playerBalance/100)*10;
+            int taxToPay = (int)(((double)playerBalance/100)*10);
             String taxAnswer = input.getButtonpress("Betal 10% af din pengebeholdning (" + taxToPay + "kr) eller 4000kr.", new String[]{"10%", "4000kr"});
             if(taxAnswer.equals("10%")) {
                 playerController.getPlayer(player).addBalance(-taxToPay);
             } else {
-                playerController.getPlayer(player).addBalance(-4000);
+                if(playerController.playerCanAfford(player, 4000)) {
+                    playerController.getPlayer(player).addBalance(-4000);
+                } else {
+                    input.showMessage("Det har du ikke råd til. Du bliver trykket 10% af din pengebeholdning. (" + taxToPay + "kr)");
+                    playerController.getPlayer(player).addBalance(-taxToPay);
+                }
             }
         } else if(fieldNumber == 39) {
             input.showMessage(reader.getFieldName(39));

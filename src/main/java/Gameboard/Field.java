@@ -131,4 +131,8 @@ public class Field {
         return this.houseCount;
     }
 
+    public int getFieldtype() {
+        return fieldtype;
+    }
+
 }
