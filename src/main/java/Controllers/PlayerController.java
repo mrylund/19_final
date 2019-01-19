@@ -80,4 +80,14 @@ public class PlayerController {
         return players.playerCanAfford(player, amount);
     }
 
+    public int getCurrentNumOfPlayers() {
+        Player[] allPlayers = players.getPlayers();
+        int counter = 0;
+        for(Player player: allPlayers) {
+            if(player.getBalance() != 0) {
+                counter++;
+            }
+        }
+        return counter-1;
+    }
 }

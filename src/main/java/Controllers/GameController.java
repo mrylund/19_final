@@ -10,8 +10,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -60,6 +60,7 @@ public class GameController {
                 curPlayer++;
             }
         }
+
     }
 
     private void doPlayerTurn(int player, int prevPos) {
@@ -300,7 +301,8 @@ public class GameController {
 
 // TODO: 18-01-2019 Lav metode som finder currentNumberofPlayers til case 10
             case 10: // 200 kr fra alle spillere til curPlayer
-                playerController.getPlayer(player).addBalance(numberOfPlayers * 200);
+                int ingamePlayers = playerController.getCurrentNumOfPlayers();
+                playerController.getPlayer(player).addBalance(ingamePlayers * 200);
                 for(int i = 0; i < numberOfPlayers; i++){
                     if(playerController.getPlayer(player) != playerController.getPlayer(i)){
                         playerController.getPlayer(i).addBalance(-200);
