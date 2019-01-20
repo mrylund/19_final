@@ -369,7 +369,7 @@ public class GameController {
                 if (boardController.fieldHasOwner(closestRederi)) {
                     input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
                                     + playerController.getPlayer(owner).getName()
-                                    + " du skal batale vedkommende dobbelt leje, nemlig "
+                                    + " du skal betale vedkommende dobbelt leje, nemlig "
                                     + price + "kr.",
                             new String[]{"ok"});
                     playerController.payRent(player, owner, price);
