@@ -165,35 +165,33 @@ public class GameController {
                                 + price + "kr.",
                         new String[]{"ok"});
                 playerController.payRent(player, owner, price);
-            } else if (boardController.hasAllFields(owner,fieldNumber)){
-                int amount = 2 * Integer.parseInt(reader.getFieldRent(fieldNumber));
-                input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() + " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + amount + " )");
-                playerController.payRent(player,owner,amount);
-            } else {
+            } else if (boardController.getHouses(fieldNumber) > 0) {
                 int numOfHouses = boardController.getHouses(fieldNumber);
                 int price = 0;
                 switch (numOfHouses) {
-                    case 0: price = Integer.parseInt(reader.getFieldRent(fieldNumber)); break;
                     case 1: price = Integer.parseInt(reader.getFieldHouse1Price(fieldNumber)); break;
                     case 2: price = Integer.parseInt(reader.getFieldHouse2Price(fieldNumber)); break;
                     case 3: price = Integer.parseInt(reader.getFieldHouse3Price(fieldNumber)); break;
                     case 4: price = Integer.parseInt(reader.getFieldHouse4Price(fieldNumber)); break;
                 }
-                if(numOfHouses == 0) {
-                    input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
-                                    + playerController.getPlayer(owner).getName()
-                                    + " du skal batale vedkommende "
-                                    + price + "kr.",
-                            new String[]{"ok"});
-                    playerController.payRent(player, owner, price);
-                } else {
-                    input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
-                                    + playerController.getPlayer(owner).getName()
-                                    + ", som har " + numOfHouses + " hus(e). Du skal batale vedkommende "
-                                    + price + "kr.",
-                            new String[]{"ok"});
-                    playerController.payRent(player, owner, price);
-                }
+                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
+                                + playerController.getPlayer(owner).getName()
+                                + ", som har " + numOfHouses + " hus(e). Du skal batale vedkommende "
+                                + price + "kr.",
+                        new String[]{"ok"});
+                playerController.payRent(player, owner, price);
+            } else if (boardController.hasAllFields(owner,fieldNumber)){
+                int amount = 2 * Integer.parseInt(reader.getFieldRent(fieldNumber));
+                input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() + " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + amount + " )");
+                playerController.payRent(player,owner,amount);
+            } else {
+                int price = Integer.parseInt(reader.getFieldRent(fieldNumber));
+                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
+                                + playerController.getPlayer(owner).getName()
+                                + " du skal batale vedkommende "
+                                + price + "kr.",
+                        new String[]{"ok"});
+                playerController.payRent(player, owner, price);
             }
         } else {
             String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) + " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
