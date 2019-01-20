@@ -203,6 +203,7 @@ public class GameController {
             doGoJailField(curPlayer, fieldNumber);
 // FIXME: 18-01-2019 Felttype 5 er brewery og skal laves
         }else if(fieldType == 5){
+            doBreweryField(curPlayer, fieldNumber);
 
         } else if (fieldType == 6) {
             doTaxField(curPlayer, fieldNumber);
@@ -229,7 +230,7 @@ public class GameController {
      *      - Then the "purchaseProperty(fieldNumber, curPlayer, Color )" method is called in BoardController.
      */
     private void doPurchasableField(int curPlayer, int fieldNumber) {
-        if (boardController.fieldHasOwner(fieldNumber)) {
+        if (boardController.fieldHasOwner(fieldNumber) && boardController.getFieldOwner(fieldNumber) != curPlayer) {
             int owner = boardController.getFieldOwner(fieldNumber);
             if (boardController.hasHotel(fieldNumber)) {
                 int price = Integer.parseInt(reader.getFieldHotelPrice(fieldNumber));
@@ -499,5 +500,19 @@ public class GameController {
             input.showMessage(reader.getFieldName(39));
             playerController.getPlayer(curPlayer).addBalance(-2000);
         }
+    }
+
+    private void doBreweryField(int curPlayer, int fieldNumber) {
+        int eyes = diceCup.getSum();
+        int owner = boardController.getFieldOwner(fieldNumber);
+        int toPay = 100 * eyes;
+
+        if (boardController.getFieldOwner(13) == owner && boardController.getFieldOwner(29) == owner) {
+            toPay = toPay * 2;
+        }
+
+        input.showMessage("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu skal betale " + playerController.getPlayerGUI(owner).getName() + " " + toPay + "kr. for leje!");
+        playerController.getPlayer(curPlayer).addBalance(-toPay);
+        playerController.getPlayer(owner).addBalance(toPay);
     }
 }
