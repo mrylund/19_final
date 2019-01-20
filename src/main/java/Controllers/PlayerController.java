@@ -35,6 +35,10 @@ public class PlayerController {
         return players.getPlayer(playerNumber);
     }
 
+    public int getBalance(int playerNumber) {
+        return players.getPlayer(playerNumber).getBalance();
+    }
+
     public void movePlayer(int player, int prevPos, int amount) {
         int newpos = prevPos + amount;
         if (newpos > 39) {

@@ -3,6 +3,7 @@ package Gameboard;
 import gui_fields.*;
 import java.awt.*;
 
+
 public class Field {
     private GUI_Field field;
     private int fieldtype = 0;
@@ -10,6 +11,7 @@ public class Field {
     private int houseCount = 0;
     private boolean hotel = false;
 
+    // TODO: 18-01-2019 Bruge metoden til at sætte farverne af felterne istedet.
     public Field(String[] values) {
 
         if(values[0].equals("GUI_Start")){
@@ -129,6 +131,10 @@ public class Field {
 
     public int getHouseCount() {
         return this.houseCount;
+    }
+
+    public int getFieldtype() {
+        return fieldtype;
     }
 
 }

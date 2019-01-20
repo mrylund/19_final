@@ -49,7 +49,6 @@ public class Player {
         if (this.balance < 0) {
             player.setBalance(0);
             hasLost = true;
-
         } else {
             player.setBalance(this.balance);
         }
