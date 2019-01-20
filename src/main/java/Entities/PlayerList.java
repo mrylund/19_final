@@ -35,14 +35,18 @@ public class PlayerList {
     }
 
     /**
-     *
-     * @param number
+     * This method is used to get a specific GUI_Player.
+     * @param number is the Player's number.
      * @return
      */
     public GUI_Player getPlayerGUI(int number) {
         return players[number].getPlayer();
     }
 
+    /**
+     * This method is used to get all Players in an Array.
+     * @return
+     */
     public Player[] getPlayers() {
         return players;
     }
@@ -56,7 +60,6 @@ public class PlayerList {
         for(int i = 0; i < players.length; i++) {
             cars[i] = players[i].getCar();
         }
-
         return cars;
     }
 

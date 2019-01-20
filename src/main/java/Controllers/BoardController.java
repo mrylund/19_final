@@ -19,7 +19,7 @@ public class BoardController {
     }
 
     /**
-     * This void is used to add cars to the gameboard.
+     * This void is used to add cars to the Gameboard.
      * @param players is the GUI_Player[] input, which is then used to assign a car to each player with help of the "for-each" loop.
      */
     public void addCars(GUI_Player[] players) {
@@ -271,6 +271,11 @@ public class BoardController {
         return value;
     }
 
+    /**
+     * This method is used to get the amount of houses a Player owns.
+     * @param player is the Player's playerNumber.
+     * @return is an Integer and is the amount of houses.
+     */
     public int getPlayerHouseCount(int player) {
         int houses = 0;
         for(int i = 1; i < 40; i++) {

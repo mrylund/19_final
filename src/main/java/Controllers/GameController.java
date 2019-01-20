@@ -302,7 +302,6 @@ public class GameController {
         //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
         int[] rederier = {0,6,16,26,36};
         int closestRederi = 0;
-
         String chanceCardText = chanceController.getCardText();
         boardController.displayChanceCard(chanceCardText);
         input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har trukket et chancekort.");
