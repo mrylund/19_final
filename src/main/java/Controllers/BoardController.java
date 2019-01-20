@@ -271,4 +271,24 @@ public class BoardController {
         return value;
     }
 
+    public int getPlayerHouseCount(int player) {
+        int houses = 0;
+        for(int i = 1; i < 40; i++) {
+            if (board.getFieldOwner(i) == player) {
+                houses += board.getHouses(i);
+            }
+        }
+        return houses;
+    }
+
+    public int getPlayerHotelCount(int player) {
+        int hotels = 0;
+        for(int i = 1; i < 40; i++) {
+            if (board.getFieldOwner(i) == player && board.hasHotel(i)) {
+                hotels++;
+            }
+        }
+        return hotels;
+    }
+
 }

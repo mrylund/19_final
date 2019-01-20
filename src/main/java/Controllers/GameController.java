@@ -331,7 +331,18 @@ public class GameController {
                 boardController.setCarpos(playerController.getPlayerGUI(player),prevPos,values[1]);
                 playerController.setPlayerPos(player,values[1],false);
                 break;
+
             case 5:
+                input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName());
+                int housePrice = Integer.parseInt(reader.getLine(fieldNumber).split("; ")[3]);
+                int hotelPrice = housePrice * 3;
+                int total = 0;
+
+                total += boardController.getPlayerHouseCount(player) * housePrice;
+                total += boardController.getPlayerHotelCount(player) * hotelPrice;
+
+                playerController.getPlayer(player).addBalance(-total);
+
                 break;
 
             case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
