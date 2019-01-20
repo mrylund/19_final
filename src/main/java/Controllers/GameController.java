@@ -207,8 +207,9 @@ public class GameController {
     private void doFieldAction(int curPlayer, int prevPos, int fieldNumber) {
         int fieldType = boardController.getFieldType(fieldNumber);
         if (fieldType == 1 || fieldType == 4) {
-            doPurchasableField(curPlayer, fieldNumber);
-
+            if (boardController.getFieldOwner(fieldNumber) != curPlayer) {
+                doPurchasableField(curPlayer, fieldNumber);
+            }
         } else if (fieldType == 2) {
             doChanceField(curPlayer, prevPos, fieldNumber);
 
@@ -243,7 +244,7 @@ public class GameController {
      *      - Then the "purchaseProperty(fieldNumber, curPlayer, Color )" method is called in BoardController.
      */
     private void doPurchasableField(int curPlayer, int fieldNumber) {
-        if (boardController.fieldHasOwner(fieldNumber) && boardController.getFieldOwner(fieldNumber) != curPlayer) {
+        if (boardController.fieldHasOwner(fieldNumber)) {
             int owner = boardController.getFieldOwner(fieldNumber);
             if (boardController.hasHotel(fieldNumber)) {
                 int price = Integer.parseInt(reader.getFieldHotelPrice(fieldNumber));
