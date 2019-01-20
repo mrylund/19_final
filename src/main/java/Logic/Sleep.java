@@ -5,6 +5,10 @@ public class Sleep {
         sleep(1000);
     }
 
+    /**
+     * This method is used when wanting to create a delay - fx. when moving a Player's car on the GUI board.
+     * @param n is the integer input in ms which determines the delay amount.
+     */
     public static void sleep(int n) {
         long t0 = System.currentTimeMillis();
 

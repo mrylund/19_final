@@ -6,7 +6,16 @@ import gui_fields.GUI_Player;
 import java.awt.*;
 
 public class PlayerList {
+    /**
+     * PlayerList creates an instant of Player
+     */
     private Player[] players;
+
+    /**
+     * This method return a Player[] containing all the Players added to the array.
+     * @param spillere is an String[] containing the names of the Player's, and is defined in the GameController.
+     * @return type is a Player[] containing Players(String name, Color) with a color assigned to them.
+     */
     public Player[] addPlayers(String[] spillere) {
         Color color;
         players = new Player[spillere.length];
@@ -25,6 +34,11 @@ public class PlayerList {
         return players;
     }
 
+    /**
+     *
+     * @param number
+     * @return
+     */
     public GUI_Player getPlayerGUI(int number) {
         return players[number].getPlayer();
     }

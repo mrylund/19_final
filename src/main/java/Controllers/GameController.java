@@ -38,11 +38,12 @@ public class GameController {
                     "Patrick",
                     "Athusan",
                     "Lars",
-                    "Andreas"
-            };
+                    "Andreas"};
         } else {
             numberOfPlayers = input.getInt("Hvor mange spillere?", 3, 6);
-            spillernavne = input.getStringArray(new String[]{"Hvad hedder spiller 1?", "Hvad hedder spiller 2?", "Hvad hedder spiller 3?", "Hvad hedder spiller 4?", "Hvad hedder spiller 5?", "Hvad hedder spiller 6?"}, numberOfPlayers);
+            spillernavne = input.getStringArray(new String[]{"Hvad hedder spiller 1?", "Hvad hedder spiller 2?",
+                                                             "Hvad hedder spiller 3?", "Hvad hedder spiller 4?",
+                                                             "Hvad hedder spiller 5?", "Hvad hedder spiller 6?"}, numberOfPlayers);
         }
         playerController.createPlayers(spillernavne);
         GUI_Player[] guiPlayers = playerController.getPlayersGUI();
@@ -117,9 +118,11 @@ public class GameController {
         int fieldNumber = 0;
 
         if (boardController.hasSameType(curPlayer)) {
-            String houseAnswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
+            String houseAnswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
+                    "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
             if (houseAnswer.equals("Ja")) {
-                int fieldAnswer = input.getInt("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nHvilket felt vil du gerne købe et hus til?", 2, 40);
+                int fieldAnswer = input.getInt("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
+                        "\nHvilket felt vil du gerne købe et hus på?", 2, 40);
                 if (boardController.hasAllFields(curPlayer, fieldAnswer) ) {
                     int price = Integer.parseInt(reader.getBuildPrice(fieldAnswer));
                     if (playerController.playerCanAfford(curPlayer, price)) {
@@ -228,7 +231,7 @@ public class GameController {
     private void doPurchasableField(int curPlayer, int fieldNumber) {
         if (boardController.fieldHasOwner(fieldNumber)) {
             int owner = boardController.getFieldOwner(fieldNumber);
-            if(boardController.hasHotel(fieldNumber)) {
+            if (boardController.hasHotel(fieldNumber)) {
                 int price = Integer.parseInt(reader.getFieldHotelPrice(fieldNumber));
                 input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDette felt er ejet af "
                                 + playerController.getPlayer(owner).getName()
@@ -269,7 +272,9 @@ public class GameController {
                 playerController.payRent(curPlayer, owner, price);
             }
         } else {
-            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) + " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
+            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
+                    "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) +
+                    " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
             if (answer.equals("ja")) {
                 int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldNumber));
                 boolean success = playerController.purchaseProperty(curPlayer, fieldPrice);
@@ -308,9 +313,9 @@ public class GameController {
                 break;
 
             case 2: //Spiller flyttes til nyt felt
-                if(prevPos > values[1]){
+                if (prevPos > values[1]) {
                     playerController.setPlayerPos(player,values[1],true);
-                }else{
+                } else {
                     playerController.setPlayerPos(player,values[1]);
                 }
                 boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber,values[1]);
@@ -332,17 +337,17 @@ public class GameController {
             case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
                 int playerPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
-                if(playerPos >= rederier[4]) {
+                if (playerPos >= rederier[4]) {
                     closestRederi = rederier[1];
                 } else {
                     for (int i = 0; i < rederier.length-1; i++) {
-                        if(playerPos > rederier[i] && playerPos < rederier[i+1]) {
+                        if (playerPos > rederier[i] && playerPos < rederier[i+1]) {
                             closestRederi = Math.max(rederier[i], rederier[i+1]);
                             break;
                         }
                     }
                 }
-                if(playerPos >= rederier[4]) {
+                if (playerPos >= rederier[4]) {
                     playerController.setPlayerPos(player, closestRederi, true);
                 } else {
                     playerController.setPlayerPos(player, closestRederi);
@@ -350,7 +355,7 @@ public class GameController {
                 boardController.setCarpos(playerController.getPlayerGUI(player), fieldNumber, closestRederi);
                 int owner = boardController.getFieldOwner(closestRederi);
                 int price = (Integer.parseInt(reader.getFieldRent(closestRederi))) * 2;
-                if(boardController.fieldHasOwner(closestRederi)) {
+                if (boardController.fieldHasOwner(closestRederi)) {
                     input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
                                     + playerController.getPlayer(owner).getName()
                                     + " du skal batale vedkommende dobbelt leje, nemlig "
@@ -364,9 +369,9 @@ public class GameController {
 
             case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
                 int totalValue = boardController.getTotalPropertyValues(player) + playerController.getPlayer(player).getBalance();
-                if(totalValue <= 15000){
+                if (totalValue <= 15000) {
                     playerController.getPlayer(player).addBalance(40000);
-                }else{
+                } else {
                     input.showMessage("Din formue er over kr. 15.000, så derfor modtager du ikke Matador-Legatet på kr. 40.000");
                 }
                 break;
@@ -374,17 +379,17 @@ public class GameController {
             case 8: // Tag med den nærmeste færge - flyt brikken frem til nærmeste færge, og tag med færgen hen til næste færge, og hvis de passerer “Start” indkassér da kr. 4.000.
                 prevPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
-                if(prevPos >= rederier[4]) {
+                if (prevPos >= rederier[4]) {
                     closestRederi = rederier[1];
                 } else {
                     for (int i = 0; i < rederier.length-1; i++) {
-                        if(prevPos > rederier[i] && prevPos < rederier[i+1]) {
+                        if (prevPos > rederier[i] && prevPos < rederier[i+1]) {
                             closestRederi = Math.max(rederier[i], rederier[i+1]);
                             break;
                         }
                     }
                 }
-                if(prevPos >= rederier[4]) {
+                if (prevPos >= rederier[4]) {
                     playerController.setPlayerPos(player, closestRederi, true);
                 } else {
                     playerController.setPlayerPos(player, closestRederi);
@@ -394,30 +399,30 @@ public class GameController {
 
                 int newPosAfterTravel = closestRederi+10;
 
-                if(newPosAfterTravel > 40){
+                if (newPosAfterTravel > 40) {
                     newPosAfterTravel = newPosAfterTravel % 40;
                 }
 
                 playerController.setPlayerPos(player,newPosAfterTravel,false);
                 boardController.setCarpos(playerController.getPlayerGUI(player),closestRederi,newPosAfterTravel);
 
-                if(boardController.fieldHasOwner(newPosAfterTravel)){
+                if (boardController.fieldHasOwner(newPosAfterTravel)) {
                     int ownedAmount = boardController.getOwnedAmountOfShippingFields(newPosAfterTravel);
                     String ownerName = playerController.getPlayerGUI(boardController.getFieldOwner(newPosAfterTravel)).getName();
-                    if(ownedAmount == 1) {
+                    if (ownedAmount == 1) {
                         playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),500);
                         input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr. 500 i leje, da ejeren har 1 af denne type felter. ");
-                    }else if(ownedAmount == 2){
+                    } else if(ownedAmount == 2) {
                         playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),1000);
                         input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr. 1.000 i leje, da ejeren har 2 af denne type felter. ");
-                    }else if(ownedAmount == 3){
+                    } else if(ownedAmount == 3) {
                         playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),2000);
                         input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr 2.000 i leje, da ejeren har 3 af denne type felter. ");
-                    }else{
+                    } else {
                         playerController.payRent(player,boardController.getFieldOwner(newPosAfterTravel),4000);
                         input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr 4.000 i leje, da ejeren har 4 af denne type felter. ");
                     }
-                }else {
+                } else {
                     doPurchasableField(player, newPosAfterTravel);
                 }
                 break;
@@ -432,8 +437,8 @@ public class GameController {
             case 10: // 200 kr fra alle spillere til curPlayer
                 int ingamePlayers = playerController.getCurrentNumOfPlayers();
                 playerController.getPlayer(player).addBalance(ingamePlayers * 200);
-                for(int i = 0; i < numberOfPlayers; i++){
-                    if(playerController.getPlayer(player) != playerController.getPlayer(i)){
+                for (int i = 0; i < numberOfPlayers; i++) {
+                    if (playerController.getPlayer(player) != playerController.getPlayer(i)) {
                         playerController.getPlayer(i).addBalance(-200);
                     }
                 }
@@ -465,14 +470,14 @@ public class GameController {
      * There are two different TaxFields, therefor also an if-else statement in this method.
      */
     private void doTaxField(int curPlayer, int fieldNumber) {
-        if(fieldNumber == 5) {
+        if (fieldNumber == 5) {
             int playerBalance = playerController.getBalance(curPlayer);
             int taxToPay = (int)(((double)playerBalance/100)*10);
             String taxAnswer = input.getButtonpress("Betal 10% af din pengebeholdning (" + taxToPay + "kr) eller 4000kr.", new String[]{"10%", "4000kr"});
-            if(taxAnswer.equals("10%")) {
+            if (taxAnswer.equals("10%")) {
                 playerController.getPlayer(curPlayer).addBalance(-taxToPay);
             } else {
-                if(playerController.playerCanAfford(curPlayer, 4000)) {
+                if (playerController.playerCanAfford(curPlayer, 4000)) {
                     playerController.getPlayer(curPlayer).addBalance(-4000);
                 } else {
                     input.showMessage("Det har du ikke råd til. Du bliver trykket 10% af din pengebeholdning. (" + taxToPay + "kr)");
