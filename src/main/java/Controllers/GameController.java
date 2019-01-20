@@ -516,17 +516,34 @@ public class GameController {
         }
     }
 
+
+    @SuppressWarnings("Duplicates")
     private void doBreweryField(int curPlayer, int fieldNumber) {
-        int eyes = diceCup.getSum();
-        int owner = boardController.getFieldOwner(fieldNumber);
-        int toPay = 100 * eyes;
+        if (boardController.fieldHasOwner(fieldNumber) && boardController.getFieldOwner(fieldNumber) != curPlayer) {
+            if (boardController.fieldHasOwner(fieldNumber)) {
+                int eyes = diceCup.getSum();
+                int owner = boardController.getFieldOwner(fieldNumber);
+                int toPay = 100 * eyes;
 
-        if (boardController.getFieldOwner(13) == owner && boardController.getFieldOwner(29) == owner) {
-            toPay = toPay * 2;
+                if (boardController.getFieldOwner(13) == owner && boardController.getFieldOwner(29) == owner) {
+                    toPay = toPay * 2;
+                }
+
+                input.showMessage("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu skal betale " + playerController.getPlayerGUI(owner).getName() + " " + toPay + "kr. for leje!");
+                playerController.getPlayer(curPlayer).addBalance(-toPay);
+                playerController.getPlayer(owner).addBalance(toPay);
+            } else {
+                String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
+                        "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) +
+                        " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
+                if (answer.equals("ja")) {
+                    int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldNumber));
+                    boolean success = playerController.purchaseProperty(curPlayer, fieldPrice);
+                    if (success) {
+                        boardController.purchaseProperty(fieldNumber, curPlayer, playerController.getPlayerGUI(curPlayer).getPrimaryColor());
+                    }
+                }
+            }
         }
-
-        input.showMessage("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu skal betale " + playerController.getPlayerGUI(owner).getName() + " " + toPay + "kr. for leje!");
-        playerController.getPlayer(curPlayer).addBalance(-toPay);
-        playerController.getPlayer(owner).addBalance(toPay);
     }
 }
