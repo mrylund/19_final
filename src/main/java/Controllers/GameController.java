@@ -4,6 +4,8 @@ import Logic.DiceCup;
 import Logic.ReadFile;
 import gui_fields.GUI_Player;
 
+import java.awt.*;
+
 public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
@@ -39,6 +41,17 @@ public class GameController {
                     "Athusan",
                     "Lars",
                     "Andreas"};
+            /* Test that make a player own all fields and also builds x amount of houses on them
+            for (int i = 1; i < 41; i++) {
+                if(boardController.getFieldType(i) == 1) {
+                    boardController.purchaseProperty(i, 0, Color.red);
+                    for (int j = 0; j < 5; j++) {
+                        boardController.purchaseHouse(0, i);
+                    }
+                }
+            }
+            */
+
         } else {
             numberOfPlayers = input.getInt("Hvor mange spillere?", 3, 6);
             spillernavne = input.getStringArray(new String[]{"Hvad hedder spiller 1?", "Hvad hedder spiller 2?",
@@ -442,7 +455,7 @@ public class GameController {
                 boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
                 playerController.movePlayer(player,fieldNumber,3);
                 int newPos = playerController.getPlayerPos(player);
-                doPurchasableField(player,newPos);
+                doFieldAction(player, prevPos, fieldNumber);
                 break;
 
             case 10: // 200 kr fra alle spillere til curPlayer

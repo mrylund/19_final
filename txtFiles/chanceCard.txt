@@ -9,7 +9,7 @@
 9: Ryk frem til "Frederiksberg all" hvis de passerer Start indkassér kr. 4.000: 2: 12
 10: Ryk brikken frem til det nærmeste rederi og betal ejeren to gange den leje, han ellers er berettiget til. Hvis selskabet ikke ejes af nogen kan de købe det af banken.: 6: 1873871
 11: Grundet dyrtiden har de fået gageforhøjelse modtag kr. 1.000: 1: 1000
-12: I anledning af kongens fødselsdag benådes de herved for fængsel. Dette kort kan opbevares, indtil de før brug for det.: 3: 1
+12: I anledning af kongens fødselsdag benådes de herved for fængsel. Dette kort kan opbevares, indtil de får brug for det.: 3: 1
 13: Ejendomsskatterne er steget, ekstraudgifterne er; kr. 800 pr.hus  -  kr. 2400 pr.hotel: 5: 800
 14: De har modtaget deres tandlægeregning betal kr. 2.000.: 1: -2000
 15: De har måttet vedtage en parkeringsbøde. Betal kr. 200 i bøde.: 1: -200

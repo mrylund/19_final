@@ -25,19 +25,22 @@ public class ChanceCardTest {
 
         //kører 50 gange for at se om den blander tilfældigt.
         for (int i = 0; i < 50; i++) {
+            //blander først 1 kort sæt og gemmer
             chanceCard.makeCardSet();
             chanceCard.shuffleCard();
             String[] shuffled = chanceCard.getCardSet();
 
-            if(checkIfSame(cardSet, shuffled)) {
+            //blander et kortsæt til og gemmer
+            chanceCard.makeCardSet();
+            chanceCard.shuffleCard();
+            String[] shuffled1 = chanceCard.getCardSet();
+
+            //tjekker om de to kortsæt er ens
+            if(checkIfSame(shuffled, shuffled1)) {
                 counter++;
             }
         }
         assertTrue(counter == 0);
-        chanceCard.makeCardSet();
-        for(int i = 0; i < chanceCard.getCardSet().length; i++) {
-            System.out.println(chanceCard.getCardSet()[i]);
-        }
     }
 
     @Test
