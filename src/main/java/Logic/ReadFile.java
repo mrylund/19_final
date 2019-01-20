@@ -96,48 +96,5 @@ public class ReadFile {
         String[] allLines = readFile(fieldInfoPath);
         return allLines[lineNum-1].split("; ")[2];
     }
-    /*
-    public static void main(String[] args){
-        ReadFile reader = new ReadFile();
-        String[] readFilePrint = reader.readFile("txtFiles/fieldInfo.txt");
 
-        for(int i = 0; i < readFilePrint.length; i++){
-            System.out.println(readFilePrint[i]);
-        }
-
-        //System.out.println(readFilePrint[2]);
-        //System.out.println(readFilePrint[39].split("; ")[5]);
-        //System.out.println(reader.getFieldName(40));
-
-        long counter = 0;
-        for (int i = 0; i < 50; i++) {
-            long t0 = System.currentTimeMillis();
-            for (int j = 1; j < 40; j++) {
-                //System.out.println(reader.getFieldName(j));
-                System.out.println(reader.getFieldName(j));
-            }
-            long t1 = System.currentTimeMillis();
-            counter += (t1-t0);
-
-            System.out.println(reader.getFieldName(40) + "\n" +
-                    reader.getFieldPrice(40) + "\n" +
-                    reader.getFieldHouse1(40) + "\n" +
-                    reader.getFieldHouse2(40) + "\n" +
-                    reader.getFieldHouse3(40) + "\n" +
-                    reader.getFieldHouse4(40) + "\n" +
-                    reader.getFieldHotel(40) + "\n" +
-                    reader.getFieldBuildPrice(40) + "\n" +
-                    reader.getFieldRent(40));
-        }
-
-        System.out.println((counter/50) + " millisek");
-
-        System.out.println(reader.getFieldColor(1));
-
-        System.out.println(System.currentTimeMillis());
-
-        System.out.println(Long.MAX_VALUE);
-    }
-
-    */
 }

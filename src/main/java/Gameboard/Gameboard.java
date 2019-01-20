@@ -4,7 +4,6 @@ import gui_codebehind.GUI_BoardController;
 import gui_fields.GUI_Field;
 import java.awt.*;
 
-
 public class Gameboard {
     private ReadFile reader = new ReadFile();
     private String[] fieldInfo;

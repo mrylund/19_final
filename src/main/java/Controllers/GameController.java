@@ -10,16 +10,26 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chancecontroller = new ChanceCardController();
-    private DiceCupDevmode diceCup = new DiceCupDevmode();
-    //private DiceCup diceCup = new DiceCup();
+    //private DiceCupDevmode diceCup = new DiceCupDevmode();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
 
+    /**
+     * This constructor "GameController initializes the game through the void "InitializeGame" in devmode, if devmode is enabled (true || false).
+     * @param devmode
+     */
     public GameController(boolean devmode) {
         InitializeGame(devmode);
     }
 
+    /**
+     * As mentioned in the comment for the constructor of the GameController-class, this method is initialized in the constructor.
+     * @param devmode
+     * In this void, a String[] is initialized and created when the user has created an input numberOfPlayers.
+     * The cars are then added through the boardController, and the GameLoop is initialized.
+     */
     private void InitializeGame(boolean devmode) {
         String[] spillernavne;
         input = new InputController(boardController.createBoard());
@@ -42,7 +52,16 @@ public class GameController {
         GameLoop();
     }
 
-    private void GameLoop() { int curPlayer = 0;
+    /**
+     * This is the GameLoop.
+     * The GameLoop will run while the While-loop inside is true.
+     * The loop ends when the @curPlayer has a balance < 0, and the break; occurs.
+     * After the "break;", a for-loop is created, whih goes through the @numberOfPlayers, and then proceeds to finds the player
+     *    - with the greatest fortune ( balance, houses and properties ).
+     * And at last it will display the winner and the winner's balance on the GUI.
+     */
+    private void GameLoop() {
+        int curPlayer = 0;
         int prevPos;
 
         while (true) {
@@ -80,33 +99,60 @@ public class GameController {
         input.showMessage(playerController.getPlayerGUI(winner).getName() + " har vundet spillet!");
     }
 
-    private void doPlayerTurn(int player, int prevPos) {
+    /**
+     * This void will execute the current Player's turn.
+     * @param curPlayer is the current player's number.
+     * @param prevPos is the current player's position.
+     * The boardController uses the method "hasSameType" which takes the curPlayer's number and checks if the player is eligible to buy a house on the property."
+     * A input from the player "Ja" || "No" is then required for the game to continue.
+     * If the input is "Ja", a new integer input names @fieldAnswer is required with the fieldNumber the current player wants to purchase a house on.
+     * Then the input fieldAnswer is used to check is the player actually owns the field, and if so, the price will be read by using the Reader-class taking the @fieldAnswer as a parameter.
+     * The price is then used to check if the player can afford to buy the property - if yes, the "purchaseHouse(int curPlayer, fieldAnswer)" method is used through boardController
+     * If the boolean is true, the balance from the current Player will be subtracted by the price of the field.
+     * When or if the "purchaseHouse" method is executed, the "dceCup.roll()" method is executed - this executes the diceroll for the current player.
+     * The boardController.setDice(dice1,dice2) is then called, which shows the rolled numbers on the GUI.
+     * The fieldNumber variable is then calculated from the diceCup.getSum() method, and the boardController.moveCar(Player player, int prevPos, int diceSum) is then used.
+     * The player is then moved by the movePlayer(curPlayer, prevPos, sum) method in the PlayerController class.
+     * At last the doFieldAction(curPlayer, prevPos, fieldNumber) method is executed, because the player has been moved to a new field after the dice roll.
+     */
+    private void doPlayerTurn(int curPlayer, int prevPos) {
         int fieldNumber = 0;
 
-        if (boardController.hasSameType(player)) {
-            String husanswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
-            if (husanswer.equals("Ja")) {
-                int fieldanswer = input.getInt("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nHvilket felt vil du gerne købe et hus til?", 2, 40);
-                if (boardController.hasAllFields(player, fieldanswer) ) {
-                    int price = Integer.parseInt(reader.getBuildPrice(fieldanswer));
-                    if (playerController.playerCanAfford(player, price)) {
-                        boolean success = boardController.purchaseHouse(player, fieldanswer);
-                        if (success) playerController.getPlayer(player).addBalance(-price);
+        if (boardController.hasSameType(curPlayer)) {
+            String houseAnswer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu har mulighed for at købe et hus, vil du det?", new String[]{"Ja", "Nej"});
+            if (houseAnswer.equals("Ja")) {
+                int fieldAnswer = input.getInt("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nHvilket felt vil du gerne købe et hus til?", 2, 40);
+                if (boardController.hasAllFields(curPlayer, fieldAnswer) ) {
+                    int price = Integer.parseInt(reader.getBuildPrice(fieldAnswer));
+                    if (playerController.playerCanAfford(curPlayer, price)) {
+                        boolean success = boardController.purchaseHouse(curPlayer, fieldAnswer);
+                        if (success) playerController.getPlayer(curPlayer).addBalance(-price);
                     }
                 }
             }
         }
-
-        input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nKast med terningerne", new String[]{"kast"});
+        input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nKast med terningerne", new String[]{"kast"});
 
         diceCup.roll();
         boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
-        fieldNumber = boardController.moveCar(playerController.getPlayerGUI(player), prevPos, diceCup.getSum());
-        playerController.movePlayer(player, prevPos, diceCup.getSum());
 
+        fieldNumber = boardController.moveCar(playerController.getPlayerGUI(curPlayer), prevPos, diceCup.getSum());
+        playerController.movePlayer(curPlayer, prevPos, diceCup.getSum());
 
-        doFieldAction(player, prevPos, fieldNumber);
+        doFieldAction(curPlayer, prevPos, fieldNumber);
     }
+
+    /**
+     * This method is executed in the GameLoop() if the Player is jailed.
+     * @param player is the current Player's number.
+     * @param prevPos is the current Player's position.
+     * This method checks if the player has a Jailcard, and asks if the players wants to use it to get out of jail.
+     * If the player chooses to use the Jailcard to get out of jailed, the setJailed(false) is used to get the player out of prison,
+     *  - and the setJailcard(false) is used to remove the Jailcard from the player.
+     * If the Player doesn't own a Jailcard, the players is given a chance to come out of jail by rolling 2 of the same dice facevalues in 3 attempts.
+     * If the players rolls 2 of the same facevalues in the dice, the player will be moved to a new field with respect to the diceSum.
+     * The "doFieldAction()" method is then called on the fieldNumber the player is now on.
+     */
 
     private void doJailedPlayerTurn(int player, int prevPos) {
         int fieldNumber;
@@ -137,6 +183,14 @@ public class GameController {
         }
     }
 
+    /**
+     *
+     * @param curPlayer
+     * @param prevPos
+     * @param fieldNumber
+     *
+     *
+     */
     private void doFieldAction(int curPlayer, int prevPos, int fieldNumber) {
         int fieldType = boardController.getFieldType(fieldNumber);
 // FIXME: 18-01-2019 Felttype 5 er brewery og skal laves
@@ -154,6 +208,11 @@ public class GameController {
         }
     }
 
+    /**
+     *
+     * @param player
+     * @param fieldNumber
+     */
     private void doPurchasableField(int player, int fieldNumber) {
         int owner = boardController.getFieldOwner(fieldNumber);
         if (boardController.fieldHasOwner(fieldNumber)) {
@@ -205,6 +264,12 @@ public class GameController {
         }
     }
 
+    /**
+     *
+     * @param player
+     * @param prevPos
+     * @param fieldNumber
+     */
     @SuppressWarnings("Duplicates")
     private void doChanceField(int player, int prevPos, int fieldNumber) {
         chancecontroller.drawCard();
@@ -244,7 +309,6 @@ public class GameController {
             case 5:
                 break;
 
-// TODO: 18-01-2019 Denne case er lavet færdigt
             case 6: // ryk til nærmeste rederi? og betal 2 * leje til ejeren af feltet
                 int playerPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
@@ -278,7 +342,6 @@ public class GameController {
                 }
                 break;
 
-// TODO: 18-01-2019 Case 7 mangler at laves
             case 7: // matador legat på 40.000 hvis formuen af spiller (d.v.s. deres kontante penge + skøder + bygninger) ikke overstiger kr. 15.000
                 int totalValue = boardController.getTotalPropertyValues(player) + playerController.getPlayer(player).getBalance();
                 if(totalValue <= 15000){
@@ -288,7 +351,6 @@ public class GameController {
                 }
                 break;
 
-// TODO: 18-01-2019 Case 8 er lavet færdigt
             case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
                 prevPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
@@ -340,7 +402,6 @@ public class GameController {
                 }
                 break;
 
-// TODO: 18-01-2019 Ændre tekst i chancecard.txt til case 9.
             case 9: // Ryk tre felter frem.
                 boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
                 playerController.movePlayer(player,fieldNumber,3);
@@ -348,7 +409,6 @@ public class GameController {
                 doPurchasableField(player,newPos);
                 break;
 
-// TODO: 18-01-2019 Lav metode som finder currentNumberofPlayers til case 10
             case 10: // 200 kr fra alle spillere til curPlayer
                 int ingamePlayers = playerController.getCurrentNumOfPlayers();
                 playerController.getPlayer(player).addBalance(ingamePlayers * 200);
@@ -359,12 +419,15 @@ public class GameController {
                 }
                 break;
 
-// TODO: 18-01-2019 Lav en default
             default:
-
         }
     }
 
+    /**
+     *
+     * @param player
+     * @param fieldNumber
+     */
     private void doGoJailField(int player, int fieldNumber) {
         if (fieldNumber == 31) {
             input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu skal gå i fængsel!");

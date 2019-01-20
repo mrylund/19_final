@@ -90,24 +90,36 @@ public class BoardController {
         return board.getFieldOwner(field);
     }
 
-    public boolean hasSameType(int player) {
-        if (getFieldOwner(2) == player && getFieldOwner(4) == player) {
+    /**
+     * This boolean is used to check if a player is allowed to buy a house on his property.
+     * The requirement for a player to be able to purchase a house is that he owns all the same type of fields.
+     * @param curPlayer is the curPlayer's number.
+     * @return true if the curPlayer owns all the same type of fields.
+     */
+    public boolean hasSameType(int curPlayer) {
+        if (getFieldOwner(2) == curPlayer && getFieldOwner(4) == curPlayer) {
             return true;
-        } else if (getFieldOwner(7)  == player && getFieldOwner(9)  == player && getFieldOwner(10)  == player) {
+        } else if (getFieldOwner(7)  == curPlayer && getFieldOwner(9)  == curPlayer && getFieldOwner(10)  == curPlayer) {
             return true;
-        } else if (getFieldOwner(12)  == player && getFieldOwner(14)  == player && getFieldOwner(15)  == player) {
+        } else if (getFieldOwner(12)  == curPlayer && getFieldOwner(14)  == curPlayer && getFieldOwner(15)  == curPlayer) {
             return true;
-        } else if (getFieldOwner(17)  == player && getFieldOwner(19)  == player && getFieldOwner(20)  == player) {
+        } else if (getFieldOwner(17)  == curPlayer && getFieldOwner(19)  == curPlayer && getFieldOwner(20)  == curPlayer) {
             return true;
-        } else if (getFieldOwner(22)  == player && getFieldOwner(24)  == player && getFieldOwner(25)  == player) {
+        } else if (getFieldOwner(22)  == curPlayer && getFieldOwner(24)  == curPlayer && getFieldOwner(25)  == curPlayer) {
             return true;
-        } else if (getFieldOwner(27)  == player && getFieldOwner(28)  == player && getFieldOwner(30)  == player) {
+        } else if (getFieldOwner(27)  == curPlayer && getFieldOwner(28)  == curPlayer && getFieldOwner(30)  == curPlayer) {
             return true;
-        } else if (getFieldOwner(32)  == player && getFieldOwner(33)  == player && getFieldOwner(35)  == player) {
+        } else if (getFieldOwner(32)  == curPlayer && getFieldOwner(33)  == curPlayer && getFieldOwner(35)  == curPlayer) {
             return true;
-        } else return getFieldOwner(38) == player && getFieldOwner(40) == player;
+        } else return getFieldOwner(38) == curPlayer && getFieldOwner(40) == curPlayer;
     }
 
+    /**
+     * This method is used to check if a player has all the same type of fields.
+     * @param player is the player's number.
+     * @param fieldNumber is the field number the player is on.
+     * @return true if player has all of the same type of fields.
+     */
     public boolean hasAllFields(int player, int fieldNumber) {
         if (fieldNumber == 2 || fieldNumber == 4) {
             return getFieldOwner(2) == player && getFieldOwner(4) == player;
