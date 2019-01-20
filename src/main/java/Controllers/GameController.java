@@ -94,7 +94,7 @@ public class GameController {
                 winnerValue = temp;
             }
         }
-        input.showMessage(playerController.getPlayerGUI(winner).getName() + " har vundet spillet!");
+        input.showMessage(playerController.getPlayerGUI(winner).getName() + " har vundet spillet, vedkommende har " + winnerValue + "kr.");
     }
 
     /**
