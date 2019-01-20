@@ -4,8 +4,8 @@ import Logic.DiceCup;
 import Logic.ReadFile;
 import gui_fields.GUI_Player;
 
-import java.awt.*;
 
+@SuppressWarnings("Duplicates")
 public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
@@ -310,7 +310,6 @@ public class GameController {
      * The chancecard is displayed in the GUI, and a message is shown.
      * A switch is made on values[0], which then executes methods depending on the case.
      */
-    @SuppressWarnings("Duplicates")
     private void doChanceField(int player, int prevPos, int fieldNumber) {
         chanceController.drawCard();
         int[] values = chanceController.getCardValues();
@@ -517,10 +516,9 @@ public class GameController {
     }
 
 
-    @SuppressWarnings("Duplicates")
     private void doBreweryField(int curPlayer, int fieldNumber) {
-        if (boardController.fieldHasOwner(fieldNumber) && boardController.getFieldOwner(fieldNumber) != curPlayer) {
-            if (boardController.fieldHasOwner(fieldNumber)) {
+        if (boardController.fieldHasOwner(fieldNumber)) {
+            if (boardController.getFieldOwner(fieldNumber) != curPlayer) {
                 int eyes = diceCup.getSum();
                 int owner = boardController.getFieldOwner(fieldNumber);
                 int toPay = 100 * eyes;
@@ -532,16 +530,16 @@ public class GameController {
                 input.showMessage("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu skal betale " + playerController.getPlayerGUI(owner).getName() + " " + toPay + "kr. for leje!");
                 playerController.getPlayer(curPlayer).addBalance(-toPay);
                 playerController.getPlayer(owner).addBalance(toPay);
-            } else {
-                String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
-                        "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) +
-                        " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
-                if (answer.equals("ja")) {
-                    int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldNumber));
-                    boolean success = playerController.purchaseProperty(curPlayer, fieldPrice);
-                    if (success) {
-                        boardController.purchaseProperty(fieldNumber, curPlayer, playerController.getPlayerGUI(curPlayer).getPrimaryColor());
-                    }
+            }
+        } else {
+            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
+                    "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) +
+                    " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
+            if (answer.equals("ja")) {
+                int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldNumber));
+                boolean success = playerController.purchaseProperty(curPlayer, fieldPrice);
+                if (success) {
+                    boardController.purchaseProperty(fieldNumber, curPlayer, playerController.getPlayerGUI(curPlayer).getPrimaryColor());
                 }
             }
         }
