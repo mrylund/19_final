@@ -11,7 +11,10 @@ public class Field {
     private int houseCount = 0;
     private boolean hotel = false;
 
-    // TODO: 18-01-2019 Bruge metoden til at sætte farverne af felterne istedet.
+
+    /**
+     * @param values all the values the field should have saved.
+     */
     public Field(String[] values) {
 
         if(values[0].equals("GUI_Start")){
@@ -98,43 +101,64 @@ public class Field {
         }
     }
 
+    /**
+     * @return the GUI_Field tied to the object.
+     */
     public GUI_Field getField() {
         return this.field;
     }
 
+    /**
+     * @return the type this field has.
+     */
     public int getFieldType() {
         return fieldtype;
     }
 
+    /**
+     * @return the current owner of the field.
+     */
     public int getOwner() {
         return this.owner;
     }
 
+    /**
+     * @param player that should own the field.
+     * @param color that the field should have.
+     */
     public void setOwner(int player, Color color) {
         this.owner = player;
         ((GUI_Ownable)this.field).setBorder(color);
     }
 
+    /**
+     * @param amount of houses the field should have on it.
+     */
     public void setHouses(int amount) {
         houseCount = amount;
         ((GUI_Street)this.field).setHouses(amount);
     }
 
+    /**
+     * @param hotel whether the field should have a hotel or not.
+     */
     public void setHotel(boolean hotel) {
         ((GUI_Street)this.field).setHotel(hotel);
         this.hotel = true;
     }
 
+    /**
+     * @return whether the field has a hotel on it.
+     */
     public boolean hasHotel() {
         return hotel;
     }
 
+    /**
+     * @return the amount of houses on the field.
+     */
     public int getHouseCount() {
         return this.houseCount;
-    }
-
-    public int getFieldtype() {
-        return fieldtype;
     }
 
 }

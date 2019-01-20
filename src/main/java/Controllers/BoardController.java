@@ -225,7 +225,7 @@ public class BoardController {
      * @return
      */
     public boolean purchaseHouse(int player, int field) {
-        if (board.getHouses(field) < 4) {
+        if (board.getHouses(field) < 4 && !board.hasHotel(field)) {
             board.addHouse(player, field);
             return true;
         } else if (board.getHouses(field) == 4) {

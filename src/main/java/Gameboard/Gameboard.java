@@ -11,8 +11,9 @@ public class Gameboard {
     private Field[] fields = new Field[40];
     private GUI_BoardController gameboard;
 
-    public Gameboard(){}
-
+    /**
+     * Method responsible for creating the board and all the corresponding fields.
+     */
     public void createBoard() {
         fieldInfo = reader.readFile("txtFiles/fieldInfo.txt");
         for (int i = 0; i < fieldInfo.length; i++) {
@@ -25,30 +26,58 @@ public class Gameboard {
         gameboard.setChanceCard("Prøv chancen");
     }
 
+    /**
+     * @return the GUI_BoardConroller object.
+     */
     public GUI_BoardController getBoard() {
         return gameboard;
     }
 
+    /**
+     * @param fieldnumber that you wish to check the fieldtype of.
+     * @return the type of the field.
+     */
     public int getFieldType(int fieldnumber) {
         return fields[fieldnumber - 1].getFieldType();
     }
 
+    /**
+     * @param fieldNumber that you wish to check whether has a hotel on it or not.
+     * @return whether the field has a hotel on it or not.
+     */
     public boolean hasHotel(int fieldNumber) {
         return fields[fieldNumber - 1].hasHotel();
     }
 
+    /**
+     * @param fieldNumber that you wish to check the current owner of.
+     * @return the current owner of the field.
+     */
     public int getFieldOwner(int fieldNumber) {
         return fields[fieldNumber - 1].getOwner();
     }
 
+    /**
+     * @param field that you wish to set the owner of.
+     * @param player that you wish to own the field.
+     * @param color that the field should be colored.
+     */
     public void setFieldOwner(int field, int player, Color color) {
         fields[field - 1].setOwner(player, color);
     }
 
+    /**
+     * @param fieldNumber that you wish to check the number of houses of.
+     * @return the amount of houses on the field.
+     */
     public int getHouses(int fieldNumber) {
         return fields[fieldNumber - 1].getHouseCount();
     }
 
+    /**
+     * @param player that want to add houses to the field.
+     * @param field that the player wish to add a house on.
+     */
     public void addHouse(int player, int field) {
         if (fields[field-1].getOwner() == player && !fields[field-1].hasHotel()) {
             int amount = fields[field-1].getHouseCount();
@@ -56,6 +85,10 @@ public class Gameboard {
         }
     }
 
+    /**
+     * @param player that want to add a hotel to the field.
+     * @param field that the player wish to place a hotel on.
+     */
     public void addHotel(int player, int field) {
         if (fields[field-1].getOwner() == player) {
             fields[field-1].setHouses(0);
@@ -63,6 +96,10 @@ public class Gameboard {
         }
     }
 
+    /**
+     * @param field that you wish to get the value of.
+     * @return the total value of the field including houses and hotels.
+     */
     public int getTotalFieldValue(int field) {
         if (fields[field - 1].getFieldType() == 1) {
             int houses = fields[field - 1].getHouseCount();
