@@ -78,11 +78,7 @@ public class GameController {
                 winnerValue = temp;
             }
         }
-
         input.showMessage(playerController.getPlayerGUI(winner).getName() + " har vundet spillet!");
-
-
-
     }
 
     private void doPlayerTurn(int player, int prevPos) {
@@ -126,7 +122,8 @@ public class GameController {
         }
 
         for (int i = 0; i < 3; i++) {
-            input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu er i fængsel, slå 2 ens for at komme ud.\nForsøg " + i + "/3", new String[]{"kast"});
+            input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() +
+                    "\nDu er i fængsel, slå 2 ens for at komme ud.\nForsøg " + (i+1) + "/3", new String[]{"kast"});
             diceCup.roll();
             boardController.setDice(diceCup.getDie1(), diceCup.getDie2());
 
