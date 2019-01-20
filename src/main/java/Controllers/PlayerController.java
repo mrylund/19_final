@@ -6,7 +6,6 @@ import gui_fields.GUI_Player;
 
 public class PlayerController {
     private PlayerList players = new PlayerList();
-    private boolean hasLost = false;
 
     public Player[] createPlayers(String[] spillere) {
         return players.addPlayers(spillere);
@@ -67,16 +66,9 @@ public class PlayerController {
     }
 
     public boolean payRent(int curPlayer, int ownerOfField, int amount) {
-        boolean success = false;
-        if (players.playerCanAfford(curPlayer, amount)) {
-            players.getPlayer(curPlayer).addBalance(-amount);
-            players.getPlayer(ownerOfField).addBalance(amount);
-            success = true;
-        } else {
-            hasLost = true;
-        }
-
-        return success;
+        players.getPlayer(curPlayer).addBalance(-amount);
+        players.getPlayer(ownerOfField).addBalance(amount);
+        return true;
     }
 
     public boolean playerCanAfford(int player, int amount) {

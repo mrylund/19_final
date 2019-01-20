@@ -42,8 +42,7 @@ public class GameController {
         GameLoop();
     }
 
-    private void GameLoop() {
-        int curPlayer = 0;
+    private void GameLoop() { int curPlayer = 0;
         int prevPos;
 
         while (true) {
@@ -209,7 +208,7 @@ public class GameController {
                     playerController.setPlayerPos(player,values[1]);
                 }
                 boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber,values[1]);
-                doFieldAction(player,prevPos,fieldNumber);
+                doFieldAction(player,values[1],fieldNumber);
                 break;
 
             case 3: //Spiller trækker jailCard, som kan bruges til at komme ud af fængsel
@@ -219,7 +218,7 @@ public class GameController {
             case 4: //Gå i fængsel chancekort
                 input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu bliver sendt i fængsel, da du har trukket et fængsels-chancekort!");
                 boardController.setCarpos(playerController.getPlayerGUI(player),prevPos,values[1]);
-                playerController.setPlayerPos(player,prevPos,false);
+                playerController.setPlayerPos(player,values[1],false);
                 break;
             case 5:
                 break;
