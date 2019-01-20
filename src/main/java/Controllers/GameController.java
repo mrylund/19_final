@@ -215,7 +215,7 @@ public class GameController {
 
         } else if (fieldType == 3) {
             doGoJailField(curPlayer, fieldNumber);
-// FIXME: 18-01-2019 Felttype 5 er brewery og skal laves
+
         }else if(fieldType == 5){
             doBreweryField(curPlayer, fieldNumber);
 

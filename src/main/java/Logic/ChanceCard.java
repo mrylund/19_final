@@ -15,10 +15,16 @@ public class ChanceCard {
     private String chanceCardPath = "txtFiles/chanceCard.txt";
     private String[] cardSet;
 
+    /**
+     * Method responsible for making the deck.
+     */
     public void makeCardSet(){
         this.cardSet = reader.readFile(chanceCardPath);
     }
 
+    /**
+     * Method responsible for shuffling the whole deck.
+     */
     public void shuffleCard() {
         shuffleArray = new String[cardSet.length];
         int randomCard;
@@ -50,6 +56,9 @@ public class ChanceCard {
         cardSet = shuffleArray;
     }
 
+    /**
+     * @return the number of the drawn card.
+     */
     public int  drawCard() {
         cardDraw = cardSet[0];
         //lægger det bagerst i bunken
@@ -60,26 +69,46 @@ public class ChanceCard {
        return Integer.parseInt(cardDraw.split(": ")[0]);
     }
 
+    /**
+     * @return the type of the card drawn.
+     */
     public int getCardType(){
         return Integer.parseInt(cardDraw.split(": ")[2]);
     }
 
+    /**
+     * @return get the value of the card.
+     */
     public int getCardValue(){
         return Integer.parseInt(cardDraw.split(": ")[3]);
     }
 
+    /**
+     * @return the whole deck.
+     */
     public String[] getCardSet() {
         return cardSet;
     }
 
+    /**
+     * @return the text of the chancecard.
+     */
     public String getCardDraw() {
         return cardDraw.split(": ")[1];
     }
+
+
+    /**
+     * @return the current cards cardnumber.
+     */
     public int getCardNr(){
         String[] chanceCardLine = getCardDraw().split(": ");
         return Integer.parseInt(chanceCardLine[0]);
     }
 
+    /**
+     * @return the text of the chancecard.
+     */
     public String getCardText(){
         return getCardDraw();
 
