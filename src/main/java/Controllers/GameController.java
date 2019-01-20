@@ -15,8 +15,8 @@ public class GameController {
     private int numberOfPlayers;
 
     /**
-     * This constructor "GameController initializes the game through the void "InitializeGame" in devmode, if devmode is enabled (true || false).
-     * @param devmode
+     * This constructor of "GameController" initializes the game through the void "InitializeGame(devmode)".
+     * @param devmode is a boolean.
      */
     public GameController(boolean devmode) {
         InitializeGame(devmode);

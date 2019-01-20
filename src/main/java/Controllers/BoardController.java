@@ -5,9 +5,10 @@ import gui_fields.GUI_Player;
 import java.awt.*;
 import static Logic.Sleep.sleep;
 
-
 public class BoardController {
+
     private Gameboard board = new Gameboard();
+
     public Gameboard createBoard() {
         board.createBoard();
         return board;
