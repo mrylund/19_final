@@ -1,15 +1,13 @@
 package Controllers;
 
-import Entities.Player;
 import Logic.DiceCup;
-import Logic.DiceCupDevmode;
 import Logic.ReadFile;
 import gui_fields.GUI_Player;
 
 public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
-    private ChanceCardController chancecontroller = new ChanceCardController();
+    private ChanceCardController chanceController = new ChanceCardController();
     //private DiceCupDevmode diceCup = new DiceCupDevmode();
     private DiceCup diceCup = new DiceCup();
     private InputController input;
@@ -184,17 +182,15 @@ public class GameController {
     }
 
     /**
-     *
-     * @param curPlayer
-     * @param prevPos
-     * @param fieldNumber
-     *
-     *
+     * This is the doFieldAction() method which has 3 parametres - int curPlayer, prevPos and fieldNumber. This method is used when a Player lands on a field.
+     * @param curPlayer is the current Player's number.
+     * @param prevPos is the Player's position.
+     * @param fieldNumber is the field number.
+     * Depending on the fieldType the Player lands on, this method will execute different methods.
      */
     private void doFieldAction(int curPlayer, int prevPos, int fieldNumber) {
         int fieldType = boardController.getFieldType(fieldNumber);
-// FIXME: 18-01-2019 Felttype 5 er brewery og skal laves
-        if (fieldType == 1 || fieldType == 4 || fieldType == 5) {
+        if (fieldType == 1 || fieldType == 4) {
             doPurchasableField(curPlayer, fieldNumber);
 
         } else if (fieldType == 2) {
@@ -202,6 +198,8 @@ public class GameController {
 
         } else if (fieldType == 3) {
             doGoJailField(curPlayer, fieldNumber);
+// FIXME: 18-01-2019 Felttype 5 er brewery og skal laves
+        }else if(fieldType == 5){
 
         } else if (fieldType == 6) {
             doTaxField(curPlayer, fieldNumber);
@@ -209,21 +207,36 @@ public class GameController {
     }
 
     /**
-     *
-     * @param player
-     * @param fieldNumber
+     * This method is executed in "doFieldAction(curPlayer, prevPos, fieldNumber)" if the fieldType the Player lands on is equal to "1".
+     * @param curPlayer the current Player's number
+     * @param fieldNumber the field number the players has landed on.
+     * First the fieldNumber is checked to see if it has an owner.
+     * If it doesn't have an owner, the "else statement" on the bottom of the method will be executed.
+     * Assuming that there's an owner, the next step is to get the owner through the "getFieldOwner(fieldNumber)" method from the BoardController class.
+     * Then a check is made to see if the owner has a hotels on the field through the "hasHotel(fieldNumber)" method from the BoardController class.
+     * If there's a hotels on the field, the "payRent(curPlayer, owner, price)" method will be executed through the playerController.
+     * If there's no hotels, the fieldNumber will be checked for houses through the getHouses(fieldNumber) method in BoardController.
+     *      - If there's a house on the fieldNumber, a rent price will be calculated through a switch on int numberOfHouses and a method in the FileReader.
+     *      - The FileReader class has a method called getFieldHouseXPrice(fieldNumber) is called, which return the rent in a String format, which is then parsed to an integer.
+     * The rent is then payed from the current Player to the owner through the "payRent(curPlayer,owner,price)" method.
+     * If there's no houses on the field, the fieldNumber is checked to see if the owner has all the other fields of same type.
+     *      - If the owner has all the other field of same type, the rent will be double, and is then payed through the same "payRent()" method as mentioned above.
+     * If there's no owner at all, the player is asked if he wants to purchase the property himself.
+     *      - If player wants to purchase the property, the price is retrieved through the "getFieldPrice(fieldNumber)" method.
+     *      - Then the "purchaseProperty(fieldNumber, curPlayer, Color )" method is called in BoardController.
      */
-    private void doPurchasableField(int player, int fieldNumber) {
-        int owner = boardController.getFieldOwner(fieldNumber);
+    private void doPurchasableField(int curPlayer, int fieldNumber) {
         if (boardController.fieldHasOwner(fieldNumber)) {
+            int owner = boardController.getFieldOwner(fieldNumber);
             if(boardController.hasHotel(fieldNumber)) {
                 int price = Integer.parseInt(reader.getFieldHotelPrice(fieldNumber));
-                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
+                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDette felt er ejet af "
                                 + playerController.getPlayer(owner).getName()
-                                + ", som har et hotel. Du skal batale vedkommende "
+                                + ", som har et hotel. Du skal betale vedkommende "
                                 + price + "kr.",
                         new String[]{"ok"});
-                playerController.payRent(player, owner, price);
+                playerController.payRent(curPlayer, owner, price);
+
             } else if (boardController.getHouses(fieldNumber) > 0) {
                 int numOfHouses = boardController.getHouses(fieldNumber);
                 int price = 0;
@@ -233,52 +246,59 @@ public class GameController {
                     case 3: price = Integer.parseInt(reader.getFieldHouse3Price(fieldNumber)); break;
                     case 4: price = Integer.parseInt(reader.getFieldHouse4Price(fieldNumber)); break;
                 }
-                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
-                                + playerController.getPlayer(owner).getName()
-                                + ", som har " + numOfHouses + " hus(e). Du skal batale vedkommende "
-                                + price + "kr.",
-                        new String[]{"ok"});
-                playerController.payRent(player, owner, price);
-            } else if (boardController.hasAllFields(owner,fieldNumber)){
+                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
+                                    "\nDette felt er ejet af " + playerController.getPlayer(owner).getName()
+                                    + ", som har " + numOfHouses + " hus(e). Du skal betale vedkommende "
+                                    + price + "kr.",
+                                     new String[]{"ok"});
+                playerController.payRent(curPlayer, owner, price);
+
+            } else if (boardController.hasAllFields(owner,fieldNumber)) {
                 int amount = 2 * Integer.parseInt(reader.getFieldRent(fieldNumber));
-                input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() + " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + amount + " )");
-                playerController.payRent(player,owner,amount);
+                input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() +
+                                    " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + amount + " )");
+                playerController.payRent(curPlayer,owner,amount);
+
             } else {
                 int price = Integer.parseInt(reader.getFieldRent(fieldNumber));
-                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDette felt er ejet af "
+                input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDette felt er ejet af "
                                 + playerController.getPlayer(owner).getName()
-                                + " du skal batale vedkommende "
+                                + " du skal betale vedkommende "
                                 + price + "kr.",
                         new String[]{"ok"});
-                playerController.payRent(player, owner, price);
+                playerController.payRent(curPlayer, owner, price);
             }
         } else {
-            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) + " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
+            String answer = input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nVil du gerne købe feltet " + reader.getFieldName(fieldNumber) + " for " + reader.getFieldPrice(fieldNumber) + "?", new String[]{"ja", "nej"});
             if (answer.equals("ja")) {
                 int fieldPrice = Integer.parseInt(reader.getFieldPrice(fieldNumber));
-                boolean success = playerController.purchaseProperty(player, fieldPrice);
+                boolean success = playerController.purchaseProperty(curPlayer, fieldPrice);
                 if (success) {
-                    boardController.purchaseProperty(fieldNumber, player, playerController.getPlayerGUI(player).getPrimaryColor());
+                    boardController.purchaseProperty(fieldNumber, curPlayer, playerController.getPlayerGUI(curPlayer).getPrimaryColor());
                 }
             }
         }
     }
 
     /**
-     *
+     * This is the doChanceField(player, prevPos, fieldNumber) method. It will be executed every time a Player lands on a Chance-card field.
      * @param player
      * @param prevPos
      * @param fieldNumber
+     * At first, a chancecard is drawn with the "drawCard()" method through chanceController.
+     * Then the values are pulled through the "getCardValues()" method in chanceController which return an int Array.
+     * The chancecard is displayed in the GUI, and a message is shown.
+     * A switch is made on values[0], which then executes methods depending on the case.
      */
     @SuppressWarnings("Duplicates")
     private void doChanceField(int player, int prevPos, int fieldNumber) {
-        chancecontroller.drawCard();
-        int[] values = chancecontroller.getCardValues();
+        chanceController.drawCard();
+        int[] values = chanceController.getCardValues();
         //felter for de 4 rederier. 0 bruges til beregning og er IKKE et rigtigt felt.
         int[] rederier = {0,6,16,26,36};
         int closestRederi = 0;
 
-        String chanceCardText = chancecontroller.getCardText();
+        String chanceCardText = chanceController.getCardText();
         boardController.displayChanceCard(chanceCardText);
         input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu har trukket et chancekort.");
 
@@ -351,7 +371,7 @@ public class GameController {
                 }
                 break;
 
-            case 8: // Tag med den nærmeste færge - flyt brikken frem, og hvis de passerer “Start” indkassér da kr. 4.000.
+            case 8: // Tag med den nærmeste færge - flyt brikken frem til nærmeste færge, og tag med færgen hen til næste færge, og hvis de passerer “Start” indkassér da kr. 4.000.
                 prevPos = playerController.getPlayerPos(player);
                 //finder det tætteste rederi
                 if(prevPos >= rederier[4]) {
@@ -424,37 +444,44 @@ public class GameController {
     }
 
     /**
-     *
-     * @param player
-     * @param fieldNumber
+     * This method sends a Player to Jail, and is used in "doFieldAction(curPlayer, prevPos, fieldNumber)", if the fieldType is equal to 3.
+     * @param curPlayer is the current Player's number.
+     * @param fieldNumber is the current Players position.
+     * The "setCarpos()" method is used to move a car to a specific position on the board.
      */
-    private void doGoJailField(int player, int fieldNumber) {
+    private void doGoJailField(int curPlayer, int fieldNumber) {
         if (fieldNumber == 31) {
-            input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu skal gå i fængsel!");
-            playerController.setPlayerPos(player, 11);
-            boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber, 11);
-            playerController.getPlayer(player).setJailed(true);
+            input.showMessage("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDu skal gå i fængsel!");
+            playerController.setPlayerPos(curPlayer, 11);
+            boardController.setCarpos(playerController.getPlayerGUI(curPlayer),fieldNumber, 11);
+            playerController.getPlayer(curPlayer).setJailed(true);
         }
     }
 
-    private void doTaxField(int player, int fieldNumber) {
+    /**
+     * This void is used in the "doFieldAction(curPlayer, prevPos, fieldNumber)" method, if the fieldType is equal to 6.
+     * @param curPlayer is the current Player's number.
+     * @param fieldNumber is the current fieldNumber the Player is on.
+     * There are two different TaxFields, therefor also an if-else statement in this method.
+     */
+    private void doTaxField(int curPlayer, int fieldNumber) {
         if(fieldNumber == 5) {
-            int playerBalance = playerController.getBalance(player);
+            int playerBalance = playerController.getBalance(curPlayer);
             int taxToPay = (int)(((double)playerBalance/100)*10);
             String taxAnswer = input.getButtonpress("Betal 10% af din pengebeholdning (" + taxToPay + "kr) eller 4000kr.", new String[]{"10%", "4000kr"});
             if(taxAnswer.equals("10%")) {
-                playerController.getPlayer(player).addBalance(-taxToPay);
+                playerController.getPlayer(curPlayer).addBalance(-taxToPay);
             } else {
-                if(playerController.playerCanAfford(player, 4000)) {
-                    playerController.getPlayer(player).addBalance(-4000);
+                if(playerController.playerCanAfford(curPlayer, 4000)) {
+                    playerController.getPlayer(curPlayer).addBalance(-4000);
                 } else {
                     input.showMessage("Det har du ikke råd til. Du bliver trykket 10% af din pengebeholdning. (" + taxToPay + "kr)");
-                    playerController.getPlayer(player).addBalance(-taxToPay);
+                    playerController.getPlayer(curPlayer).addBalance(-taxToPay);
                 }
             }
         } else if(fieldNumber == 39) {
             input.showMessage(reader.getFieldName(39));
-            playerController.getPlayer(player).addBalance(-2000);
+            playerController.getPlayer(curPlayer).addBalance(-2000);
         }
     }
 }
