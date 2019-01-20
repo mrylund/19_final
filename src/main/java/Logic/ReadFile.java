@@ -62,19 +62,19 @@ public class ReadFile {
         return theFile[lineNum-1].split("; ")[4];
     }
 
-    public String getFieldHouse1Price(int lineNum){
+    public String getFieldHouse1Rent(int lineNum){
         return theFile[lineNum-1].split("; ")[5];
     }
 
-    public String getFieldHouse2Price(int lineNum){
+    public String getFieldHouse2Rent(int lineNum){
         return theFile[lineNum-1].split("; ")[6];
     }
 
-    public String getFieldHouse3Price(int lineNum){
+    public String getFieldHouse3Rent(int lineNum){
         return theFile[lineNum-1].split("; ")[7];
     }
 
-    public String getFieldHouse4Price(int lineNum){
+    public String getFieldHouse4Rent(int lineNum){
         return theFile[lineNum-1].split("; ")[8];
     }
 

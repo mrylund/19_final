@@ -5,8 +5,18 @@ import gui_fields.GUI_Car;
 import gui_fields.GUI_Player;
 
 public class PlayerController {
+
+    public PlayerController(){
+
+    }
+
     private PlayerList players = new PlayerList();
 
+    /**
+     * This method return a Player[] consisting of
+     * @param spillere
+     * @return
+     */
     public Player[] createPlayers(String[] spillere) {
         return players.addPlayers(spillere);
     }
