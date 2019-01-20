@@ -21,7 +21,7 @@
 21: Tag ind på Rådhuspladsen.: 2: 40
 22: De modtager deres aktieudbytte. Modtag kr. 1.000 af banken.: 1: 1000
 23: Betal kr. 3.000 for reparation af deres vogn.: 1: -3000
-24: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer "Start", indkasserer de ikke kr. 4.000.: 4: 11
+24: Gå i fængsel. Ryk direkte til fængslet. Selv om de passerer "Start", indkasserér de ikke kr. 4.000.: 4: 11
 25: Deres præmieobligation er kommet ud. De modtager kr. 1.000 af banken.: 1: 1000
 26: Ryk frem til "Start".: 2: 1
 27: Ryk tre felter frem.: 9: 3
