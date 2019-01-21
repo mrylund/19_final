@@ -455,7 +455,7 @@ public class GameController {
                 boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
                 playerController.movePlayer(player,fieldNumber,3);
                 int newPos = playerController.getPlayerPos(player);
-                doFieldAction(player, prevPos, fieldNumber);
+                doFieldAction(player, prevPos, newPos);
                 break;
 
             case 10: // 200 kr fra alle spillere til curPlayer
