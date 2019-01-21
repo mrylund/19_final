@@ -11,8 +11,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chanceController = new ChanceCardController();
-    private DiceCupDevmode diceCup = new DiceCupDevmode();
-    //private DiceCup diceCup = new DiceCup();
+    //private DiceCupDevmode diceCup = new DiceCupDevmode();
+    private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
