@@ -260,25 +260,50 @@ public class GameController {
                 int numOfHouses = boardController.getHouses(fieldNumber);
                 int price = 0;
                 switch (numOfHouses) {
-                    case 1: price = Integer.parseInt(reader.getFieldHouse1Rent(fieldNumber)); break;
-                    case 2: price = Integer.parseInt(reader.getFieldHouse2Rent(fieldNumber)); break;
-                    case 3: price = Integer.parseInt(reader.getFieldHouse3Rent(fieldNumber)); break;
-                    case 4: price = Integer.parseInt(reader.getFieldHouse4Rent(fieldNumber)); break;
+                    case 1:
+                        price = Integer.parseInt(reader.getFieldHouse1Rent(fieldNumber));
+                        break;
+                    case 2:
+                        price = Integer.parseInt(reader.getFieldHouse2Rent(fieldNumber));
+                        break;
+                    case 3:
+                        price = Integer.parseInt(reader.getFieldHouse3Rent(fieldNumber));
+                        break;
+                    case 4:
+                        price = Integer.parseInt(reader.getFieldHouse4Rent(fieldNumber));
+                        break;
                 }
                 input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() +
-                                    "\nDette felt er ejet af " + playerController.getPlayer(owner).getName()
-                                    + ", som har " + numOfHouses + " hus(e). Du skal betale vedkommende "
-                                    + price + "kr.",
-                                     new String[]{"ok"});
+                                "\nDette felt er ejet af " + playerController.getPlayer(owner).getName()
+                                + ", som har " + numOfHouses + " hus(e). Du skal betale vedkommende "
+                                + price + "kr.",
+                        new String[]{"ok"});
                 playerController.payRent(curPlayer, owner, price);
 
-            } else if (boardController.hasAllFields(owner,fieldNumber)) {
+            } else if (boardController.hasAllFields(owner, fieldNumber)) {
                 int price = 2 * Integer.parseInt(reader.getFieldRent(fieldNumber));
                 input.showMessage("Da ejeren " + playerController.getPlayer(owner).getName() +
-                                    " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + price + " )");
-                playerController.payRent(curPlayer,owner,price);
+                        " ejer alle af denne type felter, så skal du nu betale dobbelt leje ( dvs. " + price + " )");
+                playerController.payRent(curPlayer, owner, price);
 
-            } else {
+            } else if (boardController.getFieldType(fieldNumber) == 4) {
+                int ownedAmount = boardController.getOwnedAmountOfShippingFields(fieldNumber);
+                String ownerName = playerController.getPlayerGUI(boardController.getFieldOwner(fieldNumber)).getName();
+                if (ownedAmount == 1) {
+                    playerController.payRent(curPlayer,boardController.getFieldOwner(fieldNumber),500);
+                    input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr. 500 i leje, da ejeren har 1 af denne type felter. ");
+                } else if(ownedAmount == 2) {
+                    playerController.payRent(curPlayer,boardController.getFieldOwner(fieldNumber),1000);
+                    input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr. 1.000 i leje, da ejeren har 2 af denne type felter. ");
+                } else if(ownedAmount == 3) {
+                    playerController.payRent(curPlayer,boardController.getFieldOwner(fieldNumber),2000);
+                    input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr 2.000 i leje, da ejeren har 3 af denne type felter. ");
+                } else {
+                    playerController.payRent(curPlayer,boardController.getFieldOwner(fieldNumber),4000);
+                    input.showMessage("Du landede på et felt ejet af: " + ownerName + " og har betalt: kr 4.000 i leje, da ejeren har 4 af denne type felter. ");
+                }
+
+           } else{
                 int price = Integer.parseInt(reader.getFieldRent(fieldNumber));
                 input.getButtonpress("Spiller: " + playerController.getPlayerGUI(curPlayer).getName() + "\nDette felt er ejet af "
                                 + playerController.getPlayer(owner).getName()
@@ -333,7 +358,7 @@ public class GameController {
                     playerController.setPlayerPos(player,values[1]);
                 }
                 boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber,values[1]);
-                doFieldAction(player,values[1],fieldNumber);
+                doFieldAction(player,fieldNumber,values[1]);
                 break;
 
             case 3: //Spiller trækker jailCard, som kan bruges til at komme ud af fængsel
@@ -342,8 +367,9 @@ public class GameController {
 
             case 4: //Gå i fængsel chancekort
                 input.showMessage("Spiller: " + playerController.getPlayerGUI(player).getName() + "\nDu bliver sendt i fængsel, da du har trukket et fængsels-chancekort!");
-                boardController.setCarpos(playerController.getPlayerGUI(player),prevPos,values[1]);
+                boardController.setCarpos(playerController.getPlayerGUI(player),fieldNumber,values[1]);
                 playerController.setPlayerPos(player,values[1],false);
+                playerController.getPlayer(player).setJailed(true);
                 break;
 
             case 5:
