@@ -1,6 +1,7 @@
 package Controllers;
 
 import Logic.DiceCup;
+import Logic.DiceCupDevmode;
 import Logic.ReadFile;
 import gui_fields.GUI_Player;
 
@@ -10,8 +11,8 @@ public class GameController {
     private BoardController boardController = new BoardController();
     private PlayerController playerController = new PlayerController();
     private ChanceCardController chanceController = new ChanceCardController();
-    //private DiceCupDevmode diceCup = new DiceCupDevmode();
-    private DiceCup diceCup = new DiceCup();
+    private DiceCupDevmode diceCup = new DiceCupDevmode();
+    //private DiceCup diceCup = new DiceCup();
     private InputController input;
     private ReadFile reader = new ReadFile();
     private int numberOfPlayers;
@@ -41,16 +42,16 @@ public class GameController {
                     "Athusan",
                     "Lars",
                     "Andreas"};
-            /* Test that make a player own all fields and also builds x amount of houses on them
-            for (int i = 1; i < 41; i++) {
-                if(boardController.getFieldType(i) == 1) {
+            //Test that make a player own all fields and also builds x amount of houses on them
+            /*for (int i = 1; i < 41; i++) {
+                if(boardController.getFieldType(i) == 5) {
                     boardController.purchaseProperty(i, 0, Color.red);
-                    for (int j = 0; j < 5; j++) {
+                    for (int j = 0; j < 0; j++) {
                         boardController.purchaseHouse(0, i);
                     }
                 }
-            }
-            */
+            }*/
+
 
         } else {
             numberOfPlayers = input.getInt("Hvor mange spillere?", 3, 6);
@@ -244,7 +245,7 @@ public class GameController {
      *      - Then the "purchaseProperty(fieldNumber, curPlayer, Color )" method is called in BoardController.
      */
     private void doPurchasableField(int curPlayer, int fieldNumber) {
-        if (boardController.fieldHasOwner(fieldNumber)) {
+        if (boardController.fieldHasOwner(fieldNumber) && boardController.getFieldOwner(fieldNumber) != curPlayer) {
             int owner = boardController.getFieldOwner(fieldNumber);
             if (boardController.hasHotel(fieldNumber)) {
                 int price = Integer.parseInt(reader.getFieldHotelPrice(fieldNumber));
@@ -452,8 +453,8 @@ public class GameController {
                 break;
 
             case 9: // Ryk tre felter frem.
-                boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber,3);
-                playerController.movePlayer(player,fieldNumber,3);
+                boardController.moveCar(playerController.getPlayerGUI(player),fieldNumber-1,3);
+                playerController.movePlayer(player,fieldNumber-1,3);
                 int newPos = playerController.getPlayerPos(player);
                 doFieldAction(player, prevPos, newPos);
                 break;
